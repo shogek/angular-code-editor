@@ -1,3 +1,6 @@
-<p *ngFor="let _ of [].constructor(columnCount); let i = index;">
+<p 
+  *ngFor="let _ of [].constructor(columnCount); let i = index;"
+  [class.active]="i + 1 === highlightedLine"
+>
   {{ i + 1 }}
 </p>

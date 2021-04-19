@@ -6,5 +6,6 @@ import { Component, Input } from "@angular/core";
   styleUrls: ['./editor-line.component.scss']
 })
 export class EditorLineComponent {
-  @Input() text: string = '';
+  @Input() text = '';
+  @Input() isHighLighted = false;
 }
