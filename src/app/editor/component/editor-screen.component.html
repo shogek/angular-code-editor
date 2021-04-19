@@ -3,12 +3,15 @@
   <app-editor-number-column
     class="number-container"
     [columnCount]="lines.length"
+    [highlightedLine]="highlightedLine"
   ></app-editor-number-column>
 
   <div class="line-container">
     <app-editor-line
-      *ngFor="let line of lines"
+      *ngFor="let line of lines; let i = index;"
       [text]="line"
+      [isHighLighted]="i + 1 === highlightedLine"
+      (click)="lineClicked(i + 1)"
     ></app-editor-line>
   </div>
 

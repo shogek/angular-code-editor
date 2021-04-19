@@ -5,4 +5,8 @@ p {
 
   color: var(--editor-line-number-color);
   text-align: end;
+
+  &.active {
+    color: var(--editor-line-active-number-color);
+  }
 }

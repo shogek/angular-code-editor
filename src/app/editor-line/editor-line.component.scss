@@ -8,4 +8,8 @@ p {
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   margin-left: 1em;
+
+  &.highlighted {
+    background-color: var(--editor-bg-active-color);
+  }
 }
