@@ -1,4 +1,5 @@
 <app-editor-line
-  *ngFor="let line of lines"
+  *ngFor="let line of lines; index as i;"
   [text]="line"
+  [lineNumber]="i + 1"
 ></app-editor-line>

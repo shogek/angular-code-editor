@@ -1,0 +1,21 @@
+:host {
+  // Renders the space characters and displays indentation
+  white-space: pre;
+}
+
+.number,
+.text {
+  margin: 0;
+  display: inline-block;
+}
+
+.number {
+  text-align: end;
+  width: 2%;
+  padding-right: 1%;
+  border-right: 1px solid black;
+}
+
+.text {
+  margin-left: 1em;
+}
