@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --editor-text-color: rgb(225, 228, 232);
+  --editor-line-number-color: rgb(68, 77, 86);
+  --editor-bg-color: rgb(36, 41, 46);
+}
+
+@font-face {
+  font-family: 'Fira code';
+  src: url(assets/fonts/FiraCode-Regular.woff2) format('woff2');
+}
+
+body {
+  font-family: 'Fira code';
+  color: var(--editor-text-color);
+  background-color: var(--editor-bg-color);
+}
