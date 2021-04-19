@@ -7,5 +7,4 @@ import { Component, Input } from "@angular/core";
 })
 export class EditorLineComponent {
   @Input() text: string = '';
-  @Input() lineNumber: number = 0;
 }
