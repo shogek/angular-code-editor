@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { UserFileService } from "src/app/services/user-file.service";
 
 @Component({
    selector: 'app-editor-screen',
@@ -6,14 +9,18 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
    styleUrls: ['./editor-screen.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorScreenComponent {
-   /** What to display in the editor screen. */
-   @Input() set fileContents(value: string) {
-      this.lines = value.split('\n');
-   }
-
+export class EditorScreenComponent implements OnInit {
+   /** Active file's content split into lines. */
+   fileContentLines$: Observable<string[] | undefined> = new Observable();
    highlightedLine = NaN;
-   lines: string[] = [];
+
+   constructor(private userFileService: UserFileService) {}
+
+   ngOnInit(): void {
+      this.fileContentLines$ = this.userFileService
+         .getActiveFile()
+         .pipe(map(userFile => userFile?.contents?.split('\n')));
+   }
 
    lineClicked(lineNumber: number): void {
       this.highlightedLine = lineNumber;

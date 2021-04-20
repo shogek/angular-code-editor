@@ -1,0 +1,20 @@
+<ng-container
+  *ngIf="{
+    allUserFiles: (allUserFiles$ | async) || [],
+    activeUserFileId: activeUserFileId$ | async
+  } as data"
+>
+
+  <div
+    *ngIf="data.allUserFiles.length > 0 && !!data.activeUserFileId"
+    class="wrapper"
+  >
+    <app-editor-tab-item
+      *ngFor="let userFile of data.allUserFiles"
+      [fileName]="userFile.name"
+      [isActive]="userFile.id === data.activeUserFileId"
+      (click)="tabClicked(userFile.id)"
+    ></app-editor-tab-item>
+  </div>
+
+</ng-container>

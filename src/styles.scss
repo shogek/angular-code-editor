@@ -4,6 +4,12 @@
   --editor-line-number-active-color: rgb(225, 228, 232);
   --editor-bg-color: rgb(36, 41, 46);
   --editor-bg-active-color: rgb(43, 48, 54);
+  --editor-tab-border-color: rgb(27, 31, 35);
+  --editor-tab-border-active-color: rgb(249, 130, 108);
+  --editor-tab-bg-color: rgb(31, 36, 40);
+  --editor-tab-bg-active-color: rgb(36, 41, 46);
+  --editor-tab-text-color: rgb(149, 157, 165);
+  --editor-tab-text-active-color: rgb(225, 228, 220);
 }
 
 @font-face {
@@ -12,6 +18,7 @@
 }
 
 body {
+  margin: 0;
   font-family: 'Fira code';
   color: var(--editor-text-color);
   background-color: var(--editor-bg-color);

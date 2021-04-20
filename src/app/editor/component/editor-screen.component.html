@@ -1,14 +1,17 @@
-<div class="container">
+<div
+  *ngIf="fileContentLines$ | async as fileContentLines"
+  class="container"
+>
 
   <app-editor-number-column
     class="number-container"
-    [columnCount]="lines.length"
+    [columnCount]="fileContentLines.length"
     [highlightedLine]="highlightedLine"
   ></app-editor-number-column>
 
   <div class="line-container">
     <app-editor-line
-      *ngFor="let line of lines; let i = index;"
+      *ngFor="let line of fileContentLines; let i = index;"
       [text]="line"
       [isHighLighted]="i + 1 === highlightedLine"
       (click)="lineClicked(i + 1)"
