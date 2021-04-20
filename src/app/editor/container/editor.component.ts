@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { DUMMY_CODE } from '../../dummy-code';
+import { UserFile } from "src/models/user-file.model";
+import { SAMPLE_USER_FILES } from '../../sample-user-files';
 
 @Component({
    selector: 'app-editor',
@@ -7,5 +8,5 @@ import { DUMMY_CODE } from '../../dummy-code';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditorComponent {
-   codeExample: string = DUMMY_CODE;
+   userFiles: UserFile[] = SAMPLE_USER_FILES;
 }

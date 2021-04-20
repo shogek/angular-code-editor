@@ -1,3 +1,7 @@
+<app-editor-tabs
+  [userFiles]="userFiles"
+></app-editor-tabs>
+
 <app-editor-screen
-  [fileContents]="codeExample"
+  [fileContents]="userFiles[0].contents"
 ></app-editor-screen>

@@ -1,0 +1,10 @@
+<div class="wrapper">
+
+  <app-editor-tab-item
+    *ngFor="let userFile of userFiles"
+    [fileName]="userFile.name"
+    [isActive]="userFile.name === activeFile"
+    (click)="tabClicked(userFile.name)"
+  ></app-editor-tab-item>
+
+</div>
