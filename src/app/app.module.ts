@@ -9,6 +9,7 @@ import { EditorTabItemComponent } from './editor-tabs/component/editor-tab-item.
 import { EditorTabsComponent } from './editor-tabs/container/editor-tabs.component';
 import { EditorScreenComponent } from './editor/component/editor-screen.component';
 import { EditorComponent } from './editor/container/editor.component';
+import { UserFileService } from './services/user-file.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { EditorComponent } from './editor/container/editor.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UserFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
