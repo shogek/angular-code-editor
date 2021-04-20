@@ -18,7 +18,7 @@ export class UserFileService {
     return this.userFiles$;
   }
 
-  public getActiveFile(): Observable<UserFile| undefined> {
+  public getActiveFile(): Observable<UserFile | undefined> {
     return this.activeUserFile$;
   }
 

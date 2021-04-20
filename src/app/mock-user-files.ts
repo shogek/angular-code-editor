@@ -23,7 +23,7 @@ const MOCK_USER_FILE_1: UserFile = {
        return this.userFiles$;
      }
    
-     public getActiveFile(): Observable<UserFile| undefined> {
+     public getActiveFile(): Observable<UserFile | undefined> {
        return this.activeUserFile$;
      }
    
