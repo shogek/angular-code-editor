@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class UserFileService {
   private isDummyDataLoaded = false;
   private userFiles$ = new BehaviorSubject<UserFile[]>([]);
-  private activeUserFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
+  private activeUserFile$ = new BehaviorSubject<UserFile>(MOCK_USER_FILES[0]);
 
   public getUserFiles(): Observable<UserFile[]> {
     if (!this.isDummyDataLoaded) {
@@ -18,12 +18,12 @@ export class UserFileService {
     return this.userFiles$;
   }
 
-  public getActiveFile(): Observable<UserFile | undefined> {
+  public getActiveFile(): Observable<UserFile> {
     return this.activeUserFile$;
   }
 
   public setActiveFile(fileId: string): void {
-    const userFile = MOCK_USER_FILES.find(x => x.id === fileId);
+    const userFile = MOCK_USER_FILES.find(x => x.id === fileId)!;
     this.activeUserFile$.next(userFile);
   }
 

@@ -1,0 +1,16 @@
+<div
+  *ngIf="fileContents"
+  class="container"
+>
+
+  <app-editor-number-column
+    class="number-container"
+    [columnCount]="fileLineCount"
+    [highlightedLine]="1"
+  ></app-editor-number-column>
+
+  <p class="file-contents" contenteditable="true">
+    {{ fileContents }}
+  </p>
+
+</div>
