@@ -1,0 +1,10 @@
+<app-editor-tabs
+  [allFiles]="userFiles$ | async"
+  [activeFile]="activeFile$ | async"
+></app-editor-tabs>
+
+<app-editor-window-screen
+  [activeFile]="activeFile$ | async"
+  [activeLine]="activeLine$ | async"
+  (editorClicked)="handleEditorClicked($event)"
+></app-editor-window-screen>
