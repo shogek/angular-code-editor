@@ -8,6 +8,7 @@ import { EditorTabItemComponent } from './editor-tabs/component/editor-tab-item.
 import { EditorTabsComponent } from './editor-tabs/container/editor-tabs.component';
 import { EditorWindowScreenComponent } from './editor-window/component/editor-window-screen.component';
 import { EditorWindowComponent } from './editor-window/container/editor-window.component';
+import { EditorService } from './services/editor/editor.service';
 import { UserFileService } from './services/user-file.service';
 
 @NgModule({
@@ -23,7 +24,10 @@ import { UserFileService } from './services/user-file.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [UserFileService],
+  providers: [
+    UserFileService,
+    EditorService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

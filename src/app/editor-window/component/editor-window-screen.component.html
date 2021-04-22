@@ -6,10 +6,14 @@
   <app-editor-number-column
     class="number-container"
     [columnCount]="fileLineCount"
-    [highlightedLine]="1"
+    [highlightedLine]="activeLine"
   ></app-editor-number-column>
 
-  <p class="file-contents" contenteditable="true">
+  <p
+    class="file-contents"
+    contenteditable="true"
+    (click)="onEditorClick($event)"  
+  >
     {{ fileContents }}
   </p>
 

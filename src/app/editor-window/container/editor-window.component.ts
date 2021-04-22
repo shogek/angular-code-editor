@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { UserFile } from "src/app/models/user-file.model";
+import { EditorService } from "src/app/services/editor/editor.service";
 import { UserFileService } from "src/app/services/user-file.service";
 
 @Component({
@@ -8,14 +9,17 @@ import { UserFileService } from "src/app/services/user-file.service";
    templateUrl: './editor-window.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorWindowComponent implements OnInit {
-   userFiles$: Observable<UserFile[]> = new Observable();
-   activeFile$: Observable<UserFile> = new Observable();
+export class EditorWindowComponent {
+   userFiles$: Observable<UserFile[]> = this.userFileService.getUserFiles();
+   activeFile$: Observable<UserFile> = this.userFileService.getActiveFile();
+   activeLine$: Observable<number> = this.editorService.getActiveLine();
 
-   constructor(private userFileService: UserFileService) {}
+   constructor(
+      public userFileService: UserFileService,
+      public editorService: EditorService,
+   ) {}
 
-   ngOnInit(): void {
-      this.userFiles$ = this.userFileService.getUserFiles();
-      this.activeFile$ = this.userFileService.getActiveFile();
+   public handleEditorClicked(editor: HTMLElement) {
+      this.editorService.registerEditorClicked(editor);
    }
 }
