@@ -13,12 +13,17 @@ export class EditorWindowScreenComponent {
       this.fileLineCount = value?.contents?.split('\n').length;
    }
    @Input() activeLine = 0;
-   @Output() editorClicked = new EventEmitter<HTMLElement>();
+   @Output() editorMouseDown = new EventEmitter<MouseEvent>();
+   @Output() editorKeyDown = new EventEmitter<KeyboardEvent>();
 
    fileLineCount = 0;
    fileContents = '';
 
-   public onEditorClick(e: MouseEvent) {
-      this.editorClicked.emit(e.target as HTMLElement);
+   public onEditorMouseDown(e: MouseEvent): void {
+      this.editorMouseDown.emit(e);
+   }
+
+   public onEditorKeyDown(e: KeyboardEvent): void {
+      this.editorKeyDown.emit(e);
    }
 }

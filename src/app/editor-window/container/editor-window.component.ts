@@ -19,7 +19,11 @@ export class EditorWindowComponent {
       public editorService: EditorService,
    ) {}
 
-   public handleEditorClicked(editor: HTMLElement) {
-      this.editorService.registerEditorClicked(editor);
+   public handleEditorMouseDown(e: MouseEvent): void {
+      this.editorService.registerEditorMouseDown(e);
+   }
+
+   public handleEditorKeyDown(e: KeyboardEvent): void {
+      this.editorService.registerEditorKeyDown(e);
    }
 }

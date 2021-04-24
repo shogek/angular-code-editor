@@ -12,7 +12,8 @@
   <p
     class="file-contents"
     contenteditable="true"
-    (click)="onEditorClick($event)"  
+    (keydown)="onEditorKeyDown($event)"
+    (mousedown)="onEditorMouseDown($event)"
   >
     {{ fileContents }}
   </p>
