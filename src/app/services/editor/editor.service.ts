@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, combineLatest, Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { UserFileService } from "../user-file.service";
-import { calculateLineClicked, getCaretOffset } from "./editor-logic";
+import { calculateLineClicked, calculateOffsetAndActiveLineForArrows, getCaretOffset } from "./editor-logic";
 
 @Injectable()
 export class EditorService implements OnDestroy {
@@ -38,69 +38,16 @@ export class EditorService implements OnDestroy {
 
   /** Call when the user triggers the 'keydown' event on the editable file's content area. */
   public registerEditorKeyDown(e: KeyboardEvent): void {
-    // Use 'setTimeout' to let the browser finish processing and successfully get the caret's position.
-    // TODO: Remove 'setTimeout' and try changing '-1' to '0'
-    // TODO: Move this to 'editor-logic.ts'
-    setTimeout(() => {
-      const currentCaretOffset = getCaretOffset();
-
-      const keyClicked = e.key;
-
-      if (keyClicked === 'ArrowUp' && this.activeLine > 1) {
-        this.caretOffset = currentCaretOffset;
-        this.setActiveLine(this.activeLine - 1);
-        return; 
-      }
-
-      if (keyClicked === 'ArrowDown') {
-        this.userFileService
-          .getActiveFileLineCount()
-          .subscribe(lineCount => {
-            this.caretOffset = currentCaretOffset;
-            if (lineCount >= this.activeLine + 1) {
-              this.setActiveLine(this.activeLine + 1);
-            }
-          })
-          .unsubscribe();
-          return;
-      }
-
-      if (keyClicked === 'ArrowLeft' && this.activeLine !== 1) {
-        this.userFileService
-          .getActiveFile()
-          .subscribe(activeFile => {
-            this.caretOffset = currentCaretOffset;
-            const symbolAfterCaret = activeFile.contents[currentCaretOffset - 1];
-            if (symbolAfterCaret === '\n') {
-              this.setActiveLine(this.activeLine - 1);
-            }
-          })
-          .unsubscribe();
-        return;
-      }
-
-      if (keyClicked === 'ArrowRight') {
-        combineLatest([
-          this.userFileService.getActiveFile(),
-          this.userFileService.getActiveFileLineCount(),
-        ])
-        .subscribe(([activeFile, lineCount]) => {
-          this.caretOffset = currentCaretOffset;
-          if (this.activeLine >= lineCount) {
-            // Caret already on last line in file.
-            return;
-          }
-
-          const symbolCaretPassed = activeFile.contents[currentCaretOffset - 2];
-          if (symbolCaretPassed === '\n') {
-            this.setActiveLine(this.activeLine + 1);
-          }
-        })
-        .unsubscribe();
-        return;
-      }
-      this.caretOffset = currentCaretOffset;
-    });
+    // TODO: Track file's contents memory to update active line when new characters are added or deleted
+    calculateOffsetAndActiveLineForArrows(
+      e.key,
+      this.activeLine,
+      this.caretOffset,
+      this.userFileService.getActiveFile(),
+      this.userFileService.getActiveFileLineCount(),
+      (caretOffset) => this.caretOffset = caretOffset,
+      (activeLine) => this.setActiveLine(activeLine),
+    );
   }
 
   public setActiveLine(line: number): void {
