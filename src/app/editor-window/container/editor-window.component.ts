@@ -19,7 +19,11 @@ export class EditorWindowComponent {
       public editorService: EditorService,
    ) {}
 
-   public handleEditorClicked(editor: HTMLElement) {
+   public handleEditorClicked(editor: HTMLElement): void {
       this.editorService.registerEditorClicked(editor);
+   }
+
+   public handleEditorKeyDowned(keyPressed: string): void {
+      this.editorService.registerEditorKeyDowned(keyPressed);
    }
 }

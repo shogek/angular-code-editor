@@ -2,15 +2,13 @@ import { Injectable } from "@angular/core";
 import { UserFile } from "../models/user-file.model";
 import { MOCK_USER_FILES } from "../mock-user-files";
 import { BehaviorSubject, Observable } from "rxjs";
-import { EditorService } from "./editor/editor.service";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class UserFileService {
   private isDummyDataLoaded = false;
   private userFiles$ = new BehaviorSubject<UserFile[]>([]);
   private activeUserFile$ = new BehaviorSubject<UserFile>(MOCK_USER_FILES[0]);
-
-  constructor(private editorService: EditorService) {}
 
   public getUserFiles(): Observable<UserFile[]> {
     if (!this.isDummyDataLoaded) {
@@ -25,10 +23,15 @@ export class UserFileService {
     return this.activeUserFile$;
   }
 
+  public getActiveFileLineCount(): Observable<number> {
+    return this.activeUserFile$.pipe(
+      map(activeFile => activeFile?.contents.split('\n').length)
+    );
+  }
+
   public setActiveFile(fileId: string): void {
     const userFile = MOCK_USER_FILES.find(x => x.id === fileId)!;
     this.activeUserFile$.next(userFile);
-    this.editorService.setActiveLine(0);
   }
 
   /** Mimic dynamic loading. */

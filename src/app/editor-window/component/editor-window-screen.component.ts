@@ -14,11 +14,16 @@ export class EditorWindowScreenComponent {
    }
    @Input() activeLine = 0;
    @Output() editorClicked = new EventEmitter<HTMLElement>();
+   @Output() editorKeyDowned = new EventEmitter<string>();
 
    fileLineCount = 0;
    fileContents = '';
 
-   public onEditorClick(e: MouseEvent) {
+   public onEditorClick(e: MouseEvent): void {
       this.editorClicked.emit(e.target as HTMLElement);
+   }
+
+   public onEditorKeyDown(e: KeyboardEvent): void {
+      this.editorKeyDowned.emit(e.key);
    }
 }
