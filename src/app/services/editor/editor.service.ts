@@ -1,13 +1,14 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, combineLatest, Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { UserFileService } from "../user-file.service";
-import { calculateLineClicked } from "./editor-logic";
+import { calculateLineClicked, getCaretOffset } from "./editor-logic";
 
 @Injectable()
 export class EditorService implements OnDestroy {
   private destroy$ = new Subject();
 
+  private caretOffset = 0;
   private activeLine = 0;
   private activeLine$ = new BehaviorSubject<number>(this.activeLine);
 
@@ -25,35 +26,81 @@ export class EditorService implements OnDestroy {
     return this.activeLine$;
   }
 
-  /**
-   * Call when the user triggers the 'click' event on the editable file's content area.
-   * @param editorHtmlElement DOM element with the attribute 'contenteditable'.
-   */
-  public registerEditorClicked(editor: HTMLElement): void {
-    const lineClicked = calculateLineClicked(editor);
-    this.setActiveLine(lineClicked);
+  /** Call when the user triggers the 'mousedown' event on the editable file's content area. */
+  public registerEditorMouseDown(e: MouseEvent): void {
+    // Use 'setTimeout' to let the browser finish processing and successfully get the caret's position.
+    setTimeout(() => {
+      this.caretOffset = getCaretOffset();
+      const lineClicked = calculateLineClicked(e.target as HTMLElement, this.caretOffset);
+      this.setActiveLine(lineClicked);
+    });
   }
 
-  /**
-   * Call when the user triggers the 'key down' event on the editable file's content area.
-   * @param keyClicked Ex.: 'ArrowUp', '5', 'Ctrl'
-   */
-  public registerEditorKeyDowned(keyClicked: string): void {
-    if (keyClicked === 'ArrowUp' && this.activeLine > 1) {
-      this.setActiveLine(this.activeLine - 1);
-      return; 
-    }
+  /** Call when the user triggers the 'keydown' event on the editable file's content area. */
+  public registerEditorKeyDown(e: KeyboardEvent): void {
+    // Use 'setTimeout' to let the browser finish processing and successfully get the caret's position.
+    // TODO: Remove 'setTimeout' and try changing '-1' to '0'
+    // TODO: Move this to 'editor-logic.ts'
+    setTimeout(() => {
+      const currentCaretOffset = getCaretOffset();
 
-    if (keyClicked === 'ArrowDown') {
-      this.userFileService
-        .getActiveFileLineCount()
-        .subscribe(lineCount => {
-          if (lineCount >= this.activeLine + 1) {
+      const keyClicked = e.key;
+
+      if (keyClicked === 'ArrowUp' && this.activeLine > 1) {
+        this.caretOffset = currentCaretOffset;
+        this.setActiveLine(this.activeLine - 1);
+        return; 
+      }
+
+      if (keyClicked === 'ArrowDown') {
+        this.userFileService
+          .getActiveFileLineCount()
+          .subscribe(lineCount => {
+            this.caretOffset = currentCaretOffset;
+            if (lineCount >= this.activeLine + 1) {
+              this.setActiveLine(this.activeLine + 1);
+            }
+          })
+          .unsubscribe();
+          return;
+      }
+
+      if (keyClicked === 'ArrowLeft' && this.activeLine !== 1) {
+        this.userFileService
+          .getActiveFile()
+          .subscribe(activeFile => {
+            this.caretOffset = currentCaretOffset;
+            const symbolAfterCaret = activeFile.contents[currentCaretOffset - 1];
+            if (symbolAfterCaret === '\n') {
+              this.setActiveLine(this.activeLine - 1);
+            }
+          })
+          .unsubscribe();
+        return;
+      }
+
+      if (keyClicked === 'ArrowRight') {
+        combineLatest([
+          this.userFileService.getActiveFile(),
+          this.userFileService.getActiveFileLineCount(),
+        ])
+        .subscribe(([activeFile, lineCount]) => {
+          this.caretOffset = currentCaretOffset;
+          if (this.activeLine >= lineCount) {
+            // Caret already on last line in file.
+            return;
+          }
+
+          const symbolCaretPassed = activeFile.contents[currentCaretOffset - 2];
+          if (symbolCaretPassed === '\n') {
             this.setActiveLine(this.activeLine + 1);
           }
         })
         .unsubscribe();
-    }
+        return;
+      }
+      this.caretOffset = currentCaretOffset;
+    });
   }
 
   public setActiveLine(line: number): void {

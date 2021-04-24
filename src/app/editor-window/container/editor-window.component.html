@@ -6,6 +6,6 @@
 <app-editor-window-screen
   [activeFile]="activeFile$ | async"
   [activeLine]="activeLine$ | async"
-  (editorClicked)="handleEditorClicked($event)"
-  (editorKeyDowned)="handleEditorKeyDowned($event)"
+  (editorMouseDown)="handleEditorMouseDown($event)"
+  (editorKeyDown)="handleEditorKeyDown($event)"
 ></app-editor-window-screen>
