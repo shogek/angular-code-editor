@@ -1,12 +1,12 @@
 <div
-  *ngIf="fileContents"
+  *ngIf="activeTab.contents"
   class="container"
 >
 
   <app-editor-number-column
     class="number-container"
-    [columnCount]="fileLineCount"
-    [highlightedLine]="activeLine"
+    [columnCount]="activeTab.lineCount"
+    [highlightedLine]="activeTab.activeLine"
   ></app-editor-number-column>
 
   <p
@@ -15,7 +15,7 @@
     (keydown)="onEditorKeyDown($event)"
     (mousedown)="onEditorMouseDown($event)"
   >
-    {{ fileContents }}
+    {{ activeTab.contents }}
   </p>
 
 </div>

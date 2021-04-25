@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { UserFile } from "src/app/models/user-file.model";
+import { EditorTab } from "src/app/models/editor-tab.model";
+import { EditorService } from "src/app/services/editor/editor.service";
 import { UserFileService } from "src/app/services/user-file.service";
 
 @Component({
@@ -9,16 +10,16 @@ import { UserFileService } from "src/app/services/user-file.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabsComponent {
-  @Input() allFiles: UserFile[] = [];
-  @Input() activeFile!: UserFile;
+  @Input() allTabs: EditorTab[] = [];
+  @Input() activeTab!: EditorTab;
 
-  constructor(private userFileService: UserFileService) {}
+  constructor(private editorService: EditorService) {}
 
-  public handleTabOpen(fileId: string): void {
-    this.userFileService.setActiveFile(fileId);
+  public handleTabOpen(tabId: string): void {
+    this.editorService.openTab(tabId);
   }
 
-  public handleTabClose(fileId: string): void {
-    this.userFileService.removeFile(fileId);
+  public handleTabClose(tabId: string): void {
+    this.editorService.closeTab(tabId);
   }
 }

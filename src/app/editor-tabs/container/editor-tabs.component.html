@@ -1,9 +1,9 @@
 <div class="wrapper">
   <app-editor-tab-item
-    *ngFor="let file of allFiles"
-    [fileId]="file.id"
-    [fileName]="file.name"
-    [isActive]="file.id === activeFile.id"
+    *ngFor="let tab of allTabs"
+    [tabId]="tab.id"
+    [tabName]="tab.name"
+    [isActive]="tab.id === activeTab.id"
     (clickOpen)="handleTabOpen($event)"
     (clickClose)="handleTabClose($event)"
   ></app-editor-tab-item>
