@@ -4,6 +4,10 @@
 >
   <p (click)="clickOpen.emit(tabId)">
     {{ tabName }} 
-    <span (click)="onClickClose($event)">✕</span>
+    
+    <span
+      class="close"
+      (click)="onClickClose($event)"
+    >✕</span>
   </p>
 </div>
