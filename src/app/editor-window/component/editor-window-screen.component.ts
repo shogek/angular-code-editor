@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { EditorTab } from "src/app/models/editor-tab.model";
 
 @Component({
@@ -9,14 +9,14 @@ import { EditorTab } from "src/app/models/editor-tab.model";
 })
 export class EditorWindowScreenComponent {
    @Input() activeTab!: EditorTab;
-   @Output() editorMouseDown = new EventEmitter<MouseEvent>();
-   @Output() editorKeyDown = new EventEmitter<KeyboardEvent>();
+   @Input() activeLine!: number;
+   @Output() onKeyDown = new EventEmitter<KeyboardEvent>();
+   @Output() onMouseDown = new EventEmitter<MouseEvent>();
 
    public onEditorMouseDown(e: MouseEvent): void {
-      this.editorMouseDown.emit(e);
+      this.onMouseDown.emit(e);
    }
 
    public onEditorKeyDown(e: KeyboardEvent): void {
-      this.editorKeyDown.emit(e);
    }
 }

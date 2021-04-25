@@ -6,8 +6,8 @@
 
   <app-editor-window-screen
     [activeTab]="activeTab"
-    (editorMouseDown)="handleEditorMouseDown($event)"
-    (editorKeyDown)="handleEditorKeyDown($event)"
+    [activeLine]="activeLine$ | async"
+    (onMouseDown)="handleMouseDown($event)"
   ></app-editor-window-screen>
 </ng-container>
 

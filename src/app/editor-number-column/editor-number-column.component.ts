@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorNumberColumnComponent {
-  @Input() columnCount = NaN;
-  @Input() highlightedLine = NaN;
+  @Input() fileLineCount!: number;
+  @Input() activeLine!: number;
 }
