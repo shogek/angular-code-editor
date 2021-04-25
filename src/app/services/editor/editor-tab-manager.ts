@@ -43,6 +43,10 @@ export class EditorTabManager {
     return this.tabMap.get(tabId)!;
   }
 
+  public updateTab(tab: EditorTab) {
+    this.tabMap.set(tab.id, tab);
+  }
+
   public removeTab(tabId: string): void {
     this.tabMap.delete(tabId);
   }

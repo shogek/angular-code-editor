@@ -19,6 +19,7 @@ import {
 })
 export class EditorWindowComponent implements OnInit, OnDestroy {
    private subscriptions: Subscription[] = [];
+   private activeTab: EditorTab | undefined;
    private activeLine = 1;
    private lineCount = 1;
 
@@ -33,6 +34,7 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
          this.editorService.getActiveTab().subscribe(activeTab => {
             this.setActiveLine(activeTab?.activeLine ?? 1);
             this.lineCount = activeTab?.lineCount ?? 1;
+            this.activeTab = activeTab;
          })
       );
    }
@@ -44,8 +46,10 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
    public handleMouseDown(e: MouseEvent) {
       // Using 'setTimeout' will allow the offset to be calculated from the current 'mousedown' instead of the last 'click' event.
       setTimeout(() => {
-         const clickedLine = getClickedLine(e.target as HTMLElement);
+         const caretOffset = getCaretOffset();
+         const clickedLine = getClickedLine(e.target as HTMLElement, caretOffset);
          this.setActiveLine(clickedLine);
+         this.updateActiveTab(caretOffset, clickedLine);
       });
    }
 
@@ -70,12 +74,28 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
             case 'ArrowRight':
                newActiveLine = getActiveLineAfterArrowRight(e, caretOffset, lineCount, activeLine);
                break;
-            default: break;
+            default: 
+               break;
          }
 
          if (newActiveLine) {
             this.setActiveLine(newActiveLine);
          }
+
+         this.updateActiveTab(caretOffset, newActiveLine);
+      });
+   }
+
+   private updateActiveTab(caretOffset: number, activeLine: number | undefined) {
+      const { activeTab } = this;
+      if (!activeTab) {
+         return;
+      }
+
+      this.editorService.updateTab({
+         ...activeTab,
+         caretOffset,
+         activeLine: activeLine ?? this.activeLine
       });
    }
 

@@ -75,6 +75,10 @@ export class EditorService {
     }).unsubscribe();
   }
 
+  public updateTab(tab: EditorTab): void {
+    this.tabManager.updateTab(tab);
+  }
+
   private loadTabs(): void {
     const initialTab = this.tabManager.getRandomTab();
     this.setActiveTab(initialTab);

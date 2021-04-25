@@ -10,15 +10,14 @@ export interface EditorTab {
   /** Contents of a file which will be editable in the editor. */
   contents: string;
 
-  // TODO: Implement functionality - opening tabs jumps to last know location.
+  // TODO: On tab open, set caret to last known position.
   /** Indicates how many characters are between the cursor and the start of file. */
   caretOffset: number;
 
-  // TODO: Implement functionality - opening tabs jumps to last know location.
   /** Indicates the currently selected line in the editor. */
   activeLine: number;
 
-  // TODO: Implement functionality - opening tabs jumps to last know location.
+  // TODO: On click 'Delete'/'Backspace', check if line removed; on click 'Enter', check if line added.
   /** Indicates the number of lines the file has. */
   lineCount: number;
 }
