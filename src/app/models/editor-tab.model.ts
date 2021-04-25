@@ -1,19 +1,24 @@
 /** I represent a file opened in the editor tab. */
 export interface EditorTab {
   id: string;
-  /** TODO: Document */
+
   userFileId: string;
-  /** TODO: Document */
+
+  /** Text which will be show in the editor's tab. */
   name: string;
-  /** TODO: Document */
+
+  /** Contents of a file which will be editable in the editor. */
   contents: string;
-  /** TODO: Document */
-  /** TODO: Implement functionality - opening tabs jumps to last know location. */
-  cursorOffset: number;
-  /** TODO: Document */
-  /** TODO: Implement functionality - opening tabs jumps to last know location. */
+
+  // TODO: Implement functionality - opening tabs jumps to last know location.
+  /** Indicates how many characters are between the cursor and the start of file. */
+  caretOffset: number;
+
+  // TODO: Implement functionality - opening tabs jumps to last know location.
+  /** Indicates the currently selected line in the editor. */
   activeLine: number;
-  /** TODO: Document */
-  /** TODO: Implement functionality - opening tabs jumps to last know location. */
+
+  // TODO: Implement functionality - opening tabs jumps to last know location.
+  /** Indicates the number of lines the file has. */
   lineCount: number;
 }

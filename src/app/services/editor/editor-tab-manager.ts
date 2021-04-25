@@ -1,12 +1,9 @@
+import { getLineCount } from "src/app/helpers/text-content.helper";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFile } from "src/app/models/user-file.model";
-import { calculateFileLineCount } from "./editor-helpers";
 
 export class EditorTabManager {
-  /** 
-   * [KEY] tabId
-   * [VAL] EditorTab
-  */
+  /** [KEY] tabId | [VAL] EditorTab */
   private tabMap = new Map<string, EditorTab>();
 
   constructor(files: UserFile[]) {
@@ -16,9 +13,9 @@ export class EditorTabManager {
         userFileId: file.id,
         name: file.name,
         contents: file.contents,
-        cursorOffset: 0,
+        caretOffset: 0,
         activeLine: 1,
-        lineCount: calculateFileLineCount(file.contents)
+        lineCount: getLineCount(file.contents)
       } as EditorTab;
 
       this.tabMap.set(tab.id, tab);

@@ -13,10 +13,11 @@ export class EditorWindowScreenComponent {
    @Output() onKeyDown = new EventEmitter<KeyboardEvent>();
    @Output() onMouseDown = new EventEmitter<MouseEvent>();
 
-   public onEditorMouseDown(e: MouseEvent): void {
+   public onEditorMouseDown(e: MouseEvent) {
       this.onMouseDown.emit(e);
    }
 
-   public onEditorKeyDown(e: KeyboardEvent): void {
+   public onEditorKeyDown(e: KeyboardEvent) {
+      this.onKeyDown.emit(e);
    }
 }
