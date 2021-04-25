@@ -1,11 +1,19 @@
-<app-editor-tabs
-  [allFiles]="userFiles$ | async"
-  [activeFile]="activeFile$ | async"
-></app-editor-tabs>
+<ng-container *ngIf="activeFile$ | async as activeFile; else noFiles">
+  <app-editor-tabs
+    [allFiles]="userFiles$ | async"
+    [activeFile]="activeFile$ | async"
+  ></app-editor-tabs>
 
-<app-editor-window-screen
-  [activeFile]="activeFile$ | async"
-  [activeLine]="activeLine$ | async"
-  (editorMouseDown)="handleEditorMouseDown($event)"
-  (editorKeyDown)="handleEditorKeyDown($event)"
-></app-editor-window-screen>
+  <app-editor-window-screen
+    [activeFile]="activeFile$ | async"
+    [activeLine]="activeLine$ | async"
+    (editorMouseDown)="handleEditorMouseDown($event)"
+    (editorKeyDown)="handleEditorKeyDown($event)"
+  ></app-editor-window-screen>
+</ng-container>
+
+<ng-template #noFiles>
+  <div class="empty">
+    Open a file and start editing!
+  </div>
+</ng-template>

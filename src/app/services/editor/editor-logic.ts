@@ -24,7 +24,7 @@ export function calculateOffsetAndActiveLineForArrows(
   keyPressed: string,
   activeLine: number,
   caretOffset: number,
-  activeFile: Observable<UserFile>,
+  activeFile: Observable<UserFile | undefined>,
   activeFileLineCount: Observable<number>,
   caretOffsetCallback: (caretOffset: number) => void,
   activeLineCallback: (activeLine: number) => void,
@@ -100,7 +100,7 @@ function calculateOffsetAndActiveLineForArrowDown(
 function calculateOffsetAndActiveLineForArrowLeft(
   activeLine: number,
   caretOffset: number,
-  activeFile: Observable<UserFile>,
+  activeFile: Observable<UserFile | undefined>,
   caretOffsetCallback: (caretOffset: number) => void,
   activeLineCallback: (activeLine: number) => void,
 ): void {
@@ -109,7 +109,7 @@ function calculateOffsetAndActiveLineForArrowLeft(
       caretOffsetCallback(caretOffset - 1);
     }
 
-    const symbolAfterCaret = activeFile.contents[caretOffset - 2];
+    const symbolAfterCaret = activeFile?.contents[caretOffset - 2];
     if (symbolAfterCaret === '\n') {
       activeLineCallback(activeLine - 1);
     }
@@ -120,7 +120,7 @@ function calculateOffsetAndActiveLineForArrowLeft(
 function calculateOffsetAndActiveLineForArrowRight(
   activeLine: number,
   caretOffset: number,
-  activeFile: Observable<UserFile>,
+  activeFile: Observable<UserFile | undefined>,
   activeFileLineCount: Observable<number>,
   caretOffsetCallback: (caretOffset: number) => void,
   activeLineCallback: (activeLine: number) => void,
@@ -130,6 +130,10 @@ function calculateOffsetAndActiveLineForArrowRight(
     activeFileLineCount,
   ])
   .subscribe(([activeFile, lineCount]) => {
+    if (!activeFile) {
+      return;
+    }
+
     if (caretOffset < activeFile.contents.length) {
       caretOffsetCallback(caretOffset + 1);
     }

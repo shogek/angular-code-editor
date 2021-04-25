@@ -7,11 +7,12 @@ import { UserFileService } from "src/app/services/user-file.service";
 @Component({
    selector: 'app-editor',
    templateUrl: './editor-window.component.html',
+   styleUrls: ['./editor-window.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditorWindowComponent {
    userFiles$: Observable<UserFile[]> = this.userFileService.getUserFiles();
-   activeFile$: Observable<UserFile> = this.userFileService.getActiveFile();
+   activeFile$: Observable<UserFile | undefined> = this.userFileService.getActiveFile();
    activeLine$: Observable<number> = this.editorService.getActiveLine();
 
    constructor(

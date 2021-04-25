@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: 'app-editor-tab-item',
@@ -7,6 +7,9 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabItemComponent {
+  @Input() fileId = '';
   @Input() fileName = '';
   @Input() isActive = false;
+  @Output() clickOpen = new EventEmitter<string>();
+  @Output() clickClose = new EventEmitter<string>();
 }

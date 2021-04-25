@@ -14,7 +14,11 @@ export class EditorTabsComponent {
 
   constructor(private userFileService: UserFileService) {}
 
-  public tabClicked(fileId: string): void {
+  public handleTabOpen(fileId: string): void {
     this.userFileService.setActiveFile(fileId);
+  }
+
+  public handleTabClose(fileId: string): void {
+    this.userFileService.removeFile(fileId);
   }
 }
