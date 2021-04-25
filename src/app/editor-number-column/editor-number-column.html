@@ -1,6 +1,6 @@
 <p 
-  *ngFor="let _ of [].constructor(columnCount); let i = index;"
-  [class.active]="i + 1 === highlightedLine"
+  *ngFor="let _ of [].constructor(fileLineCount); let i = index;"
+  [class.active]="i + 1 === activeLine"
 >
   {{ i + 1 }}
 </p>

@@ -21,4 +21,13 @@
     margin: 0;
     padding: 0.7rem;
   }
+
+  .close {
+    color: var(--editor-tab-bg-color);
+  }
+
+  &:hover {
+    &.active .close { color: var(--editor-tab-text-active-color); }
+             .close { color: var(--editor-tab-text-color); }
+  }
 }

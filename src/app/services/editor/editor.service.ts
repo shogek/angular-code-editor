@@ -1,65 +1,89 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { take } from "rxjs/operators";
+import { MOCK_USER_FILES } from "src/app/mock-user-files";
+import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFileService } from "../user-file.service";
-import { calculateLineClicked, calculateOffsetAndActiveLineForArrows, getCaretOffset } from "./editor-logic";
+import { EditorTabManager } from "./editor-tab-manager";
 
 @Injectable()
-export class EditorService implements OnDestroy {
-  private destroy$ = new Subject();
+export class EditorService {
+  private tabManager = new EditorTabManager(MOCK_USER_FILES);
 
-  private caretOffset = 0;
-  private activeLine = 0;
-  private activeLine$ = new BehaviorSubject<number>(this.activeLine);
+  private allTabs$ = new BehaviorSubject<EditorTab[]>([]);
+  private activeTab$ = new BehaviorSubject<EditorTab | undefined>(undefined);
 
   constructor(private userFileService: UserFileService) {
-    this.trackActiveFile();
+    this.loadTabs();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  public getAllTabs(): Observable<EditorTab[]> {
+    return this.allTabs$;
   }
 
-  /** Get the line that is currently being highlighted in the editor. */
-  public getActiveLine(): Observable<number> {
-    return this.activeLine$;
+  public getActiveTab(): Observable<EditorTab | undefined> {
+    return this.activeTab$;
   }
 
-  /** Call when the user triggers the 'mousedown' event on the editable file's content area. */
-  public registerEditorMouseDown(e: MouseEvent): void {
-    // Use 'setTimeout' to let the browser finish processing and successfully get the caret's position.
-    setTimeout(() => {
-      this.caretOffset = getCaretOffset();
-      const lineClicked = calculateLineClicked(e.target as HTMLElement, this.caretOffset);
-      this.setActiveLine(lineClicked);
-    });
+  public openTab(tabId?: string): void {
+    if (!tabId) {
+      // Closed last tab.
+      this.activeTab$.next(undefined);
+      return;
+    }
+
+    this.getActiveTab()
+    .pipe(take(1))
+    .subscribe(activeTab => {
+      if (activeTab?.id === tabId) {
+        // Tab is already active.
+        return;
+      }
+
+      const newTab = this.tabManager.getTabById(tabId);
+      this.setActiveTab(newTab);
+    })
+    .unsubscribe();
   }
 
-  /** Call when the user triggers the 'keydown' event on the editable file's content area. */
-  public registerEditorKeyDown(e: KeyboardEvent): void {
-    // TODO: Track file's contents memory to update active line when new characters are added or deleted
-    calculateOffsetAndActiveLineForArrows(
-      e.key,
-      this.activeLine,
-      this.caretOffset,
-      this.userFileService.getActiveFile(),
-      this.userFileService.getActiveFileLineCount(),
-      (caretOffset) => this.caretOffset = caretOffset,
-      (activeLine) => this.setActiveLine(activeLine),
-    );
+  public closeTab(tabId: string): void {
+    const closedTab = this.tabManager.getTabById(tabId);
+    this.tabManager.removeTab(tabId);
+    this.userFileService.remove(closedTab.userFileId);
+
+    const tabsLeft = this.tabManager.getAllTabs();
+    this.allTabs$.next(tabsLeft);
+
+    if (tabsLeft.length < 1) {
+      // Closed last tab.
+      this.setActiveTab(undefined);
+      return;
+    }
+
+    this.activeTab$.subscribe(activeTab => {
+      if (!activeTab) {
+        debugger;
+        throw new Error("This shouldn't be null - if a file exists, a tab must be opened!");
+      }
+
+      const closingCurrentTab = activeTab.id === tabId;
+      if (closingCurrentTab) {
+        const randomTab = this.tabManager.getRandomTab();
+        this.setActiveTab(randomTab);
+        return;
+      }
+    }).unsubscribe();
   }
 
-  public setActiveLine(line: number): void {
-    this.activeLine = line;
-    this.activeLine$.next(line);
+  private loadTabs(): void {
+    const initialTab = this.tabManager.getRandomTab();
+    this.setActiveTab(initialTab);
+
+    const allTabs = this.tabManager.getAllTabs();
+    this.allTabs$.next(allTabs);
   }
 
-  /** When the user switches tabs, set the active line to the first one in the file. */
-  private trackActiveFile(): void {
-    this.userFileService
-      .getActiveFile()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(_ => this.setActiveLine(1));
+  private setActiveTab(tab?: EditorTab): void {
+    this.activeTab$.next(tab);
   }
 }

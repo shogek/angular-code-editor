@@ -2,5 +2,12 @@
   class="wrapper"
   [class.active]="isActive"
 >
-  <p>{{ fileName }}</p>
+  <p (click)="clickOpen.emit(tabId)">
+    {{ tabName }} 
+    
+    <span
+      class="close"
+      (click)="onClickClose($event)"
+    >✕</span>
+  </p>
 </div>

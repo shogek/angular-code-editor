@@ -17,6 +17,11 @@
   src: url(assets/fonts/FiraCode-Regular.woff2) format('woff2');
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: 'Fira code';
