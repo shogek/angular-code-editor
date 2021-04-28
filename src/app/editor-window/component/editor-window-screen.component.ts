@@ -83,10 +83,6 @@ export class EditorWindowScreenComponent implements AfterViewChecked {
 
    private highlightLineAfterTabChanged() {
       const { activeLineElementId, caretOffset } = this.activeTab;
-      if (!activeLineElementId) {
-         // TODO: Update this - always highlight the first line
-         return;
-      }
 
       const editor = this.editor.nativeElement as HTMLElement;
       const activeLine = editor.querySelector('#' + activeLineElementId)!;

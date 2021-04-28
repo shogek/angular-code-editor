@@ -9,13 +9,14 @@ export class EditorTabManager {
 
   constructor(files: UserFile[]) {
     files.forEach(file => {
+      const fileContentsAsTypescript = this.formatFileContentAsTypescript(file.contents);
       const tab = {
         id: `${file.name}-${file.id}`,
         userFileId: file.id,
         name: file.name,
-        contents: addTypeScriptCodeSyntaxColoring(file.contents),
+        contents: fileContentsAsTypescript,
         caretOffset: 0,
-        activeLineElementId: '',
+        activeLineElementId: this.getIdOfFirstLineElement(fileContentsAsTypescript),
         lineCount: getLineCount(file.contents)
       } as EditorTab;
 
@@ -50,5 +51,39 @@ export class EditorTabManager {
 
   public removeTab(tabId: string): void {
     this.tabMap.delete(tabId);
+  }
+
+  private formatFileContentAsTypescript(fileContents: string): string {
+    // Surround some of language's keywords with <span> tags to add coloring
+    const contentWithSpans = addTypeScriptCodeSyntaxColoring(fileContents);
+
+    // Add unique ID values to each of the <span> tags
+    const spans = contentWithSpans.split('<span');
+    const id = 'span-';
+    let contentWithUniqueSpans = spans[0];
+    for (let i = 1; i <= spans.length; i++) {
+      const updatedSpan = `<span id="${id}${i}"`; // TODO: Use unique IDs
+      contentWithUniqueSpans += updatedSpan + spans[i];
+    }
+
+    // Surround each of the file's lines with <p> tags
+    const lines = contentWithUniqueSpans
+      .split('\n')
+      .map((line, i) =>
+        '<p ' +
+          `id="line-${i + 1}"` + // TODO: Use unique IDs
+          `line="${i + 1}">` +
+            line + 
+          '</p>'
+      ).join('');
+
+    return lines;
+  }
+
+  private getIdOfFirstLineElement(fileContents: string): string {
+    // const regex = /<p id="(.*)"/;
+    // const result = fileContents.match(regex);
+    // TODO: After <p> and <span> has unique IDs
+    return 'line-1';
   }
 }

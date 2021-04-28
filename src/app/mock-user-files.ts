@@ -12,10 +12,10 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable()
 export class UserFileService {
   private isDummyDataLoaded = false;
-  private userFiles$ = new BehaviorSubject<UserFile[]>([]);
-  private activeUserFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
+  private userFiles$ = new BehaviorSubject([]);
+  private activeUserFile$ = new BehaviorSubject(undefined);
 
-  public getUserFiles(): Observable<UserFile[]> {
+  public getUserFiles(): Observable {
     if (!this.isDummyDataLoaded) {
       this.loadDummyData();
       this.isDummyDataLoaded = true;
@@ -27,7 +27,7 @@ export class UserFileService {
   /**
    * Get the file that is currently opened in the editor.
    */
-  public getActiveFile(): Observable<UserFile | undefined> {
+  public getActiveFile(): Observable {
     return this.activeUserFile$;
   }
 

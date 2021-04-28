@@ -1,5 +1,5 @@
 /** Surround certain TypeScript language tokens with span tags to add coloring. */
-export function addTypeScriptCodeSyntaxColoring(fileContents: string) {
+export function addTypeScriptCodeSyntaxColoring(fileContents: string): string {
   let text = fileContents;
   text = replaceSingleLineImportStatements(text);
   text = replaceInjectableKeyword(text);
@@ -12,19 +12,7 @@ export function addTypeScriptCodeSyntaxColoring(fileContents: string) {
   text = replaceIfStatements(text);
   text = replaceSingleLineComments(text);
   text = replaceMultiLineComments(text);
-  // TOOD: This does not belong here. Create a 'editor-line-manager.ts'?
-  const lines = text.split('\n').map((line, i) => {
-    const l = `<p id="line-${i + 1}" line="${i + 1}">${line}</p>`;
-    return l;
-  }).join('');
-  const spans = lines.split('<span');
-  let id = 'span-';
-  let result = spans[0];
-  for (let i = 1; i <= spans.length; i++) {
-    const updatedSpan = `<span id="${id}${i}"`;
-    result += updatedSpan + spans[i];
-  }
-  return result;
+  return text;
 }
 
 function replaceSingleLineImportStatements(text: string): string {
@@ -60,7 +48,7 @@ function replaceExternalClassDeclarations(text: string): string {
 
 function replaceVariableDeclarationsWithNewKeyword(text: string): string {
   return text.replace(
-    /private (.*) = new (.*);/g,
+    /private (.*) = new ([/s/S]*);/g,
     '<span class="red">private</span> ' +
     '$1' +
     '<span class="red"> = new </span>' +
