@@ -7,6 +7,7 @@ import { EditorNumberColumnComponent } from './editor-number-column/editor-numbe
 import { EditorTabItemComponent } from './editor-tabs/component/editor-tab-item.component';
 import { EditorTabsComponent } from './editor-tabs/container/editor-tabs.component';
 import { EditorWindowScreenComponent } from './editor-window/component/editor-window-screen.component';
+import { SafeHtmlPipe } from './editor-window/component/safe-html.pipe';
 import { EditorWindowComponent } from './editor-window/container/editor-window.component';
 import { EditorService } from './services/editor/editor.service';
 import { UserFileService } from './services/user-file.service';
@@ -19,6 +20,7 @@ import { UserFileService } from './services/user-file.service';
     EditorNumberColumnComponent,
     EditorTabsComponent,
     EditorTabItemComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,

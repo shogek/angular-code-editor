@@ -10,12 +10,12 @@
   ></app-editor-number-column>
 
   <p
+    #editor
     class="file-contents"
     contenteditable="true"
+    [innerHTML]="activeTab.contents | safeHtml"
     (keydown)="onEditorKeyDown($event)"
     (mousedown)="onEditorMouseDown($event)"
-  >
-    {{ activeTab.contents }}
-  </p>
+  ></p>
 
 </div>

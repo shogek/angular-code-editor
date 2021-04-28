@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorService } from "src/app/services/editor/editor.service";
+import { OnMouseDownArgs } from "../common/on-mouse-down-args";
 import {
    getClickedLine,
    getCaretOffset,
@@ -20,19 +21,19 @@ import {
 export class EditorWindowComponent implements OnInit, OnDestroy {
    private subscriptions: Subscription[] = [];
    private activeTab: EditorTab | undefined;
-   private activeLine = 1;
+   private activeLineElementId = '';
    private lineCount = 1;
 
    allTabs$: Observable<EditorTab[]> = this.editorService.getAllTabs();
    activeTab$: Observable<EditorTab | undefined> = this.editorService.getActiveTab();
-   activeLine$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+   // activeLineElementId$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
    constructor(public editorService: EditorService) { }
 
    ngOnInit() {
       this.subscriptions.push(
          this.editorService.getActiveTab().subscribe(activeTab => {
-            this.setActiveLine(activeTab?.activeLine ?? 1);
+            // this.setActiveLine(activeTab?.activeLineElementId ?? '');
             this.lineCount = activeTab?.lineCount ?? 1;
             this.activeTab = activeTab;
          })
@@ -43,50 +44,47 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
       this.subscriptions.forEach(x => x.unsubscribe());
    }
 
-   public handleMouseDown(e: MouseEvent) {
-      // Using 'setTimeout' will allow the offset to be calculated from the current 'mousedown' instead of the last 'click' event.
-      setTimeout(() => {
-         const caretOffset = getCaretOffset();
-         const clickedLine = getClickedLine(e.target as HTMLElement, caretOffset);
-         this.setActiveLine(clickedLine);
-         this.updateActiveTab(caretOffset, clickedLine);
-      });
+   public handleMouseDown(e: OnMouseDownArgs) {
+      const { clickedLineElementId, caretOffset } = e;
+         // this.setActiveLine(clickedLineElementId);
+         this.updateActiveTab(caretOffset, clickedLineElementId);
    }
-
+// TODO: Span 34 gets generated badly
+// TODO: Fix active line not working on arrow press
    public handleKeyDown(e: KeyboardEvent) {
       // Using 'setTimeout' will allow the offset to be calculated from the current 'mousedown' instead of the last 'click' event.
       setTimeout(() => {
          const caretOffset = getCaretOffset();
          
          let newActiveLine: number | undefined;
-         const { activeLine, lineCount } = this;
+         const { activeLineElementId, lineCount } = this;
 
          switch (e.key) {
             case 'ArrowUp':
-               newActiveLine = getActiveLineAfterArrowUp(activeLine);
+               newActiveLine = getActiveLineAfterArrowUp(0);
                break;
             case 'ArrowDown':
-               newActiveLine = getActiveLineAfterArrowDown(activeLine, lineCount);
+               newActiveLine = getActiveLineAfterArrowDown(0, lineCount);
                break;
             case 'ArrowLeft':
-               newActiveLine = getActiveLineAfterArrowLeft(e, caretOffset, activeLine);
+               newActiveLine = getActiveLineAfterArrowLeft(e, caretOffset, 0);
                break;
             case 'ArrowRight':
-               newActiveLine = getActiveLineAfterArrowRight(e, caretOffset, lineCount, activeLine);
+               newActiveLine = getActiveLineAfterArrowRight(e, caretOffset, lineCount, 0);
                break;
             default: 
                break;
          }
 
-         if (newActiveLine) {
-            this.setActiveLine(newActiveLine);
-         }
+         // if (newActiveLine) {
+         //    this.setActiveLine(newActiveLine);
+         // }
 
-         this.updateActiveTab(caretOffset, newActiveLine);
+         this.updateActiveTab(caretOffset, '');
       });
    }
 
-   private updateActiveTab(caretOffset: number, activeLine: number | undefined) {
+   private updateActiveTab(caretOffset: number, activeLineElementId: string | undefined) {
       const { activeTab } = this;
       if (!activeTab) {
          return;
@@ -95,12 +93,12 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
       this.editorService.updateTab({
          ...activeTab,
          caretOffset,
-         activeLine: activeLine ?? this.activeLine
+         activeLineElementId: activeLineElementId ?? this.activeLineElementId
       });
    }
 
-   private setActiveLine(line: number) {
-      this.activeLine = line;
-      this.activeLine$.next(line);
+   private setActiveLine(lineId: string) {
+      // this.activeLineElementId = lineId;
+      // this.activeLineElementId$.next(lineId);
    }
 }

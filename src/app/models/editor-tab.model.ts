@@ -14,8 +14,11 @@ export interface EditorTab {
   /** Indicates how many characters are between the cursor and the start of file. */
   caretOffset: number;
 
-  /** Indicates the currently selected line in the editor. */
-  activeLine: number;
+  /**
+   * ID of DOM element which represents the currently selected line in the editor.
+   * Can be the line's <p> element or a <span> inside it. 
+   */
+  activeLineElementId: string;
 
   // TODO: On click 'Delete'/'Backspace', check if line removed; on click 'Enter', check if line added.
   /** Indicates the number of lines the file has. */

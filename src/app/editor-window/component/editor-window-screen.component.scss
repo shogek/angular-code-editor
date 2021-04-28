@@ -10,12 +10,31 @@
 .file-contents {
   width: 100%;
   margin: 0;
+  // Vertically center text in the containing element
   line-height: 1.85rem;
   cursor: text;
   // Renders the space characters and displays indentation
   white-space: pre;
 
+  p {
+    margin: 0;
+    // Show lines with no content
+    height: 1.85rem;
+  }
+
   &:focus-visible {
     outline: none;
   }
 }
+
+p.highlight {
+  background-color: var(--editor-line-bg-active-color);
+}
+
+.red { color: var(--color-red); }
+.blue { color: var(--color-blue); }
+.yellow { color: var(--color-yellow); }
+.orange { color: var(--color-orange); }
+.purple { color: var(--color-purple); }
+.pink { color: var(--color-pink); }
+.gray { color: var(--color-gray); }

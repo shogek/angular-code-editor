@@ -1,10 +1,19 @@
-import { getLineCount } from "src/app/helpers/text-content.helper";
-
 /** Calculate on which line the user clicked. */
-export function getClickedLine(editor: HTMLElement, caretOffset?: number): number {
-  caretOffset =  caretOffset ?? window.getSelection()?.getRangeAt(0).startOffset;
-  const textUpToCaret = editor.innerText.substring(0, caretOffset);
-  return getLineCount(textUpToCaret);
+// TODO: Move this to the component and pass it through the EventEmitter props
+export function getClickedLine(editorLine: HTMLElement, caretOffset?: number): number {
+  const line = editorLine.nodeName === 'P'
+    ? editorLine
+    : editorLine.parentElement;
+
+  const attribute = line?.getAttribute('line');
+  if (!attribute) {
+    debugger;
+    throw new Error("You done goofed again.");
+  }
+
+  // line?.classList.add('highlight');
+
+  return +attribute;
 }
 
 /** Returns how many characters are behind the cursor. */

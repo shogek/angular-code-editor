@@ -1,6 +1,7 @@
 import { getLineCount } from "src/app/helpers/text-content.helper";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFile } from "src/app/models/user-file.model";
+import { addTypeScriptCodeSyntaxColoring } from "./typescript-syntax-regexes";
 
 export class EditorTabManager {
   /** [KEY] tabId | [VAL] EditorTab */
@@ -12,9 +13,9 @@ export class EditorTabManager {
         id: `${file.name}-${file.id}`,
         userFileId: file.id,
         name: file.name,
-        contents: file.contents,
+        contents: addTypeScriptCodeSyntaxColoring(file.contents),
         caretOffset: 0,
-        activeLine: 1,
+        activeLineElementId: '',
         lineCount: getLineCount(file.contents)
       } as EditorTab;
 
