@@ -14,11 +14,13 @@ import { setCaretPosition } from "./editor-line-caret.logic";
 export class EditorWindowScreenComponent implements AfterViewChecked {
    @Input() set activeTab (value: EditorTab) {
       this._activeTab = value;
+      this.activeLine = value.activeLineNumber;
       this.wasTabSwitched = true;
    } get activeTab(): EditorTab { return this._activeTab; }
-   @Input() activeLine!: number;
    @Output() onKeyDown = new EventEmitter<KeyboardEvent>();
    @Output() onMouseDown = new EventEmitter<OnMouseDownArgs>();
+
+   activeLine: number = 1;
 
    @ViewChild('editor') editor!: ElementRef;
 
@@ -46,15 +48,41 @@ export class EditorWindowScreenComponent implements AfterViewChecked {
          this.toggleLineHighlight(clickedLine);
          this.lastActiveLine = clickedLine;
 
+         const clickedLineNumber = this.getLineNumber(clickedLine);
+         this.activeLine = clickedLineNumber;
+
          this.onMouseDown.emit({
             clickedLineElementId: target.id,
+            clickedLineNumber: clickedLineNumber,
             caretOffset: window.getSelection()?.getRangeAt(0).startOffset!
          });
       });
    }
 
    public onEditorKeyDown(e: KeyboardEvent) {
-      this.onKeyDown.emit(e);
+      setTimeout(() => {
+         console.log(window.getSelection()?.getRangeAt(0).startOffset);
+
+         const { activeLine } = this;
+         // TODO: Highlight active line
+         if (e.key === 'ArrowUp') {
+            if (activeLine > 1) {
+               this.activeLine = activeLine - 1;
+               console.log((e.target as HTMLElement));
+               console.log('ArrowUp', this.activeLine);
+            }
+         }
+
+         if (e.key === 'ArrowDown') {
+            if (activeLine < this.activeTab.lineCount) {
+               this.activeLine = activeLine + 1;
+               console.log((e.target as HTMLElement));
+               console.log('ArrowDown', this.activeLine);
+            }
+         }
+
+         // this.onKeyDown.emit(e);
+      });
    }
 
    private getClickedLineElement(target: HTMLElement): HTMLParagraphElement {
@@ -82,7 +110,10 @@ export class EditorWindowScreenComponent implements AfterViewChecked {
    }
 
    private highlightLineAfterTabChanged() {
-      const { activeLineElementId, caretOffset } = this.activeTab;
+      const { activeLineElementId, activeLineNumber, caretOffset } = this.activeTab;
+
+      this.activeLine = activeLineNumber;
+      console.log('editor', this.activeLine);
 
       const editor = this.editor.nativeElement as HTMLElement;
       const activeLine = editor.querySelector('#' + activeLineElementId)!;
@@ -91,5 +122,17 @@ export class EditorWindowScreenComponent implements AfterViewChecked {
       const line = this.getClickedLineElement(activeLine as HTMLElement);
       this.toggleLineHighlight(line);
       this.lastActiveLine = line;
+   }
+
+   private getLineNumber(line: HTMLParagraphElement): number {
+      const editor = this.editor.nativeElement as HTMLElement;
+      const allLines = editor.children;
+      for (let i = 0; i < allLines.length; i++) {
+         if (allLines[i].id === line.id) {
+            return i + 1;
+         }
+      }
+
+      throw new Error('Clicked line not found in the editor?!');
    }
 }

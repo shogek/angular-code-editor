@@ -22,18 +22,18 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
    private subscriptions: Subscription[] = [];
    private activeTab: EditorTab | undefined;
    private activeLineElementId = '';
+   private activeLine = 0;
    private lineCount = 1;
 
    allTabs$: Observable<EditorTab[]> = this.editorService.getAllTabs();
    activeTab$: Observable<EditorTab | undefined> = this.editorService.getActiveTab();
-   // activeLineElementId$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+   // activeLine$: Observable<number> = this.editorService
 
    constructor(public editorService: EditorService) { }
 
    ngOnInit() {
       this.subscriptions.push(
          this.editorService.getActiveTab().subscribe(activeTab => {
-            // this.setActiveLine(activeTab?.activeLineElementId ?? '');
             this.lineCount = activeTab?.lineCount ?? 1;
             this.activeTab = activeTab;
          })
@@ -45,11 +45,10 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
    }
 
    public handleMouseDown(e: OnMouseDownArgs) {
-      const { clickedLineElementId, caretOffset } = e;
-         // this.setActiveLine(clickedLineElementId);
-         this.updateActiveTab(caretOffset, clickedLineElementId);
+      const { clickedLineElementId, clickedLineNumber, caretOffset } = e;
+         this.updateActiveTab(caretOffset, clickedLineNumber, clickedLineElementId);
    }
-// TODO: Span 34 gets generated badly
+
 // TODO: Fix active line not working on arrow press
    public handleKeyDown(e: KeyboardEvent) {
       // Using 'setTimeout' will allow the offset to be calculated from the current 'mousedown' instead of the last 'click' event.
@@ -80,11 +79,11 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
          //    this.setActiveLine(newActiveLine);
          // }
 
-         this.updateActiveTab(caretOffset, '');
+         // this.updateActiveTab(caretOffset, '');
       });
    }
 
-   private updateActiveTab(caretOffset: number, activeLineElementId: string | undefined) {
+   private updateActiveTab(caretOffset: number, activeLineNumber: number, activeLineElementId: string | undefined) {
       const { activeTab } = this;
       if (!activeTab) {
          return;
@@ -93,12 +92,8 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
       this.editorService.updateTab({
          ...activeTab,
          caretOffset,
+         activeLineNumber,
          activeLineElementId: activeLineElementId ?? this.activeLineElementId
       });
-   }
-
-   private setActiveLine(lineId: string) {
-      // this.activeLineElementId = lineId;
-      // this.activeLineElementId$.next(lineId);
    }
 }

@@ -10,9 +10,11 @@ export interface EditorTab {
   /** Contents of a file which will be editable in the editor. */
   contents: string;
 
-  // TODO: On tab open, set caret to last known position.
   /** Indicates how many characters are between the cursor and the start of file. */
   caretOffset: number;
+
+  /** Indicates which line number to highlight. */
+  activeLineNumber: number
 
   /**
    * ID of DOM element which represents the currently selected line in the editor.

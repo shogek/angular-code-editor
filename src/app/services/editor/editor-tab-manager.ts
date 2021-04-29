@@ -16,6 +16,7 @@ export class EditorTabManager {
         name: file.name,
         contents: fileContentsAsTypescript,
         caretOffset: 0,
+        activeLineNumber: 1,
         activeLineElementId: this.getIdOfFirstLineElement(fileContentsAsTypescript),
         lineCount: getLineCount(file.contents)
       } as EditorTab;
@@ -57,33 +58,50 @@ export class EditorTabManager {
     // Surround some of language's keywords with <span> tags to add coloring
     const contentWithSpans = addTypeScriptCodeSyntaxColoring(fileContents);
 
+    const getId = this.getIdMaker();
+
     // Add unique ID values to each of the <span> tags
     const spans = contentWithSpans.split('<span');
-    const id = 'span-';
     let contentWithUniqueSpans = spans[0];
     for (let i = 1; i <= spans.length; i++) {
-      const updatedSpan = `<span id="${id}${i}"`; // TODO: Use unique IDs
+      const updatedSpan = `<span id="${getId()}"`;
       contentWithUniqueSpans += updatedSpan + spans[i];
     }
 
     // Surround each of the file's lines with <p> tags
     const lines = contentWithUniqueSpans
       .split('\n')
-      .map((line, i) =>
-        '<p ' +
-          `id="line-${i + 1}"` + // TODO: Use unique IDs
-          `line="${i + 1}">` +
-            line + 
-          '</p>'
+      .map(line => `<p id="${getId()}">` + (line || `<span id="${getId()}"></span>`) + '</p>'
       ).join('');
 
     return lines;
   }
 
   private getIdOfFirstLineElement(fileContents: string): string {
-    // const regex = /<p id="(.*)"/;
-    // const result = fileContents.match(regex);
-    // TODO: After <p> and <span> has unique IDs
-    return 'line-1';
+    /*
+     * Example of formated file contents:
+     * <p id="ce-1619714413999">blah blah</p>
+     *        ^^^^^^^^^^^^^^^^ is the part that we want (ID is result of Date.now())
+    */
+    const paragraphId = fileContents.substring(7, 23);
+    if (/^ce-\d{13}$/.test(paragraphId)) {
+      return paragraphId;
+    }
+
+    throw new Error("Did you change the way the IDs are generated? Or text rendering?");
+  }
+
+  private getIdMaker(): () => string {
+    let lastId = Date.now();
+
+    return () => {
+      let newId = Date.now();
+      while (newId === lastId) {
+        newId = Date.now();
+      }
+      lastId = newId;
+      // Prepend the ID with 'ce-' so JS won't yell about IDs that are only made up of numbers
+      return 'ce-' + newId.toString();
+    }
   }
 }
