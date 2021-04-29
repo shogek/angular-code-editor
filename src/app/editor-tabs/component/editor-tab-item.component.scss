@@ -8,6 +8,10 @@
   &:hover {
     cursor: pointer;
     background-color: var(--editor-tab-bg-active-color);
+
+    .close-button {
+      color: var(--editor-tab-text-color);
+    }
   }
 
   &.active {
@@ -15,6 +19,14 @@
     border-bottom-color: var(--editor-tab-bg-active-color);
     border-top-color: var(--editor-tab-border-active-color);
     color: var(--editor-tab-text-active-color);
+
+    .close-button {
+      color: var(--editor-tab-bg-active-color);
+    }
+
+    &:hover .close-button { 
+      color: var(--editor-tab-text-active-color);
+    }
   }
 
   p {
@@ -22,12 +34,7 @@
     padding: 0.7rem;
   }
 
-  .close {
+  .close-button {
     color: var(--editor-tab-bg-color);
-  }
-
-  &:hover {
-    &.active .close { color: var(--editor-tab-text-active-color); }
-             .close { color: var(--editor-tab-text-color); }
   }
 }
