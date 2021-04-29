@@ -6,4 +6,6 @@ export interface UserFile {
   name: string;
   /** The contents of the file "test.ts". */
   contents: string;
+  /** The "ts" part of file "test.ts". */
+  extension: string;
 }

@@ -13,6 +13,7 @@ export class EditorTabManager {
         userFileId: file.id,
         name: file.name,
         contents: file.contents,
+        fileExtension: file.extension,
         caretOffset: 0,
         activeLine: 1,
         lineCount: getLineCount(file.contents)

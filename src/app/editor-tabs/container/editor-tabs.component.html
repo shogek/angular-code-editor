@@ -3,6 +3,7 @@
     *ngFor="let tab of allTabs"
     [tabId]="tab.id"
     [tabName]="tab.name"
+    [fileExtension]="tab.fileExtension"
     [isActive]="tab.id === activeTab.id"
     (clickOpen)="handleTabOpen($event)"
     (clickClose)="handleTabClose($event)"
