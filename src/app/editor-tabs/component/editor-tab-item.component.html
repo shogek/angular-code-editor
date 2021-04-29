@@ -1,10 +1,12 @@
 <div
   class="wrapper"
   [class.active]="isActive"
+  (click)="clickOpen.emit(tabId)"
 >
-  <p (click)="clickOpen.emit(tabId)">
+  <img [src]="pathToFileIcon" />
+
+  <p >
     {{ tabName }} 
-    
     <span
       class="close-button"
       (click)="onClickClose($event)"

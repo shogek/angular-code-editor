@@ -7,10 +7,11 @@ export interface EditorTab {
   /** Text which will be show in the editor's tab. */
   name: string;
 
+  fileExtension: string;
+
   /** Contents of a file which will be editable in the editor. */
   contents: string;
 
-  // TODO: On tab open, set caret to last known position.
   /** Indicates how many characters are between the cursor and the start of file. */
   caretOffset: number;
 
