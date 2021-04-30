@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  place-items: center;
+}
+
+button {
+  color: var(--editor-text-color);
+  background-color: var(--editor-line-number-color);
+  border: none;
+  padding: 0.5rem;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

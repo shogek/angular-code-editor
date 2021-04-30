@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
-import { EditorService } from "src/app/services/editor/editor.service";
+import { EditorTabService } from "src/app/services/editor/editor-tab.service";
 import {
    getClickedLine,
    getCaretOffset,
@@ -23,15 +23,15 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
    private activeLine = 1;
    private lineCount = 1;
 
-   allTabs$: Observable<EditorTab[]> = this.editorService.getAllTabs();
-   activeTab$: Observable<EditorTab | undefined> = this.editorService.getActiveTab();
+   allTabs$: Observable<EditorTab[]> = this.editorTabService.getAllTabs();
+   activeTab$: Observable<EditorTab | undefined> = this.editorTabService.getActiveTab();
    activeLine$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
 
-   constructor(public editorService: EditorService) { }
+   constructor(public editorTabService: EditorTabService) { }
 
    ngOnInit() {
       this.subscriptions.push(
-         this.editorService.getActiveTab().subscribe(activeTab => {
+         this.editorTabService.getActiveTab().subscribe(activeTab => {
             this.setActiveLine(activeTab?.activeLine ?? 1);
             this.lineCount = activeTab?.lineCount ?? 1;
             this.activeTab = activeTab;
@@ -92,7 +92,7 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
          return;
       }
 
-      this.editorService.updateTab({
+      this.editorTabService.updateTab({
          ...activeTab,
          caretOffset,
          activeLine: activeLine ?? this.activeLine

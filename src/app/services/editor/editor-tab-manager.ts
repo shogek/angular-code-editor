@@ -6,7 +6,8 @@ export class EditorTabManager {
   /** [KEY] tabId | [VAL] EditorTab */
   private tabMap = new Map<string, EditorTab>();
 
-  constructor(files: UserFile[]) {
+  public createTabs(files: UserFile[]) {
+    // TODO: Check what happens if loads dummies, closes them and loads again.
     files.forEach(file => {
       const tab = {
         id: `${file.name}-${file.id}`,

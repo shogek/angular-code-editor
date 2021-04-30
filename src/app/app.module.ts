@@ -8,8 +8,10 @@ import { EditorTabItemComponent } from './editor-tabs/component/editor-tab-item.
 import { EditorTabsComponent } from './editor-tabs/container/editor-tabs.component';
 import { EditorWindowScreenComponent } from './editor-window/component/editor-window-screen.component';
 import { EditorWindowComponent } from './editor-window/container/editor-window.component';
-import { EditorService } from './services/editor/editor.service';
+import { EditorTabService } from './services/editor/editor-tab.service';
 import { UserFileService } from './services/user-file.service';
+import { WelcomeWindowComponent } from './welcome-window/container/welcome-window.component';
+import { WelcomeWindowScreenComponent } from './welcome-window/component/welcome-window-screen.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { UserFileService } from './services/user-file.service';
     EditorNumberColumnComponent,
     EditorTabsComponent,
     EditorTabItemComponent,
+    WelcomeWindowComponent,
+    WelcomeWindowScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,7 @@ import { UserFileService } from './services/user-file.service';
   ],
   providers: [
     UserFileService,
-    EditorService,
+    EditorTabService,
   ],
   bootstrap: [AppComponent]
 })

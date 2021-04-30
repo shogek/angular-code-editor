@@ -1,4 +1,4 @@
-<ng-container *ngIf="activeTab$ | async as activeTab; else empty">
+<ng-container *ngIf="activeTab$ | async as activeTab">
   <app-editor-tabs
     [allTabs]="allTabs$ | async"
     [activeTab]="activeTab"
@@ -11,9 +11,3 @@
     (onKeyDown)="handleKeyDown($event)"
   ></app-editor-window-screen>
 </ng-container>
-
-<ng-template #empty>
-  <div class="empty">
-    <h1>Now look what you've done!</h1>
-  </div>
-</ng-template>

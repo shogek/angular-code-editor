@@ -1,0 +1,16 @@
+<div>
+  <h1>Welcome!</h1>
+  <p>
+    <button type="button" (click)="clickLoadDummyFiles()">Load</button> dummy files.
+  </p>
+
+  <p>
+    <button type="button" (click)="clickFileInput()">Choose</button> your own files.
+    <input #fileUploader hidden type="file" multiple (change)="onFilesUploaded($event)"/>
+  </p>
+
+  <p>
+    <button type="button" (click)="clickFolderInput()">Upload</button> a whole folder.
+    <input #folderUploader hidden type="file" multiple webkitdirectory (change)="onFolderUploaded($event)" />
+  </p>
+</div>

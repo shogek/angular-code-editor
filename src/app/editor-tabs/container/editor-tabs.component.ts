@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { EditorTab } from "src/app/models/editor-tab.model";
-import { EditorService } from "src/app/services/editor/editor.service";
-import { UserFileService } from "src/app/services/user-file.service";
+import { EditorTabService } from "src/app/services/editor/editor-tab.service";
 
 @Component({
   selector: 'app-editor-tabs',
@@ -13,13 +12,13 @@ export class EditorTabsComponent {
   @Input() allTabs: EditorTab[] = [];
   @Input() activeTab!: EditorTab;
 
-  constructor(private editorService: EditorService) {}
+  constructor(private editorTabService: EditorTabService) {}
 
   public handleTabOpen(tabId: string): void {
-    this.editorService.openTab(tabId);
+    this.editorTabService.openTab(tabId);
   }
 
   public handleTabClose(tabId: string): void {
-    this.editorService.closeTab(tabId);
+    this.editorTabService.closeTab(tabId);
   }
 }

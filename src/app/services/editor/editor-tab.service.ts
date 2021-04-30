@@ -1,20 +1,37 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { take } from "rxjs/operators";
-import { MOCK_USER_FILES } from "src/app/mock-user-files";
+import { Injectable, OnDestroy } from "@angular/core";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { map, take } from "rxjs/operators";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFileService } from "../user-file.service";
 import { EditorTabManager } from "./editor-tab-manager";
 
 @Injectable()
-export class EditorService {
-  private tabManager = new EditorTabManager(MOCK_USER_FILES);
+export class EditorTabService implements OnDestroy {
+  private tabManager = new EditorTabManager();
+  private subscription!: Subscription;
 
   private allTabs$ = new BehaviorSubject<EditorTab[]>([]);
   private activeTab$ = new BehaviorSubject<EditorTab | undefined>(undefined);
 
   constructor(private userFileService: UserFileService) {
-    this.loadTabs();
+    this.trackUserFilesToCreateTabs();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  private trackUserFilesToCreateTabs() {
+    this.subscription = this.userFileService
+      .getAll()
+      .pipe(
+        map(userFiles => {
+          this.tabManager.createTabs(userFiles);
+          const allTabs = this.tabManager.getAllTabs();
+          this.allTabs$.next(allTabs);
+          this.setActiveTab(allTabs[0]);
+        })
+      ).subscribe();
   }
 
   public getAllTabs(): Observable<EditorTab[]> {
@@ -77,14 +94,6 @@ export class EditorService {
 
   public updateTab(tab: EditorTab): void {
     this.tabManager.updateTab(tab);
-  }
-
-  private loadTabs(): void {
-    const initialTab = this.tabManager.getRandomTab();
-    this.setActiveTab(initialTab);
-
-    const allTabs = this.tabManager.getAllTabs();
-    this.allTabs$.next(allTabs);
   }
 
   private setActiveTab(tab?: EditorTab): void {

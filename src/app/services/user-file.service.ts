@@ -1,13 +1,25 @@
 import { Injectable } from "@angular/core";
 import { UserFile } from "../models/user-file.model";
 import { MOCK_USER_FILES } from "../mock-user-files";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable()
 export class UserFileService {
-  private files = MOCK_USER_FILES;
+  private files: UserFile[] = [];
+  private files$ = new BehaviorSubject<UserFile[]>([]);
 
-  public getAll(): UserFile[] {
-    return this.files;
+  public getAll(): Observable<UserFile[]> {
+    return this.files$;
+  }
+
+  public setAll(files: UserFile[]) {
+    this.files = files;
+    this.files$.next(files);
+  }
+
+  public useDummyFiles() {
+    this.files = MOCK_USER_FILES;
+    this.files$.next(this.files);
   }
 
   public remove(fileId: string): void {
