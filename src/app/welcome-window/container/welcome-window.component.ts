@@ -10,6 +10,7 @@ import { UserFileService } from "src/app/services/user-file.service";
 export class WelcomeWindowComponent {
   constructor (private userFileService: UserFileService) { }
 
+  // TODO: Don't open tabs when files loaded - just show them in tree structure
   public onLoadDummyFiles() {
     this.userFileService.useDummyFiles();
   }

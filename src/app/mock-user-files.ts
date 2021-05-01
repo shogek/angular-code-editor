@@ -4,6 +4,7 @@ const MOCK_USER_FILE_1: UserFile = {
    id: 'id1',
    name: 'user-file.service.ts',
    extension: 'ts',
+   path: 'src/app/services',
    contents: `import { Injectable } from "@angular/core";
    import { UserFile } from "../models/user-file.model";
    import { MOCK_USER_FILES } from "../mock-user-files";
@@ -58,6 +59,7 @@ const MOCK_USER_FILE_2: UserFile = {
    id: 'id2',
    name: 'app-component.spec.ts',
    extension: 'ts',
+   path: 'app',
    contents: `import { TestBed } from '@angular/core/testing';
    import { RouterTestingModule } from '@angular/router/testing';
    import { AppComponent } from './app.component';
@@ -100,6 +102,7 @@ const MOCK_USER_FILE_3: UserFile = {
    id: 'id3',
    name: 'editor-tab-item.component.scss',
    extension: 'scss',
+   path: 'app/editor-tabs/component',
    contents: `.wrapper {
       background-color: var(--editor-tab-bg-color);
       border-style: solid;
@@ -131,6 +134,7 @@ const MOCK_USER_FILE_4: UserFile = {
    id: 'id4',
    name: 'test.ts',
    extension: 'ts',
+   path: 'app',
    contents: `// This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
    import 'zone.js/dist/zone-testing';
@@ -163,6 +167,7 @@ const MOCK_USER_FILE_5: UserFile = {
    id: 'id5',
    name: 'index.html',
    extension: 'html',
+   path: 'app',
    contents: `<!doctype html>
    <html lang="en">
    <head>
@@ -183,6 +188,7 @@ const MOCK_USER_FILE_6: UserFile = {
    id: 'id6',
    name: 'HelloWorld6.cs',
    extension: 'cs',
+   path: 'app/unknown',
    contents: `namespace HelloWorld6
 {
    class Hello6 {         

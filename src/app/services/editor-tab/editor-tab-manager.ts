@@ -7,7 +7,7 @@ export class EditorTabManager {
   private tabMap = new Map<string, EditorTab>();
 
   public createTabs(files: UserFile[]) {
-    // TODO: Check what happens if loads dummies, closes them and loads again.
+    // TODO: Create tab only when file opened - then cache it.
     files.forEach(file => {
       const tab = {
         id: `${file.name}-${file.id}`,

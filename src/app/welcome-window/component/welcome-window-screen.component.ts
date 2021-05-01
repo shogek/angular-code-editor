@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Output, ViewChild, EventEmitter } from "@angular/core";
 import { UserFile } from "src/app/models/user-file.model";
 
+// TODO: Add drag and drop
+// TODO: Emit files one by one - dont' wait for all of them to finish
+
 @Component({
   selector: 'app-welcome-window-screen',
   templateUrl: './welcome-window-screen.component.html',
@@ -11,8 +14,8 @@ export class WelcomeWindowScreenComponent {
   @Output() loadDummyFiles = new EventEmitter<void>();
   @Output() filesUploaded = new EventEmitter<UserFile[]>();
 
-  @ViewChild('fileUploader') fileUploader!: ElementRef<HTMLInputElement>;
-  @ViewChild('folderUploader') folderUploader!: ElementRef<HTMLInputElement>;
+  @ViewChild('fileUploader') fileUploader!: ElementRef;
+  @ViewChild('folderUploader') folderUploader!: ElementRef;
 
   public clickLoadDummyFiles() {
     this.loadDummyFiles.emit();
@@ -22,15 +25,17 @@ export class WelcomeWindowScreenComponent {
     this.fileUploader.nativeElement.click();
   }
 
+  public clickFolderInput() {
+    this.folderUploader.nativeElement.click();
+  }
+
   public async onFilesUploaded(e: Event) {
-    const input = e.target as HTMLInputElement;
-    const files = input.files;
+    const files = (e.target as HTMLInputElement).files;
     if (!files || files.length < 1) {
       debugger;
       throw new Error('How did you manage to cause this?');
     }
 
-    // TODO: Add loader?
     const userFiles: UserFile[] = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -39,7 +44,8 @@ export class WelcomeWindowScreenComponent {
         id: `${file.name}-${file.lastModified}`,
         name: file.name,
         contents: fileContents,
-        extension: file.name.split('.').pop()!
+        extension: file.name.split('.').pop()!,
+        path: (file as any).webkitRelativePath || '',
       });
     }
 
@@ -56,13 +62,5 @@ export class WelcomeWindowScreenComponent {
       }
       reader.readAsText(file);
     });
-  }
-
-  public clickFolderInput() {
-    this.folderUploader.nativeElement.click();
-  }
-
-  public onFolderUploaded(e: any) {
-    // TODO: Finish this
   }
 }

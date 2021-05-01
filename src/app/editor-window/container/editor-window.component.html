@@ -1,13 +1,17 @@
 <ng-container *ngIf="activeTab$ | async as activeTab">
-  <app-editor-tabs
-    [allTabs]="allTabs$ | async"
-    [activeTab]="activeTab"
-  ></app-editor-tabs>
+  <div class="wrapper">
+    <app-editor-tabs
+      class="tabs"
+      [allTabs]="allTabs$ | async"
+      [activeTab]="activeTab"
+    ></app-editor-tabs>
 
-  <app-editor-window-screen
-    [activeTab]="activeTab"
-    [activeLine]="activeLine$ | async"
-    (onMouseDown)="handleMouseDown($event)"
-    (onKeyDown)="handleKeyDown($event)"
-  ></app-editor-window-screen>
+    <app-editor-window-screen
+      class="editor"
+      [activeTab]="activeTab"
+      [activeLine]="activeLine$ | async"
+      (onMouseDown)="handleMouseDown($event)"
+      (onKeyDown)="handleKeyDown($event)"
+    ></app-editor-window-screen>
+  </div>
 </ng-container>

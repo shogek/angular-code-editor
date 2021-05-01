@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EditorTab } from './models/editor-tab.model';
-import { EditorTabService } from './services/editor/editor-tab.service';
+import { EditorTabService } from './services/editor-tab/editor-tab.service';
 
 @Component({
   selector: 'app-root',

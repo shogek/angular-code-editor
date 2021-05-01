@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
-import { EditorTabService } from "src/app/services/editor/editor-tab.service";
+import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service";
 import {
    getClickedLine,
    getCaretOffset,
@@ -12,7 +12,7 @@ import {
 } from "./editor-window-component.logic";
 
 @Component({
-   selector: 'app-editor',
+   selector: 'app-editor-window',
    templateUrl: './editor-window.component.html',
    styleUrls: ['./editor-window.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush

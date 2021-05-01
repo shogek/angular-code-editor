@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { EditorTab } from "src/app/models/editor-tab.model";
-import { EditorTabService } from "src/app/services/editor/editor-tab.service";
+import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service";
 
 @Component({
   selector: 'app-editor-tabs',
