@@ -2,3 +2,18 @@
   height: 100%;
   display: block;
 }
+
+.editor-wrapper {
+  display: flex;
+}
+
+// TODO: Make sidebar resizeable
+.editor {
+  // width: 90%;
+  width: 40%;
+}
+
+.sidebar {
+  // width: 10%;
+  width: 60%;
+}

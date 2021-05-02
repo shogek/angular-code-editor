@@ -7,6 +7,6 @@ export interface UserFile {
   contents: string;
   /** The "ts" part of the file "app/component/test.ts". */
   extension: string;
-  /** The "app/component" part of the file "app/component/test.cs". */
+  /** The "app/component/test.ts" part of the file "app/component/test.ts". */
   path: string;
 }

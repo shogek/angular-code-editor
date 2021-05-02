@@ -1,0 +1,22 @@
+<p class="folder-name">{{ folder.folderName }}</p>
+
+<!-- TODO: Show icons -->
+<!-- TODO: Make folders collapsible -->
+<ul
+  *ngIf="folder.files.length > 0 || folder.folders.length > 0"
+  class="list" 
+>
+
+  <ng-container *ngIf="folder.files.length > 0">
+    <li *ngFor="let file of folder.files">
+      {{ file.name }}
+    </li>
+  </ng-container>
+
+  <ng-container *ngIf="folder.folders.length > 0">
+    <li *ngFor="let folder of folder.folders">
+      <app-folder [folder]="folder"></app-folder>
+    </li>
+  </ng-container>
+
+</ul>
