@@ -1,10 +1,13 @@
 import { UserFile } from "src/app/models/user-file.model";
 
+const pathToIconFolder = '/assets/icons/';
+
 const MOCK_USER_FILE_100: UserFile = {
   id: 'id100',
   name: 'editor-window-screen.component.html',
   extension: 'html',
   path: 'src/app/editor-window/component/editor-window-screen.component.html',
+  iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<div
 *ngIf="activeTab.contents"
@@ -33,6 +36,7 @@ const MOCK_USER_FILE_101: UserFile = {
   name: 'editor-window-screen.component.scss',
   extension: 'scss',
   path: 'src/app/editor-window/component/editor-window-screen.component.scss',
+  iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
   height: 100%;
@@ -66,6 +70,7 @@ const MOCK_USER_FILE_102: UserFile = {
   name: 'editor-window-screen.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/component/editor-window-screen.component.ts',
+  iconPath: pathToIconFolder + 'typescript.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { EditorTab } from "src/app/models/editor-tab.model";
@@ -96,6 +101,7 @@ const MOCK_USER_FILE_103: UserFile = {
   name: 'editor-window.component.html',
   extension: 'html',
   path: 'src/app/editor-window/container/editor-window.component.html',
+  iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<ng-container *ngIf="activeTab$ | async as activeTab">
 <div class="wrapper">
@@ -120,6 +126,7 @@ const MOCK_USER_FILE_104: UserFile = {
   name: 'editor-window.component.scss',
   extension: 'scss',
   path: 'src/app/editor-window/container/editor-window.component.scss',
+  iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
   height: 100%;
@@ -152,6 +159,7 @@ const MOCK_USER_FILE_105: UserFile = {
   name: 'editor-window.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window.component.ts',
+  iconPath: pathToIconFolder + 'typescript.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
@@ -265,6 +273,7 @@ const MOCK_USER_FILE_106: UserFile = {
   name: 'editor-window-component.logic.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window-component.logic.ts',
+  iconPath: pathToIconFolder + 'typescript.svg',
   contents:
 `import { getLineCount } from "src/app/helpers/text-content.helper";
 
@@ -333,6 +342,7 @@ const MOCK_USER_FILE_107: UserFile = {
   name: 'app.component.ts',
   extension: 'ts',
   path: 'src/app/app.component.ts',
+  iconPath: pathToIconFolder + 'typescript.svg',
   contents:
 `import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -357,6 +367,7 @@ const MOCK_USER_FILE_108: UserFile = {
   name: 'app.component.scss',
   extension: 'scss',
   path: 'src/app/app.component.scss',
+  iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
   height: 100%;
@@ -372,6 +383,7 @@ const MOCK_USER_FILE_109: UserFile = {
   name: 'app.component.html',
   extension: 'html',
   path: 'src/app/app.component.html',
+  iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<ng-container *ngIf="(editorTabs$ | async).length > 0; else welcomeScreen">
 <div class="editor-wrapper">
@@ -389,6 +401,7 @@ const MOCK_USER_FILE_110: UserFile = {
   name: 'test.txt',
   extension: 'txt',
   path: 'src/test.txt',
+  iconPath: pathToIconFolder + 'file.svg',
   contents:
 `Don't mind me, just trying to cause an exception.`};
 

@@ -1,3 +1,7 @@
 <h4 class="title">EXPLORER</h4>
 
-<app-folder [folder]="folder"></app-folder>
+<!-- TODO: Clean this up -->
+<app-folder
+  [folder]="folder"
+  (fileClicked)="fileClicked.emit($event)"
+></app-folder>

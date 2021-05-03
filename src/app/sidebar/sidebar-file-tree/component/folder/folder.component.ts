@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { FileTreeNode } from "../sidebar-file-tree-list.component";
 
 // TODO: Rename and move
@@ -11,4 +11,10 @@ import { FileTreeNode } from "../sidebar-file-tree-list.component";
 })
 export class FolderComponent {
   @Input() folder!: FileTreeNode;
+  @Output() fileClicked = new EventEmitter<string>();
+  isExpanded = false;
+
+  public toggleExpanded() {
+    this.isExpanded = !this.isExpanded;
+  }
 }

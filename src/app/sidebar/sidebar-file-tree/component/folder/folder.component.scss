@@ -1,7 +1,30 @@
-.folder-name {
+.line {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
   margin: 0;
+  height: 1.8rem;
+  width: max-content;
+
+  &:hover {
+    background-color: var(--sidebar-file-tree-item-bg-active-color);
+  }
+}
+
+.caret {
+  display: inline-block;
+
+  &.closed {
+    transform: rotate(90deg);
+  }
+}
+
+.icon {
+  height: 1.1rem;
 }
 
 .list {
   list-style-type: none;
+  border-left: solid 1px var(--sidebar-file-tree-divider-color);
 }

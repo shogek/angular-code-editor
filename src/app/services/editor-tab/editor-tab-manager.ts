@@ -9,7 +9,7 @@ export class EditorTabManager {
   public createTabs(files: UserFile[]) {
     // TODO: Create tab only when file opened - then cache it.
     files.forEach(file => {
-      const tab = {
+      const tab: EditorTab = {
         id: `${file.name}-${file.id}`,
         userFileId: file.id,
         name: file.name,
@@ -17,11 +17,16 @@ export class EditorTabManager {
         fileExtension: file.extension,
         caretOffset: 0,
         activeLine: 1,
-        lineCount: getLineCount(file.contents)
-      } as EditorTab;
+        lineCount: getLineCount(file.contents),
+        iconPath: file.iconPath
+      };
 
       this.tabMap.set(tab.id, tab);
     });
+  }
+
+  public getOrCreateTabFromFile(file: UserFile) {
+    // TODO: tabManager should keep track of tabs by FileID
   }
 
   public getRandomTab(): EditorTab | undefined {

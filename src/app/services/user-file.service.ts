@@ -8,6 +8,10 @@ export class UserFileService {
   private files: UserFile[] = [];
   private files$ = new BehaviorSubject<UserFile[]>([]);
 
+  public get(id: string): UserFile {
+    return this.files.find(file => file.id === id)!;
+  } 
+
   public getAll(): Observable<UserFile[]> {
     return this.files$;
   }

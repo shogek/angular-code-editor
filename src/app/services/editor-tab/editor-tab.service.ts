@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { EditorTab } from "src/app/models/editor-tab.model";
+import { UserFile } from "src/app/models/user-file.model";
 import { UserFileService } from "../user-file.service";
 import { EditorTabManager } from "./editor-tab-manager";
 
@@ -42,7 +43,12 @@ export class EditorTabService implements OnDestroy {
     return this.activeTab$;
   }
 
-  public openTab(tabId?: string): void {
+  // TODO: Think of a better name?
+  public openTabFromFile(file: UserFile) {
+    this.tabManager.getOrCreateTabFromFile(file);
+  }
+
+  public openTab(tabId?: string) {
     if (!tabId) {
       // Closed last tab.
       this.activeTab$.next(undefined);

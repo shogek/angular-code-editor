@@ -1,4 +1,5 @@
 :root {
+  // TODO: Names are getting too long - fix it.
   --editor-text-color: rgb(225, 228, 232);
   --editor-line-number-color: rgb(68, 77, 86);
   --editor-line-number-active-color: rgb(225, 228, 232);
@@ -10,6 +11,8 @@
   --editor-tab-bg-active-color: rgb(36, 41, 46);
   --editor-tab-text-color: rgb(149, 157, 165);
   --editor-tab-text-active-color: rgb(225, 228, 220);
+  --sidebar-file-tree-divider-color: rgb(47, 54, 61);
+  --sidebar-file-tree-item-bg-active-color: rgb(40, 46, 52);
 }
 
 @font-face {

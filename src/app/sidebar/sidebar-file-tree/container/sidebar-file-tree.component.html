@@ -1,3 +1,4 @@
 <app-sidebar-file-tree-list
   [userFiles]="userFiles$ | async"
+  (fileClicked)="onFileClicked($event)"
 ></app-sidebar-file-tree-list>

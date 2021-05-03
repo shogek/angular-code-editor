@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { UserFile } from "src/app/models/user-file.model";
 
 // TODO: Document
@@ -14,6 +14,7 @@ import { UserFile } from "src/app/models/user-file.model";
 })
 export class SidebarFileTreeListComponent implements OnInit {
   @Input() userFiles!: UserFile[]
+  @Output() fileClicked = new EventEmitter<string>();
   folder!: FileTreeNode;
 
   ngOnInit() {

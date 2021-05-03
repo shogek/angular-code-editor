@@ -9,4 +9,6 @@ export interface UserFile {
   extension: string;
   /** The "app/component/test.ts" part of the file "app/component/test.ts". */
   path: string;
+  /** Example: "/assets/icons/file.svg" */
+  iconPath: string;
 }

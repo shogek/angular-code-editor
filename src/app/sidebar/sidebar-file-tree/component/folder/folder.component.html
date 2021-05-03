@@ -1,15 +1,22 @@
-<p class="folder-name">{{ folder.folderName }}</p>
+<div class="line" (click)="toggleExpanded()">
+  <!-- TODO: Fix this class.closed logic -->
+  <span class="caret" [class.closed]="isExpanded">›</span>
+  <img class="icon" src="/assets/icons/folder.svg" />
+  <p>
+    {{ folder.folderName }}
+  </p>
+</div>
 
-<!-- TODO: Show icons -->
-<!-- TODO: Make folders collapsible -->
+<!-- TODO: Highlight whole line on hover -->
 <ul
-  *ngIf="folder.files.length > 0 || folder.folders.length > 0"
+  *ngIf="isExpanded && (folder.files.length > 0 || folder.folders.length > 0)"
   class="list" 
 >
 
   <ng-container *ngIf="folder.files.length > 0">
-    <li *ngFor="let file of folder.files">
-      {{ file.name }}
+    <li *ngFor="let file of folder.files" class="line" (click)="fileClicked.emit(file.id)">
+      <img [src]="file.iconPath" class="icon" />
+      <p>{{ file.name }}</p>
     </li>
   </ng-container>
 
