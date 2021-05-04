@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { FileTreeNode } from "../sidebar-file-tree-list.component";
+import { Folder } from "../folder.model";
 
 // TODO: Rename and move
 // TODO: Sort files and folders by name
@@ -10,7 +10,7 @@ import { FileTreeNode } from "../sidebar-file-tree-list.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FolderComponent {
-  @Input() folder!: FileTreeNode;
+  @Input() folder!: Folder;
   @Output() fileClicked = new EventEmitter<string>();
   isExpanded = true;
 
