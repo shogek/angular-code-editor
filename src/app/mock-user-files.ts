@@ -70,7 +70,7 @@ const MOCK_USER_FILE_102: UserFile = {
   name: 'editor-window-screen.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/component/editor-window-screen.component.ts',
-  iconPath: pathToIconFolder + 'typescript.svg',
+  iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { EditorTab } from "src/app/models/editor-tab.model";
@@ -159,7 +159,7 @@ const MOCK_USER_FILE_105: UserFile = {
   name: 'editor-window.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window.component.ts',
-  iconPath: pathToIconFolder + 'typescript.svg',
+  iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
@@ -273,7 +273,7 @@ const MOCK_USER_FILE_106: UserFile = {
   name: 'editor-window-component.logic.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window-component.logic.ts',
-  iconPath: pathToIconFolder + 'typescript.svg',
+  iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { getLineCount } from "src/app/helpers/text-content.helper";
 
@@ -342,7 +342,7 @@ const MOCK_USER_FILE_107: UserFile = {
   name: 'app.component.ts',
   extension: 'ts',
   path: 'src/app/app.component.ts',
-  iconPath: pathToIconFolder + 'typescript.svg',
+  iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { Component } from '@angular/core';
 import { Observable } from 'rxjs';

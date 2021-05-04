@@ -3,11 +3,11 @@ import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service
 import { UserFileService } from "src/app/services/user-file.service";
 
 @Component({
-  selector: 'app-sidebar-file-tree',
-  templateUrl: './sidebar-file-tree.component.html',
+  selector: 'app-file-explorer',
+  templateUrl: './file-explorer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarFileTreeComponent {
+export class FileExplorer {
   userFiles$ = this.userFileService.getAll();
 
   constructor (

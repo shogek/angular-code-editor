@@ -1,7 +1,7 @@
 <ng-container *ngIf="(editorTabs$ | async).length > 0; else welcomeScreen">
   <div class="editor-wrapper">
     <app-editor-window class="editor"></app-editor-window>
-    <app-sidebar-file-tree class="sidebar"></app-sidebar-file-tree>
+    <app-file-explorer class="sidebar"></app-file-explorer>
   </div>
 </ng-container>
 

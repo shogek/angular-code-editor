@@ -4,12 +4,12 @@ import { createFolderTreeStructure } from "../common/folder.helper";
 import { Folder } from "../common/folder.model";
 
 @Component({
-  selector: 'app-sidebar-file-tree-list',
-  templateUrl: './sidebar-file-tree-list.component.html',
-  styleUrls: ['./sidebar-file-tree-list.component.scss'],
+  selector: 'app-file-explorer-tree',
+  templateUrl: './file-explorer-tree.component.html',
+  styleUrls: ['./file-explorer-tree.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarFileTreeListComponent {
+export class FileExplorerTree {
   @Input() set userFiles(value: UserFile[]) {
     this.folder = createFolderTreeStructure(value);
   }

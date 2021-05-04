@@ -1,7 +1,7 @@
 <div class="line" (click)="toggleExpanded()">
   <!-- TODO: Fix this class.closed logic -->
   <span class="caret" [class.closed]="isExpanded">›</span>
-  <img class="icon" src="/assets/icons/folder.svg" />
+  <img class="icon" [src]="folderIcon" />
   <p>
     {{ folder.name }}
   </p>
@@ -22,7 +22,7 @@
 
   <ng-container *ngIf="folder.folders.length > 0">
     <li *ngFor="let folder of folder.folders">
-      <app-sidebar-file-tree-list-item [folder]="folder"></app-sidebar-file-tree-list-item>
+      <app-file-explorer-tree-item [folder]="folder"></app-file-explorer-tree-item>
     </li>
   </ng-container>
 

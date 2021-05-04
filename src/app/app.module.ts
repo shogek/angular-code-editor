@@ -12,11 +12,7 @@ import { EditorTabService } from './services/editor-tab/editor-tab.service';
 import { UserFileService } from './services/user-file.service';
 import { WelcomeWindowComponent } from './welcome-window/container/welcome-window.component';
 import { WelcomeWindowScreenComponent } from './welcome-window/component/welcome-window-screen.component';
-import {
-  SidebarFileTreeComponent,
-  SidebarFileTreeListComponent,
-  SidebarFileTreeListItemComponent
-} from './sidebar/sidebar-file-tree';
+import { FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar/file-explorer';
 
 @NgModule({
   declarations: [
@@ -28,9 +24,9 @@ import {
     EditorTabItemComponent,
     WelcomeWindowComponent,
     WelcomeWindowScreenComponent,
-    SidebarFileTreeComponent,
-    SidebarFileTreeListComponent,
-    SidebarFileTreeListItemComponent,
+    FileExplorer,
+    FileExplorerTree,
+    FileExplorerTreeItem,
   ],
   imports: [
     BrowserModule,
