@@ -12,9 +12,11 @@ import { EditorTabService } from './services/editor-tab/editor-tab.service';
 import { UserFileService } from './services/user-file.service';
 import { WelcomeWindowComponent } from './welcome-window/container/welcome-window.component';
 import { WelcomeWindowScreenComponent } from './welcome-window/component/welcome-window-screen.component';
-import { SidebarFileTreeComponent } from './sidebar/sidebar-file-tree/container/sidebar-file-tree.component';
-import { SidebarFileTreeListComponent } from './sidebar/sidebar-file-tree/component/sidebar-file-tree-list.component';
-import { FolderComponent } from './sidebar/sidebar-file-tree/component/folder/folder.component';
+import {
+  SidebarFileTreeComponent,
+  SidebarFileTreeListComponent,
+  SidebarFileTreeListItemComponent
+} from './sidebar/sidebar-file-tree';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { FolderComponent } from './sidebar/sidebar-file-tree/component/folder/fo
     WelcomeWindowScreenComponent,
     SidebarFileTreeComponent,
     SidebarFileTreeListComponent,
-    FolderComponent,
+    SidebarFileTreeListItemComponent,
   ],
   imports: [
     BrowserModule,

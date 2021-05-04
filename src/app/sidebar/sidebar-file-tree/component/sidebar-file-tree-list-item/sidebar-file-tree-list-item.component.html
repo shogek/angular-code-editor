@@ -22,7 +22,7 @@
 
   <ng-container *ngIf="folder.folders.length > 0">
     <li *ngFor="let folder of folder.folders">
-      <app-folder [folder]="folder"></app-folder>
+      <app-sidebar-file-tree-list-item [folder]="folder"></app-sidebar-file-tree-list-item>
     </li>
   </ng-container>
 

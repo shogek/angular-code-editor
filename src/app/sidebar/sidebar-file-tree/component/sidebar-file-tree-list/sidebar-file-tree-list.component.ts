@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
 import { UserFile } from "src/app/models/user-file.model";
-import { createFolderTreeStructure } from "./folder.helper";
-import { Folder } from "./folder.model";
+import { createFolderTreeStructure } from "../common/folder.helper";
+import { Folder } from "../common/folder.model";
 
 @Component({
   selector: 'app-sidebar-file-tree-list',
