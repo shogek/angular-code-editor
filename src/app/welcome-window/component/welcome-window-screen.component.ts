@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Output, ViewChild, EventEmitter } from "@angular/core";
-import { getFileIcon } from "src/app/helpers/icon.helper";
-import { UserFile } from "src/app/models/user-file.model";
 
 // TODO: Add drag and drop
-// TODO: Emit files one by one - dont' wait for all of them to finish
 
 @Component({
   selector: 'app-welcome-window-screen',
@@ -13,7 +10,7 @@ import { UserFile } from "src/app/models/user-file.model";
 })
 export class WelcomeWindowScreenComponent {
   @Output() loadDummyFiles = new EventEmitter<void>();
-  @Output() filesUploaded = new EventEmitter<UserFile[]>();
+  @Output() filesUploaded = new EventEmitter<FileList>();
 
   @ViewChild('fileUploader') fileUploader!: ElementRef;
   @ViewChild('folderUploader') folderUploader!: ElementRef;
@@ -30,6 +27,8 @@ export class WelcomeWindowScreenComponent {
     this.folderUploader.nativeElement.click();
   }
 
+  // TODO: Test with uploading files, not folder
+
   public async onFilesUploaded(e: Event) {
     const files = (e.target as HTMLInputElement).files;
     if (!files || files.length < 1) {
@@ -37,34 +36,6 @@ export class WelcomeWindowScreenComponent {
       throw new Error('How did you manage to cause this?');
     }
 
-    // TODO: Move this to container + move File-to-UserFile conversion to userFileService
-    const userFiles: UserFile[] = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const fileContents = await this.getFileContent(file);
-      const fileExtension = file.name.split('.').pop()!;
-      userFiles.push({
-        id: `${file.name}-${file.lastModified}`,
-        name: file.name,
-        contents: fileContents,
-        extension: fileExtension,
-        path: (file as any).webkitRelativePath || '',
-        iconPath: getFileIcon(fileExtension)
-      });
-    }
-
-    this.filesUploaded.emit(userFiles);
-  }
-
-  private getFileContent(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => resolve(e.target?.result as string);
-      reader.onerror = () => {
-        debugger;
-        reject('How did you manage to cause this?');
-      }
-      reader.readAsText(file);
-    });
+    this.filesUploaded.emit(files);
   }
 }
