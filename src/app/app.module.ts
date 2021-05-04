@@ -15,7 +15,6 @@ import { WelcomeWindowScreenComponent } from './welcome-window/component/welcome
 import { SidebarFileTreeComponent } from './sidebar/sidebar-file-tree/container/sidebar-file-tree.component';
 import { SidebarFileTreeListComponent } from './sidebar/sidebar-file-tree/component/sidebar-file-tree-list.component';
 import { FolderComponent } from './sidebar/sidebar-file-tree/component/folder/folder.component';
-import { IconService } from './services/icon.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +37,6 @@ import { IconService } from './services/icon.service';
   providers: [
     UserFileService,
     EditorTabService,
-    IconService,
   ],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,7 @@ import { FileTreeNode } from "../sidebar-file-tree-list.component";
 export class FolderComponent {
   @Input() folder!: FileTreeNode;
   @Output() fileClicked = new EventEmitter<string>();
-  isExpanded = false;
+  isExpanded = true;
 
   public toggleExpanded() {
     this.isExpanded = !this.isExpanded;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Output, ViewChild, EventEmitter } from "@angular/core";
+import { getFileIcon } from "src/app/helpers/icon.helper";
 import { UserFile } from "src/app/models/user-file.model";
-import { IconService } from "src/app/services/icon.service";
 
 // TODO: Add drag and drop
 // TODO: Emit files one by one - dont' wait for all of them to finish
@@ -18,8 +18,6 @@ export class WelcomeWindowScreenComponent {
   @ViewChild('fileUploader') fileUploader!: ElementRef;
   @ViewChild('folderUploader') folderUploader!: ElementRef;
 
-  constructor (private iconService: IconService) { }
-  
   public clickLoadDummyFiles() {
     this.loadDummyFiles.emit();
   }
@@ -51,7 +49,7 @@ export class WelcomeWindowScreenComponent {
         contents: fileContents,
         extension: fileExtension,
         path: (file as any).webkitRelativePath || '',
-        iconPath: this.iconService.getFileIconPath(fileExtension)
+        iconPath: getFileIcon(fileExtension)
       });
     }
 
