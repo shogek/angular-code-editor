@@ -27,8 +27,6 @@ export class WelcomeWindowScreenComponent {
     this.folderUploader.nativeElement.click();
   }
 
-  // TODO: Test with uploading files, not folder
-
   public async onFilesUploaded(e: Event) {
     const files = (e.target as HTMLInputElement).files;
     if (!files || files.length < 1) {

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
 
 // TODO: Scroll to clicked tab if it is not fully visible
-// TODO: Enable tab scrolling without holding the "Shift" button
 
 @Component({
   selector: 'app-editor-tab-list-item',
