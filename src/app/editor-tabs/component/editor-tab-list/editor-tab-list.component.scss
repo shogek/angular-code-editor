@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  background-color: var(--editor-tab-bg-color);
+  overflow-x: auto;
+  // Hide scrollbars (for Firefox)
+  scrollbar-width: none;
+  // Hide scrollbars (for IE 10+) 
+  -ms-overflow-style: none;
+}
+
+// Hide scrollbars (for WebKit) 
+.wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

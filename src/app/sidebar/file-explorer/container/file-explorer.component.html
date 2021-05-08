@@ -1,0 +1,4 @@
+<app-file-explorer-tree
+  [userFiles]="userFiles$ | async"
+  (fileClicked)="onFileClicked($event)"
+></app-file-explorer-tree>

@@ -1,0 +1,14 @@
+<div
+  #scrollable
+  class="wrapper"
+  (wheel)="onScroll($event)"
+>
+  <app-editor-tab-list-item
+    *ngFor="let tab of openedTabs"
+    [name]="tab.name"
+    [isActive]="tab.isActive"
+    [iconPath]="tab.iconPath"
+    (clickOpen)="tabOpen.emit(tab.userFileId)"
+    (clickClose)="tabClose.emit(tab.userFileId)"
+  ></app-editor-tab-list-item>
+</div>

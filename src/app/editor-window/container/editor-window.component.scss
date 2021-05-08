@@ -1,5 +1,14 @@
-.empty {
+.wrapper {
   height: 100%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: block;
+}
+
+.editor {
+  display: block;
+  overflow-y: auto;
 }

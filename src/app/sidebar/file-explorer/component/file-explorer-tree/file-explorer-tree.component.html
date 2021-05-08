@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <h5 class="title">EXPLORER</h5>
+
+  <div class="tree">
+    <app-file-explorer-tree-item
+      [folder]="folder"
+      (fileClicked)="onFileClicked($event)"
+    ></app-file-explorer-tree-item>
+  </div>
+
+  <!-- TODO: .wrapper has padding, but it is not adhered to. -->
+  <div class="spacer"></div>
+</div>

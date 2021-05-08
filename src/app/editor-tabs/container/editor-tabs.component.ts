@@ -1,25 +1,23 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { Observable } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
-import { EditorService } from "src/app/services/editor/editor.service";
-import { UserFileService } from "src/app/services/user-file.service";
+import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service";
 
 @Component({
   selector: 'app-editor-tabs',
   templateUrl: './editor-tabs.component.html',
-  styleUrls: ['./editor-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabsComponent {
-  @Input() allTabs: EditorTab[] = [];
-  @Input() activeTab!: EditorTab;
+  openedTabs$: Observable<EditorTab[]> = this.editorTabService.getOpenedTabs();
 
-  constructor(private editorService: EditorService) {}
+  constructor(private editorTabService: EditorTabService) {}
 
-  public handleTabOpen(tabId: string): void {
-    this.editorService.openTab(tabId);
+  public handleTabOpen(userFileId: string): void {
+    this.editorTabService.setActiveTab(userFileId);
   }
 
-  public handleTabClose(tabId: string): void {
-    this.editorService.closeTab(tabId);
+  public handleTabClose(userFileId: string): void {
+    this.editorTabService.closeTab(userFileId);
   }
 }

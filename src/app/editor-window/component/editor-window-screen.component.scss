@@ -1,10 +1,16 @@
+:host {
+  height: 100%;
+}
+
 .container {
+  height: 100%;
   display: flex;
 }
 
 .number-container {
   width: 2%;
-  padding-right: 1%;
+  padding-right: 1.5rem;
+  padding-left: 1.7rem;
 }
 
 .file-contents {

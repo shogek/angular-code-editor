@@ -1,0 +1,43 @@
+.wrapper {
+  background-color: var(--editor-tab-bg-color);
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  margin: 0;
+  height: 1.8rem;
+
+  &:hover {
+    background-color: var(--sidebar-file-tree-item-bg-active-color);
+  }
+}
+
+.pad-left {
+  padding-left: 1.7rem;
+}
+
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.caret {
+  display: inline-block;
+
+  &.expanded {
+    transform: rotate(90deg);
+  }
+}
+
+.icon {
+  height: 1.1rem;
+}
+
+.list {
+  list-style-type: none;
+  border-left: solid 1px var(--sidebar-file-tree-divider-color);
+}

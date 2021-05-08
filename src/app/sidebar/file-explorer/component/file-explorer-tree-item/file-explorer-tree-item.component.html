@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <div class="line" (click)="toggleExpanded()">
+    <span class="caret" [class.expanded]="isExpanded">›</span>
+    <img class="icon" [src]="folderIcon" />
+    <p class="text">
+      {{ folder.name }}
+    </p>
+  </div>
+
+  <div
+    *ngIf="isExpanded && (folder.files.length > 0 || folder.folders.length > 0)"
+    class="list" 
+  >
+    <ng-container *ngIf="folder.files.length > 0">
+      <div *ngFor="let file of folder.files"
+        class="line pad-left"
+        (click)="onFileClicked(file.id)"
+      >
+        <img [src]="file.iconPath" class="icon" />
+        <p class="text">{{ file.name }}</p>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="folder.folders.length > 0">
+      <div
+        *ngFor="let folder of folder.folders"
+        class="pad-left"
+      >
+        <app-file-explorer-tree-item
+          [folder]="folder"
+          (fileClicked)="onFileClicked($event)"
+        ></app-file-explorer-tree-item>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

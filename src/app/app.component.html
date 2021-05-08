@@ -1,1 +1,10 @@
-<app-editor></app-editor>
+  <div class="editor-wrapper">
+    <ng-container *ngIf="(editorTabs$ | async).length > 0; else welcomeScreen">
+      <app-editor-window class="editor"></app-editor-window>
+    </ng-container>
+    <app-file-explorer *ngIf="(userFiles$ | async).length > 0" class="sidebar"></app-file-explorer>
+  </div>
+
+<ng-template #welcomeScreen>
+  <app-welcome-window class="welcome-screen"></app-welcome-window>
+</ng-template>
