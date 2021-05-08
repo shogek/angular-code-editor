@@ -1,29 +1,37 @@
-<div class="line" (click)="toggleExpanded()">
-  <!-- TODO: Fix this class.closed logic -->
-  <span class="caret" [class.closed]="isExpanded">›</span>
-  <img class="icon" [src]="folderIcon" />
-  <p>
-    {{ folder.name }}
-  </p>
+<div class="wrapper">
+  <div class="line" (click)="toggleExpanded()">
+    <span class="caret" [class.expanded]="isExpanded">›</span>
+    <img class="icon" [src]="folderIcon" />
+    <p class="text">
+      {{ folder.name }}
+    </p>
+  </div>
+
+  <div
+    *ngIf="isExpanded && (folder.files.length > 0 || folder.folders.length > 0)"
+    class="list" 
+  >
+    <ng-container *ngIf="folder.files.length > 0">
+      <div *ngFor="let file of folder.files"
+        class="line pad-left"
+        (click)="onFileClicked(file.id)"
+      >
+        <img [src]="file.iconPath" class="icon" />
+        <p class="text">{{ file.name }}</p>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="folder.folders.length > 0">
+      <div
+        *ngFor="let folder of folder.folders"
+        class="pad-left"
+      >
+        <app-file-explorer-tree-item
+          [folder]="folder"
+          (fileClicked)="onFileClicked($event)"
+        ></app-file-explorer-tree-item>
+      </div>
+    </ng-container>
+
+  </div>
 </div>
-
-<!-- TODO: Highlight whole line on hover -->
-<ul
-  *ngIf="isExpanded && (folder.files.length > 0 || folder.folders.length > 0)"
-  class="list" 
->
-
-  <ng-container *ngIf="folder.files.length > 0">
-    <li *ngFor="let file of folder.files" class="line" (click)="fileClicked.emit(file.id)">
-      <img [src]="file.iconPath" class="icon" />
-      <p>{{ file.name }}</p>
-    </li>
-  </ng-container>
-
-  <ng-container *ngIf="folder.folders.length > 0">
-    <li *ngFor="let folder of folder.folders">
-      <app-file-explorer-tree-item [folder]="folder"></app-file-explorer-tree-item>
-    </li>
-  </ng-container>
-
-</ul>

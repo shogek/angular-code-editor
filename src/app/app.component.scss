@@ -4,16 +4,24 @@
 }
 
 .editor-wrapper {
+  height: 100%;
   display: flex;
 }
 
 // TODO: Make sidebar resizeable
 .editor {
-  // width: 90%;
-  width: 40%;
+  width: 70%;
+  // width: 40%;
 }
 
 .sidebar {
-  // width: 10%;
-  width: 60%;
+  width: 30%;
+  height: 100%;
+  // overflow: auto;
+  // width: 60%;
+}
+
+.welcome-screen {
+  width: 100%;
+  height: 100%;
 }

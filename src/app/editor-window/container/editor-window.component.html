@@ -2,8 +2,7 @@
   <div class="wrapper">
     <app-editor-tabs
       class="tabs"
-      [allTabs]="allTabs$ | async"
-      [activeTab]="activeTab"
+      [openedTabs]="openedTabs$ | async"
     ></app-editor-tabs>
 
     <app-editor-window-screen

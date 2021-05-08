@@ -10,15 +10,21 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabItemComponent {
-  @Input() tabId = '';
-  @Input() tabName = '';
-  @Input() tabIcon = '';
-  @Input() isActive = false;
+  @Input() userFileId!: string;
+  @Input() name!: string;
+  @Input() isActive!: boolean;
+  @Input() iconPath!: string;
   @Output() clickOpen = new EventEmitter<string>();
   @Output() clickClose = new EventEmitter<string>();
 
+  public onClickOpen() {
+    if (!this.isActive) {
+      this.clickOpen.emit(this.userFileId);
+    }
+  }
+
   public onClickClose(e: MouseEvent): void {
     e.stopPropagation();
-    this.clickClose.emit(this.tabId);
+    this.clickClose.emit(this.userFileId);
   }
 }

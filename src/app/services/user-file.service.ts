@@ -8,6 +8,7 @@ import { getFileIcon } from "../helpers/icon.helper";
 export class UserFileService {
   private files: UserFile[] = [];
   private files$ = new BehaviorSubject<UserFile[]>([]);
+  private activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
 
   public get(id: string): UserFile {
     return this.files.find(file => file.id === id)!;
@@ -17,8 +18,17 @@ export class UserFileService {
     return this.files$;
   }
 
+  public getActiveFile(): Observable<UserFile | undefined> {
+    return this.activeFile$;
+  }
+
   public useDummyFiles() {
     this.setFiles(MOCK_USER_FILES);
+  }
+
+  public setActiveFile(userFileId: string) {
+    const activeFile = this.files.find(({ id }) => id === userFileId)!
+    this.activeFile$.next(activeFile);
   }
 
   public async setAll(fileList: FileList) {
@@ -33,11 +43,11 @@ export class UserFileService {
         name: file.name,
         contents: fileContents,
         extension: fileExtension,
-        path: (file as any).webkitRelativePath || '',
+        path: (file as any).webkitRelativePath || 'Unknown',
         iconPath: getFileIcon(fileExtension)
       });
     }
-
+    
     this.setFiles(userFiles);
   }
 

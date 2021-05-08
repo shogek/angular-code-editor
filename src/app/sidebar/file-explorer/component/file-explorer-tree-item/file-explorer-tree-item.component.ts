@@ -19,4 +19,8 @@ export class FileExplorerTreeItem {
   public toggleExpanded() {
     this.isExpanded = !this.isExpanded;
   }
+
+  public onFileClicked(userFileId: string) {
+    this.fileClicked.emit(userFileId);
+  }
 }

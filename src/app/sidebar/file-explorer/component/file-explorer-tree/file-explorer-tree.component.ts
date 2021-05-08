@@ -16,4 +16,8 @@ export class FileExplorerTree {
   @Output() fileClicked = new EventEmitter<string>();
 
   folder!: Folder;
+
+  public onFileClicked = (userFileId: string) => {
+    this.fileClicked.emit(userFileId);
+  }
 }

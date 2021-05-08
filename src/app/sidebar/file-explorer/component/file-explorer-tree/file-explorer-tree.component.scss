@@ -1,4 +1,19 @@
+.wrapper {
+  height: 100%;
+  background-color: var(--editor-tab-bg-color);
+  overflow-y: auto;
+  padding: 1.7rem;
+  // Fixes problem of padding making height taller than 100%;
+  box-sizing: border-box;
+}
+
+.spacer {
+  height: 1.7rem;
+}
+
 .title {
   margin: 0;
-  padding: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: lighter;
+  text-transform: uppercase;
 }

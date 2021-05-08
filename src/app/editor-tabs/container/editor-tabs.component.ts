@@ -9,16 +9,15 @@ import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabsComponent {
-  @Input() allTabs: EditorTab[] = [];
-  @Input() activeTab!: EditorTab;
+  @Input() openedTabs: EditorTab[] = [];
 
   constructor(private editorTabService: EditorTabService) {}
 
-  public handleTabOpen(tabId: string): void {
-    this.editorTabService.openTab(tabId);
+  public handleTabOpen(userFileId: string): void {
+    this.editorTabService.setActiveTab(userFileId);
   }
 
-  public handleTabClose(tabId: string): void {
-    this.editorTabService.closeTab(tabId);
+  public handleTabClose(userFileId: string): void {
+    this.editorTabService.closeTab(userFileId);
   }
 }

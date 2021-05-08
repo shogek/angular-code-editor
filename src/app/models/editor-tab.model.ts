@@ -1,11 +1,13 @@
 /** I represent a file opened in the editor tab. */
 export interface EditorTab {
-  id: string;
+  /** Acts as a unique identifier of the tab record. */
   userFileId: string;
   /** Text which will be show in the editor's tab. */
   name: string;
   /** Example: 'html'. */
   fileExtension: string;
+  /** Indicates if the tab is currently opened and its contents visible. */
+  isActive: boolean;
   /** Contents of a file which will be editable in the editor. */
   contents: string;
   /** Indicates how many characters are between the cursor and the start of file. */

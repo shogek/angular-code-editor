@@ -1,3 +1,7 @@
+.wrapper {
+  background-color: var(--editor-tab-bg-color);
+}
+
 .line {
   display: flex;
   align-items: center;
@@ -5,17 +9,26 @@
   cursor: pointer;
   margin: 0;
   height: 1.8rem;
-  width: max-content;
 
   &:hover {
     background-color: var(--sidebar-file-tree-item-bg-active-color);
   }
 }
 
+.pad-left {
+  padding-left: 1.7rem;
+}
+
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .caret {
   display: inline-block;
 
-  &.closed {
+  &.expanded {
     transform: rotate(90deg);
   }
 }

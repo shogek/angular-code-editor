@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
-import { map, take } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
+import { filterNullish } from "src/app/helpers/observable.helper";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFile } from "src/app/models/user-file.model";
 import { UserFileService } from "../user-file.service";
@@ -9,100 +10,84 @@ import { EditorTabManager } from "./editor-tab-manager";
 @Injectable()
 export class EditorTabService implements OnDestroy {
   private tabManager = new EditorTabManager();
-  private subscription!: Subscription;
+  private subscriptions: Subscription[] = [];
 
-  private allTabs$ = new BehaviorSubject<EditorTab[]>([]);
-  private activeTab$ = new BehaviorSubject<EditorTab | undefined>(undefined);
+  private openedTabs: EditorTab[] = [];
+  private openedTabs$ = new BehaviorSubject<EditorTab[]>([]);
+  private activeTab$ = this.openedTabs$.pipe(map(tabs => tabs.filter(tab => tab.isActive)[0]));
 
-  constructor(private userFileService: UserFileService) {
-    this.trackUserFilesToCreateTabs();
+  constructor(public userFileService: UserFileService) {
+    this.trackActiveUserFileToSetActiveTab();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  private trackUserFilesToCreateTabs() {
-    this.subscription = this.userFileService
-      .getAll()
-      .pipe(
-        map(userFiles => {
-          this.tabManager.createTabs(userFiles);
-          const allTabs = this.tabManager.getAllTabs();
-          this.allTabs$.next(allTabs);
-          this.setActiveTab(allTabs[0]);
-        })
-      ).subscribe();
-  }
-
-  public getAllTabs(): Observable<EditorTab[]> {
-    return this.allTabs$;
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   public getActiveTab(): Observable<EditorTab | undefined> {
     return this.activeTab$;
   }
 
-  // TODO: Think of a better name?
-  public openTabFromFile(file: UserFile) {
-    this.tabManager.getOrCreateTabFromFile(file);
+  public getOpenedTabs(): Observable<EditorTab[]> {
+    return this.openedTabs$;
   }
 
-  public openTab(tabId?: string) {
-    if (!tabId) {
-      // Closed last tab.
-      this.activeTab$.next(undefined);
-      return;
-    }
-
-    this.getActiveTab()
-    .pipe(take(1))
-    .subscribe(activeTab => {
-      if (activeTab?.id === tabId) {
-        // Tab is already active.
-        return;
-      }
-
-      const newTab = this.tabManager.getTabById(tabId);
-      this.setActiveTab(newTab);
-    })
-    .unsubscribe();
+  public setActiveTab(tabId: string) {
+    const updatedTabs = this.openedTabs.map(tab => ({...tab, isActive: tab.userFileId === tabId}));
+    this.setOpenedTabs(updatedTabs);
   }
 
-  public closeTab(tabId: string): void {
-    const closedTab = this.tabManager.getTabById(tabId);
-    this.tabManager.removeTab(tabId);
-    this.userFileService.remove(closedTab.userFileId);
+  public closeTab(userFileId: string): void {
+    const tabsLeft = this.openedTabs.filter(tab => tab.userFileId !== userFileId);
 
-    const tabsLeft = this.tabManager.getAllTabs();
-    this.allTabs$.next(tabsLeft);
-
-    if (tabsLeft.length < 1) {
-      // Closed last tab.
-      this.setActiveTab(undefined);
-      return;
+    const closedTab = this.tabManager.get(userFileId)!;
+    if (closedTab.isActive && tabsLeft.length > 0) {
+      tabsLeft[0].isActive = true;
     }
 
-    this.activeTab$.subscribe(activeTab => {
-      if (!activeTab) {
-        debugger;
-        throw new Error("This shouldn't be null - if a file exists, a tab must be opened!");
-      }
-
-      const closingCurrentTab = activeTab.id === tabId;
-      if (closingCurrentTab) {
-        const randomTab = this.tabManager.getRandomTab();
-        this.setActiveTab(randomTab);
-        return;
-      }
-    }).unsubscribe();
+    this.setOpenedTabs(tabsLeft);
   }
 
   public updateTab(tab: EditorTab): void {
-    this.tabManager.updateTab(tab);
+    this.tabManager.update(tab);
   }
 
-  private setActiveTab(tab?: EditorTab): void {
-    this.activeTab$.next(tab);
+  private trackActiveUserFileToSetActiveTab() {
+    this.subscriptions.push(
+      this.userFileService
+      .getActiveFile()
+      .pipe(
+        filterNullish(),
+        map((file) => this.getEditorTabFromUserFile(file)),
+        tap((tab) => this.addTab(tab))
+      ).subscribe()
+    );
+  }
+
+  private addTab(tab: EditorTab) {
+    if (this.openedTabs.includes(tab)) {
+      return;
+    }
+
+    const oldTabs = this.openedTabs.map(tab => ({...tab, isActive: false}));
+    tab.isActive = true;
+    const allTabs = [tab, ...oldTabs];
+    this.setOpenedTabs(allTabs);
+  }
+
+  private getEditorTabFromUserFile(file: UserFile): EditorTab {
+    const existingTab = this.tabManager.get(file.id);
+    if (existingTab) {
+      return existingTab;
+    }
+
+    const newTab = this.tabManager.create(file);
+    this.tabManager.cache(newTab);
+    return newTab;
+  }
+
+  private setOpenedTabs(tabs: EditorTab[]) {
+    this.openedTabs = tabs;
+    this.openedTabs$.next(tabs);
   }
 }

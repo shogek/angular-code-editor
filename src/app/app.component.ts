@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EditorTab } from './models/editor-tab.model';
+import { UserFile } from './models/user-file.model';
 import { EditorTabService } from './services/editor-tab/editor-tab.service';
+import { UserFileService } from './services/user-file.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,11 @@ import { EditorTabService } from './services/editor-tab/editor-tab.service';
 export class AppComponent {
   title = 'code-editor';
 
-  editorTabs$: Observable<EditorTab[]> = this.editorTabService.getAllTabs();
+  editorTabs$: Observable<EditorTab[]> = this.editorTabService.getOpenedTabs();
+  userFiles$: Observable<UserFile[]> = this.userFileService.getAll();
 
-  constructor (private editorTabService: EditorTabService) { }
+  constructor (
+    private editorTabService: EditorTabService,
+    private userFileService: UserFileService,
+  ) { }
 }
