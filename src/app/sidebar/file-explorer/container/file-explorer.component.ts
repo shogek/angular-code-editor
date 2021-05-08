@@ -12,6 +12,6 @@ export class FileExplorer {
   constructor (private userFileService: UserFileService) { }
 
   public onFileClicked(userFileId: string) {
-    this.userFileService.setActiveFile(userFileId);
+    this.userFileService.openFile(userFileId);
   }
 }

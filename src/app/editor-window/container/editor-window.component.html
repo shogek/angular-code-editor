@@ -1,9 +1,6 @@
 <ng-container *ngIf="activeTab$ | async as activeTab">
   <div class="wrapper">
-    <app-editor-tabs
-      class="tabs"
-      [openedTabs]="openedTabs$ | async"
-    ></app-editor-tabs>
+    <app-editor-tabs class="tabs"></app-editor-tabs>
 
     <app-editor-window-screen
       class="editor"

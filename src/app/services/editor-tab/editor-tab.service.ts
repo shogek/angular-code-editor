@@ -38,9 +38,9 @@ export class EditorTabService implements OnDestroy {
   }
 
   public closeTab(userFileId: string): void {
+    const closedTab = this.openedTabs.find(tab => tab.userFileId === userFileId)!;
     const tabsLeft = this.openedTabs.filter(tab => tab.userFileId !== userFileId);
 
-    const closedTab = this.tabManager.get(userFileId)!;
     if (closedTab.isActive && tabsLeft.length > 0) {
       tabsLeft[0].isActive = true;
     }
@@ -58,24 +58,26 @@ export class EditorTabService implements OnDestroy {
       .getActiveFile()
       .pipe(
         filterNullish(),
-        map((file) => this.getEditorTabFromUserFile(file)),
-        tap((tab) => this.addTab(tab))
+        tap((file) => this.openTabFromFile(file))
       ).subscribe()
     );
   }
 
-  private addTab(tab: EditorTab) {
-    if (this.openedTabs.includes(tab)) {
+  private openTabFromFile(file: UserFile) {
+    const openedTab = this.openedTabs.find(tab => tab.userFileId === file.id);
+    if (openedTab) {
+      const updatedTabs = this.openedTabs.map(openedTab => ({...openedTab, isActive: openedTab.userFileId === file.id}));
+      this.setOpenedTabs(updatedTabs);
       return;
     }
 
-    const oldTabs = this.openedTabs.map(tab => ({...tab, isActive: false}));
-    tab.isActive = true;
-    const allTabs = [tab, ...oldTabs];
-    this.setOpenedTabs(allTabs);
+    const newTab = this.mapFileToTab(file);
+    const allTabs = [newTab, ...this.openedTabs];
+    const updatedTabs = allTabs.map(tab => ({...tab, isActive: file.id === tab.userFileId}));
+    this.setOpenedTabs(updatedTabs);
   }
 
-  private getEditorTabFromUserFile(file: UserFile): EditorTab {
+  private mapFileToTab(file: UserFile): EditorTab {
     const existingTab = this.tabManager.get(file.id);
     if (existingTab) {
       return existingTab;

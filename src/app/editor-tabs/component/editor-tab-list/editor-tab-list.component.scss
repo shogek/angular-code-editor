@@ -9,7 +9,7 @@
 }
 
 // Hide scrollbars (for WebKit) 
-.wrapper::-webkit-scrollbar { /* WebKit */
+.wrapper::-webkit-scrollbar {
   width: 0;
   height: 0;
 }

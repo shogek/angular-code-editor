@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorNumberColumnComponent } from './editor-number-column/editor-number-column.component';
-import { EditorTabItemComponent } from './editor-tabs/component/editor-tab-item.component';
 import { EditorTabsComponent } from './editor-tabs/container/editor-tabs.component';
 import { EditorWindowScreenComponent } from './editor-window/component/editor-window-screen.component';
 import { EditorWindowComponent } from './editor-window/container/editor-window.component';
@@ -13,6 +12,8 @@ import { UserFileService } from './services/user-file.service';
 import { WelcomeWindowComponent } from './welcome-window/container/welcome-window.component';
 import { WelcomeWindowScreenComponent } from './welcome-window/component/welcome-window-screen.component';
 import { FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar/file-explorer';
+import { EditorTabListComponent } from './editor-tabs/component/editor-tab-list/editor-tab-list.component';
+import { EditorTabListItemComponent } from './editor-tabs/component/editor-tab-list-item/editor-tab-list-item.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar/
     EditorWindowScreenComponent,
     EditorNumberColumnComponent,
     EditorTabsComponent,
-    EditorTabItemComponent,
+    EditorTabListComponent,
+    EditorTabListItemComponent,
     WelcomeWindowComponent,
     WelcomeWindowScreenComponent,
     FileExplorer,

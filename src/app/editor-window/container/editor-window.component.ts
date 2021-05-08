@@ -23,7 +23,6 @@ export class EditorWindowComponent implements OnInit, OnDestroy {
    private activeLine = 1;
    private lineCount = 1;
 
-   openedTabs$: Observable<EditorTab[]> = this.editorTabService.getOpenedTabs();
    activeTab$: Observable<EditorTab | undefined> = this.editorTabService.getActiveTab();
    activeLine$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
 

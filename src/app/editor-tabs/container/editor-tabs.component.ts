@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { Observable } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service";
 
 @Component({
   selector: 'app-editor-tabs',
   templateUrl: './editor-tabs.component.html',
-  styleUrls: ['./editor-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabsComponent {
-  @Input() openedTabs: EditorTab[] = [];
+  openedTabs$: Observable<EditorTab[]> = this.editorTabService.getOpenedTabs();
 
   constructor(private editorTabService: EditorTabService) {}
 

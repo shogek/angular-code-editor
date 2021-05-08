@@ -26,7 +26,7 @@ export class UserFileService {
     this.setFiles(MOCK_USER_FILES);
   }
 
-  public setActiveFile(userFileId: string) {
+  public openFile(userFileId: string) {
     const activeFile = this.files.find(({ id }) => id === userFileId)!
     this.activeFile$.next(activeFile);
   }

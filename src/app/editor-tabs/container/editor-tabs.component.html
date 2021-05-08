@@ -1,11 +1,5 @@
-<div class="wrapper">
-  <app-editor-tab-item
-    *ngFor="let tab of openedTabs"
-    [userFileId]="tab.userFileId"
-    [name]="tab.name"
-    [isActive]="tab.isActive"
-    [iconPath]="tab.iconPath"
-    (clickOpen)="handleTabOpen($event)"
-    (clickClose)="handleTabClose($event)"
-  ></app-editor-tab-item>
-</div>
+<app-editor-tab-list
+  [openedTabs]="openedTabs$ | async"
+  (tabOpen)="handleTabOpen($event)"
+  (tabClose)="handleTabClose($event)"
+></app-editor-tab-list>
