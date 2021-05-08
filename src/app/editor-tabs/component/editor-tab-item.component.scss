@@ -2,9 +2,7 @@
   display: flex;
   align-items: center;
   background-color: var(--editor-tab-bg-color);
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--editor-tab-border-color);
+  border: solid 1px var(--editor-tab-border-color);
   color: var(--editor-tab-text-color);
 
   img {
