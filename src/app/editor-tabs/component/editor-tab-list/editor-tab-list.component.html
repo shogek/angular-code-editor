@@ -1,4 +1,8 @@
-<div class="wrapper">
+<div
+  #scrollable
+  class="wrapper"
+  (wheel)="onScroll($event)"
+>
   <app-editor-tab-list-item
     *ngFor="let tab of openedTabs"
     [name]="tab.name"
