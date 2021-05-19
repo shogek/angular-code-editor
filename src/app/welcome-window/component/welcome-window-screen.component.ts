@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Output, ViewChild, EventEmitter } from "@angular/core";
 
-// TODO: Add drag and drop
-
 @Component({
   selector: 'app-welcome-window-screen',
   templateUrl: './welcome-window-screen.component.html',
@@ -15,6 +13,8 @@ export class WelcomeWindowScreenComponent {
   @ViewChild('fileUploader') fileUploader!: ElementRef;
   @ViewChild('folderUploader') folderUploader!: ElementRef;
 
+  isDragging = false;
+
   public clickLoadDummyFiles() {
     this.loadDummyFiles.emit();
   }
@@ -25,6 +25,28 @@ export class WelcomeWindowScreenComponent {
 
   public clickFolderInput() {
     this.folderUploader.nativeElement.click();
+  }
+
+  public dragOver(e: DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.isDragging = true;
+  }
+
+  public dragLeave(e: DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.isDragging = false;
+  }
+
+  public drop(e: DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.isDragging = false;
+    
+    if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+      this.filesUploaded.emit(e.dataTransfer.files);
+    }
   }
 
   public async onFilesUploaded(e: Event) {

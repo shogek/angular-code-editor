@@ -10,8 +10,28 @@ button {
   border: none;
   padding: 0.5rem;
   text-transform: uppercase;
+  border-radius: 0.1rem;
 
   &:hover {
     cursor: pointer;
+    background-color: rgb(52, 58, 64);
   }
+}
+
+.drop-wrapper {
+  margin-top: 1.8rem;
+
+  .drop-zone {
+    margin-right: 0.5rem;
+    display: inline;
+    padding: 0.5rem;
+    border: dashed;
+    text-transform: uppercase;
+    color: var(--editor-text-color);
+    background-color: var(--editor-line-number-color);
+  }
+}
+
+.dragging {
+  background-color: lightseagreen;
 }
