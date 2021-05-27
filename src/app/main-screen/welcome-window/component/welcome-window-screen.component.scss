@@ -4,13 +4,31 @@
   place-items: center;
 }
 
+.wrapper {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  border-style: dashed;
+  border-width: 2px;
+
+  h1,
+  p {
+    margin: 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 button {
   color: var(--editor-text-color);
   background-color: var(--editor-line-number-color);
   border: none;
   padding: 0.5rem;
-  text-transform: uppercase;
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
 
   &:hover {
     cursor: pointer;
@@ -18,20 +36,7 @@ button {
   }
 }
 
-.drop-wrapper {
-  margin-top: 1.8rem;
-
-  .drop-zone {
-    margin-right: 0.5rem;
-    display: inline;
-    padding: 0.5rem;
-    border: dashed;
-    text-transform: uppercase;
-    color: var(--editor-text-color);
-    background-color: var(--editor-line-number-color);
-  }
-}
-
+// TODO: Fix colors
 .dragging {
   background-color: lightseagreen;
 }

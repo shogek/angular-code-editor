@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UserFileService } from "src/app/services/user-file.service";
+import { UserFileService } from "src/app/services/user-file/user-file.service";
 
 @Component({
   selector: 'app-file-explorer',
