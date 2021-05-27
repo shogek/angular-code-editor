@@ -4,7 +4,7 @@ import { map, tap } from "rxjs/operators";
 import { filterNullish } from "src/app/helpers/observable.helper";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { UserFile } from "src/app/models/user-file.model";
-import { UserFileService } from "../user-file.service";
+import { UserFileService } from "../user-file/user-file.service";
 import { EditorTabManager } from "./editor-tab-manager";
 
 @Injectable()

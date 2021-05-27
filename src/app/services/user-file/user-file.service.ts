@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { UserFile } from "../models/user-file.model";
-import { MOCK_USER_FILES } from "../mock-user-files";
+import { UserFile } from "../../models/user-file.model";
+import { MOCK_USER_FILES } from "./mock-user-files";
 import { BehaviorSubject, Observable } from "rxjs";
-import { getFileIcon } from "../helpers/icon.helper";
+import { getFileIcon } from "../../helpers/icon.helper";
 
 @Injectable()
 export class UserFileService {

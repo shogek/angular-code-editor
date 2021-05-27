@@ -1,0 +1,26 @@
+<div
+  class="wrapper drop-zone"
+  (dragleave)="dragLeave($event)"
+  (dragover)="dragOver($event)"
+  (drop)="drop($event)"
+  [class.dragging]="isDragging"
+>
+  <h1>Welcome!</h1>
+  <p><b>Drag and drop</b> files or press a button to start!</p>
+  
+  <div class="buttons">
+    <div>
+      <button type="button" (click)="clickLoadDummyFiles()">Load dummy files</button>
+    </div>
+
+    <div>
+      <button type="button" (click)="clickFileInput()">Upload files</button>
+      <input #fileUploader hidden type="file" multiple (change)="onFilesUploaded($event)"/>
+    </div>
+
+    <div>
+      <button type="button" (click)="clickFolderInput()">Upload a folder</button>
+      <input #folderUploader hidden type="file" multiple webkitdirectory (change)="onFilesUploaded($event)" />
+    </div>
+  </div>
+</div>

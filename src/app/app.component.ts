@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { EditorTab } from './models/editor-tab.model';
 import { UserFile } from './models/user-file.model';
 import { EditorTabService } from './services/editor-tab/editor-tab.service';
-import { UserFileService } from './services/user-file.service';
+import { UserFileService } from './services/user-file/user-file.service';
 
 @Component({
   selector: 'app-root',
