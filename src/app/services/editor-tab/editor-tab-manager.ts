@@ -39,9 +39,10 @@ export class EditorTabManager {
   }
 
   private wrapLinesInSpanTags(fileContents: string): string {
-    return fileContents
+    const result = fileContents
       .split('\n')
-      .map(line => `<span>${line}</span>`)
-      .join('\n');
+      .map(line => `<p>${line}</p>`)
+      .join('');
+    return result;
   }
 }

@@ -17,6 +17,7 @@ import {
   WelcomeWindowScreenComponent,
 } from './main-screen';
 import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
+import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
     FileExplorerTreeItem,
     StatusBarComponent,
     StatusBarRowComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import { UserFileService } from "src/app/services/user-file/user-file.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeWindowComponent {
-  constructor (private userFileService: UserFileService) { }
+  constructor (private userFileService: UserFileService) { this.userFileService.useDummyFiles(); }
 
   public onLoadDummyFiles() {
     this.userFileService.useDummyFiles();
