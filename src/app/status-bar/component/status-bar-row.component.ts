@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 
 @Component({
   selector: 'app-status-bar-row',
@@ -6,4 +6,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   styleUrls: ['./status-bar-row.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatusBarRowComponent { }
+export class StatusBarRowComponent {
+  @Input() editorLineNumber: number | undefined;
+  @Input() editorCaretOffset: number | undefined;
+}

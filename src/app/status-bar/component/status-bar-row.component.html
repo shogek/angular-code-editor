@@ -1,4 +1,7 @@
 <div class="wrapper">
-  <!-- TODO: On the right side show current line and column! -->
   Project loaded!
+
+  <div *ngIf="editorLineNumber && editorCaretOffset">
+    Ln {{ editorLineNumber }}, Col {{ editorCaretOffset }}
+  </div>
 </div>

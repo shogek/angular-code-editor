@@ -28,6 +28,14 @@ export class EditorTabService implements OnDestroy {
     return this.activeTab$;
   }
 
+  public getActiveTabLineNumber(): Observable<number | undefined> {
+    return this.activeTab$.pipe(map(tab => tab?.activeLine));
+  }
+
+  public getActiveTabCaretOffset(): Observable<number | undefined> {
+    return this.activeTab$.pipe(map(tab => tab?.caretOffset));
+  }
+
   public getOpenedTabs(): Observable<EditorTab[]> {
     return this.openedTabs$;
   }
@@ -50,6 +58,11 @@ export class EditorTabService implements OnDestroy {
 
   public updateTab(tab: EditorTab): void {
     this.tabManager.update(tab);
+
+    const updatedTabs = this.openedTabs.map(
+      openedTab => !openedTab.isActive ? openedTab : ({...openedTab, ...tab})
+    );
+    this.setOpenedTabs(updatedTabs);
   }
 
   private trackActiveUserFileToSetActiveTab() {

@@ -1,1 +1,4 @@
-<app-status-bar-row></app-status-bar-row>
+<app-status-bar-row
+  [editorLineNumber]="editorActiveLine$ | async"
+  [editorCaretOffset]="editorCaretOffset$ | async"
+></app-status-bar-row>
