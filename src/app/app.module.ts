@@ -16,6 +16,7 @@ import {
   WelcomeWindowComponent,
   WelcomeWindowScreenComponent,
 } from './main-screen';
+import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import {
     FileExplorer,
     FileExplorerTree,
     FileExplorerTreeItem,
+    StatusBarComponent,
+    StatusBarRowComponent,
   ],
   imports: [
     BrowserModule,
