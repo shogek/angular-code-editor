@@ -27,8 +27,12 @@ button {
   color: var(--editor-text-color);
   background-color: var(--editor-line-number-color);
   border: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 0.2rem;
+  font-weight: 800;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   &:hover {
     cursor: pointer;
