@@ -1,0 +1,12 @@
+<ul
+  class="menu"
+  [class.visible]="visible"
+  [ngStyle]="{top: y + 'px', left: x + 'px'}"
+>
+  <li
+    *ngFor="let choice of choices"
+    (click)="itemClicked.emit(choice)"
+  >
+    {{ choice }}
+  </li>
+</ul>

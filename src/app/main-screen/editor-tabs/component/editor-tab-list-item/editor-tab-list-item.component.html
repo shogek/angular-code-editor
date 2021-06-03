@@ -2,6 +2,7 @@
   class="wrapper"
   [class.active]="isActive"
   (click)="onClickOpen()"
+  (contextmenu)="onContextMenu($event)"
 >
   <img [src]="iconPath" />
 
@@ -13,3 +14,11 @@
     >✕</span>
   </p>
 </div>
+
+<app-context-menu
+  [visible]="contextMenuVisible"
+  [x]="contextMenuX"
+  [y]="contextMenuY"
+  [choices]="contextMenuChoices"
+  (itemClicked)="onContextMenuItemClicked($event)"
+></app-context-menu>
