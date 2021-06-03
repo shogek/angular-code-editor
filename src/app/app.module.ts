@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditorTabService } from './services/editor-tab/editor-tab.service';
-import { UserFileService } from './services/user-file/user-file.service';
 import { FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar';
 import {
   EditorLineNumbersComponent,
@@ -18,6 +16,7 @@ import {
 } from './main-screen';
 import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
 import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pipe';
+import { EditorTabService, StatusBarService, UserFileService } from './services';
 
 @NgModule({
   declarations: [
@@ -44,6 +43,7 @@ import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pi
   providers: [
     UserFileService,
     EditorTabService,
+    StatusBarService,
   ],
   bootstrap: [AppComponent]
 })

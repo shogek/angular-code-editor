@@ -8,7 +8,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, Output, ViewChild, Even
 })
 export class WelcomeWindowScreenComponent {
   @Output() loadDummyFiles = new EventEmitter<void>();
+  @Output() filesDraggedAndDropped = new EventEmitter<FileList>();
   @Output() filesUploaded = new EventEmitter<FileList>();
+  @Output() folderUploaded = new EventEmitter<FileList>();
 
   @ViewChild('fileUploader') fileUploader!: ElementRef;
   @ViewChild('folderUploader') folderUploader!: ElementRef;
@@ -45,17 +47,21 @@ export class WelcomeWindowScreenComponent {
     this.isDragging = false;
     
     if (e.dataTransfer && e.dataTransfer.files.length > 0) {
-      this.filesUploaded.emit(e.dataTransfer.files);
+      this.filesDraggedAndDropped.emit(e.dataTransfer.files);
     }
   }
 
   public async onFilesUploaded(e: Event) {
     const files = (e.target as HTMLInputElement).files;
-    if (!files || files.length < 1) {
-      debugger;
-      throw new Error('How did you manage to cause this?');
+    if (files?.length && files.length > 0) {
+      this.filesUploaded.emit(files);
     }
+  }
 
-    this.filesUploaded.emit(files);
+  public async onFolderUploaded(e: Event) {
+    const files = (e.target as HTMLInputElement).files;
+    if (files?.length && files.length > 0) {
+      this.folderUploaded.emit(files);
+    }
   }
 }
