@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { UserFileSource } from "src/app/services/user-file/user-file-source";
 import { UserFileService } from "src/app/services/user-file/user-file.service";
 
 @Component({
@@ -14,6 +15,14 @@ export class WelcomeWindowComponent {
   }
 
   public onFilesUploaded(fileList: FileList) {
-    this.userFileService.setAll(fileList);
+    this.userFileService.setAll(fileList, UserFileSource.UploadedFiles);
+  }
+
+  public onFolderUploaded(fileList: FileList) {
+    this.userFileService.setAll(fileList, UserFileSource.UploadedFolder);
+  }
+
+  public onFilesDraggedAndDropped(fileList: FileList) {
+    this.userFileService.setAll(fileList, UserFileSource.DragAndDrop);
   }
 }

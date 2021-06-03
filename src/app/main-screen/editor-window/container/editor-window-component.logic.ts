@@ -14,7 +14,7 @@ export function getCaretOffset(): number {
     throw new Error("How did you manage to pull this off?");
   }
 
-  return caretOffset; 
+  return caretOffset + 1; // +1 because it's zero-based
 }
 
 export function getActiveLineAfterArrowUp(currentActiveLine: number): number | undefined {

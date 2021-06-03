@@ -12,7 +12,7 @@ export class EditorTabManager {
       userFileId: file.id,
       name: file.name,
       isActive: false,
-      contents: file.contents,
+      contents: this.wrapLinesInSpanTags(file.contents),
       fileExtension: file.extension,
       caretOffset: 0,
       activeLine: 1,
@@ -36,5 +36,13 @@ export class EditorTabManager {
 
   public update(tab: EditorTab) {
     this.tabMap.set(tab.userFileId, tab);
+  }
+
+  private wrapLinesInSpanTags(fileContents: string): string {
+    const result = fileContents
+      .split('\n')
+      .map(line => `<p>${line}</p>`)
+      .join('');
+    return result;
   }
 }

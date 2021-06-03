@@ -3,9 +3,19 @@
   display: block;
 }
 
-.editor-wrapper {
+.screen-wrapper {
   height: 100%;
+}
+
+.editor-wrapper {
+  height: 96.5%;
   display: flex;
+}
+
+.status-bar {
+  display: block;
+  height: 3.5%;
+  width: 100%;
 }
 
 // TODO: Make sidebar resizeable
