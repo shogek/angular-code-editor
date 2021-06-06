@@ -1,8 +1,8 @@
 <div
+  #tab
   class="wrapper"
   [class.active]="isActive"
   (click)="onClickOpen()"
-  (contextmenu)="onContextMenu($event)"
 >
   <img [src]="iconPath" />
 
@@ -16,9 +16,7 @@
 </div>
 
 <app-context-menu
-  [visible]="contextMenuVisible"
-  [x]="contextMenuX"
-  [y]="contextMenuY"
   [choices]="contextMenuChoices"
+  [clickableElement]="tab"
   (itemClicked)="onContextMenuItemClicked($event)"
 ></app-context-menu>

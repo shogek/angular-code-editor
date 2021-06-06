@@ -1,11 +1,11 @@
 <ul
-  class="menu"
-  [class.visible]="visible"
-  [ngStyle]="{top: y + 'px', left: x + 'px'}"
+  *ngIf="isMenuVisible"
+  [id]="id"
+  [ngStyle]="{top: menuYCoord + 'px', left: menuXCoord + 'px'}"
 >
   <li
     *ngFor="let choice of choices"
-    (click)="itemClicked.emit(choice)"
+    (click)="onContextMenuItemClick(choice)"
   >
     {{ choice }}
   </li>
