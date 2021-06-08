@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewChild, OnInit } from "@angular/core";
-import { ContextMenuItem } from "src/app/common/context-menu/context-menu-item";
+import { ContextMenuItem } from "src/app/common";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorTabListItemMenu } from "./editor-tab-list-item.menu";
 
