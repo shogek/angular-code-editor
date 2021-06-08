@@ -45,7 +45,7 @@ export class EditorTabService implements OnDestroy {
     this.setOpenedTabs(updatedTabs);
   }
 
-  public closeTab(userFileId: string): void {
+  public closeTab(userFileId: string) {
     const closedTab = this.openedTabs.find(tab => tab.userFileId === userFileId)!;
     const tabsLeft = this.openedTabs.filter(tab => tab.userFileId !== userFileId);
 
@@ -56,7 +56,17 @@ export class EditorTabService implements OnDestroy {
     this.setOpenedTabs(tabsLeft);
   }
 
-  public updateTab(tab: EditorTab): void {
+  public closeAllTabs() {
+    this.setOpenedTabs([]);
+  }
+
+  public closeOtherTabs(userFileId: string) {
+    const onlyTab = this.openedTabs.find(tab => tab.userFileId === userFileId)!;
+    onlyTab.isActive = true;
+    this.setOpenedTabs([onlyTab]);
+  }
+
+  public updateTab(tab: EditorTab) {
     this.tabManager.update(tab);
 
     const updatedTabs = this.openedTabs.map(

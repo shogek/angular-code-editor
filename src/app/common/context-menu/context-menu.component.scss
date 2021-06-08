@@ -3,15 +3,34 @@ ul {
   position: fixed;
   z-index: 99999;
   background-color: rgb(47, 54, 61);
+  margin: 0;
   padding: 0.5rem 0;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
   li {
-    padding: 0.5rem 2rem;
+    margin: 0;
+    padding: 0;
 
-    &:hover {
+    button {
+      text-align: start;
+      padding: 0.5rem 2rem;
+      background-color: inherit;
+      color: inherit;
+      border: none;
+      width: 100%;
       cursor: pointer;
-      background-color: rgb(57, 65, 74);
+      font-family: inherit;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: rgb(57, 65, 74);
+      }
+
+      &[disabled] {
+        cursor: default;
+        background-color: rgb(47, 54, 61);
+        color: rgb(117, 122, 128);
+      }
     }
 
     &:last-child {

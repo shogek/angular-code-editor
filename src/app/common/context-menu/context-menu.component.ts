@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnDestroy, Output } from "@angular/core";
+import { ContextMenuItem } from "./context-menu-item";
 
 @Component({
   selector: 'app-context-menu',
@@ -7,12 +8,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ho
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuComponent implements OnDestroy {
-  @Input() choices: string[] = [];
+  @Input() choices: ContextMenuItem[] = [];
   @Input() set clickableElement(value: HTMLElement) {
     this._clickableElement = value;
     value.addEventListener('contextmenu', (e) => this.onContextMenu(e));
   }
-  @Output() itemClicked = new EventEmitter<string>();
+  @Output() itemClicked = new EventEmitter<ContextMenuItem>();
 
   constructor(private cd: ChangeDetectorRef) { }
 
@@ -31,7 +32,7 @@ export class ContextMenuComponent implements OnDestroy {
     this._clickableElement.removeEventListener('contextmenu', this.onContextMenu);
   }
 
-  public onContextMenuItemClick(choice: string) {
+  public onContextMenuItemClick(choice: ContextMenuItem) {
     this.isMenuVisible = false;
     this.cd.markForCheck();
     this.itemClicked.emit(choice);

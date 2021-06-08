@@ -9,8 +9,10 @@ import { EditorTab } from "src/app/models/editor-tab.model";
 })
 export class EditorTabListComponent {
   @Input() openedTabs: EditorTab[] = [];
-  @Output() tabOpen = new EventEmitter<string>();
-  @Output() tabClose = new EventEmitter<string>();
+  @Output() openTab = new EventEmitter<string>();
+  @Output() closeTab = new EventEmitter<string>();
+  @Output() closeAllTabs = new EventEmitter<void>();
+  @Output() closeOtherTabs = new EventEmitter<string>();
 
   @ViewChild('scrollable') scrollable!: ElementRef;
 

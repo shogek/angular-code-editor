@@ -1,5 +1,7 @@
 <app-editor-tab-list
   [openedTabs]="openedTabs$ | async"
-  (tabOpen)="handleTabOpen($event)"
-  (tabClose)="handleTabClose($event)"
+  (openTab)="onOpenTab($event)"
+  (closeTab)="onCloseTab($event)"
+  (closeAllTabs)="onCloseAllTabs()"
+  (closeOtherTabs)="onCloseOtherTabs($event)"
 ></app-editor-tab-list>
