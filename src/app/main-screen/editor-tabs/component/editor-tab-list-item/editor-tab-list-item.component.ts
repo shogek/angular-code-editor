@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, HostListener, ViewChild, ElementRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 
 // TODO: Scroll to clicked tab if it is not fully visible
 
@@ -17,10 +17,6 @@ export class EditorTabListItemComponent {
 
   @ViewChild('tab') tab!: HTMLElement;
 
-  // TODO: There has to be a cleaner way to do this.
-  // contextMenuX = NaN;
-  // contextMenuY = NaN;
-  // contextMenuVisible = false;
   contextMenuChoices = ["Close", "Close others", "Close all"];
 
   public onClickOpen() {
@@ -34,21 +30,7 @@ export class EditorTabListItemComponent {
     this.clickClose.emit();
   }
 
-  // public onContextMenu(e: MouseEvent) {
-  //   this.contextMenuX = e.clientX;
-  //   this.contextMenuY = e.clientY;
-  //   this.contextMenuVisible = true;
-  //   // Prevent browser's native context menu
-  //   return false;
-  // }
-
   public onContextMenuItemClicked(choice: string) {
     console.log(choice);
   }
-
-  // TODO: Read about "HostListener"
-  // @HostListener('document:click')
-  // public onDocumentClick() {
-  //   this.contextMenuVisible = false;
-  // }
 }
