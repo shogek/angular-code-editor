@@ -1,15 +1,22 @@
 <div
+  #tabElement
   class="wrapper"
-  [class.active]="isActive"
+  [class.active]="tab.isActive"
   (click)="onClickOpen()"
 >
-  <img [src]="iconPath" />
+  <img [src]="tab.iconPath" />
 
   <p>
-    {{ name }} 
+    {{ tab.name }} 
     <span
       class="close-button"
       (click)="onClickClose($event)"
     >✕</span>
   </p>
 </div>
+
+<app-context-menu
+  [choices]="contextMenuChoices"
+  [clickableElement]="tabElement"
+  (itemClicked)="onContextMenuItemClicked($event)"
+></app-context-menu>

@@ -17,6 +17,7 @@ import {
 import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
 import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pipe';
 import { EditorTabService, StatusBarService, UserFileService } from './services';
+import { ContextMenuComponent } from './common';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EditorTabService, StatusBarService, UserFileService } from './services'
     StatusBarComponent,
     StatusBarRowComponent,
     SafeHtmlPipe,
+    ContextMenuComponent,
   ],
   imports: [
     BrowserModule,

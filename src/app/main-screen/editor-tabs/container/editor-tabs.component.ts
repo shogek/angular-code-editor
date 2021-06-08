@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorTabService } from "src/app/services/editor-tab/editor-tab.service";
@@ -13,11 +13,19 @@ export class EditorTabsComponent {
 
   constructor(private editorTabService: EditorTabService) {}
 
-  public handleTabOpen(userFileId: string): void {
+  public onOpenTab(userFileId: string) {
     this.editorTabService.setActiveTab(userFileId);
   }
 
-  public handleTabClose(userFileId: string): void {
+  public onCloseTab(userFileId: string) {
     this.editorTabService.closeTab(userFileId);
+  }
+
+  public onCloseAllTabs() {
+    this.editorTabService.closeAllTabs();
+  }
+
+  public onCloseOtherTabs(userFileId: string) {
+    this.editorTabService.closeOtherTabs(userFileId);
   }
 }

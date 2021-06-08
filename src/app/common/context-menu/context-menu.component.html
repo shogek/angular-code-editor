@@ -1,0 +1,14 @@
+<ul
+  *ngIf="isMenuVisible"
+  [ngStyle]="{top: menuYCoord + 'px', left: menuXCoord + 'px'}"
+>
+  <li *ngFor="let choice of choices">
+    <button
+      type="button"
+      [disabled]="choice.isDisabled"
+      (click)="onContextMenuItemClick(choice)"
+    >
+      {{ choice.label }}
+    </button>
+  </li>
+</ul>
