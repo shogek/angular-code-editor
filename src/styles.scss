@@ -1,3 +1,5 @@
+@import "./styles/themes/test.scss";
+
 :root {
   // TODO: Names are getting too long - fix it.
   --editor-text-color: rgb(225, 228, 232);
@@ -30,4 +32,8 @@ body {
   font-family: 'Fira code';
   color: var(--editor-text-color);
   background-color: var(--editor-bg-color);
+}
+
+.test {
+  @include test;
 }
