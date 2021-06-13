@@ -1,8 +1,8 @@
 .wrapper {
   display: flex;
   align-items: center;
-  background-color: var(--editor-tab-bg-color);
-  border: solid 1px var(--editor-tab-border-color);
+  background-color: var(--editor-tab-item-bg-color);
+  border: solid 1px var(--editor-tab-item-border-color);
   color: var(--editor-tab-text-color);
 
   img {
@@ -12,7 +12,8 @@
 
   &:hover {
     cursor: pointer;
-    background-color: var(--editor-tab-bg-active-color);
+    background-color: var(--editor-tab-item-hover-bg-color);
+    border-color: var(--editor-tab-item-border-hover-color);
 
     .close-button {
       color: var(--editor-tab-text-color);
@@ -20,13 +21,13 @@
   }
 
   &.active {
-    background-color: var(--editor-tab-bg-active-color);
-    border-bottom-color: var(--editor-tab-bg-active-color);
-    border-top-color: var(--editor-tab-border-active-color);
+    background-color: var(--editor-tab-item-active-bg-color);
+    border-bottom-color: var(--editor-tab-item-active-bg-color);
+    border-top-color: var(--editor-tab-item-border-active-color);
     color: var(--editor-tab-text-active-color);
 
     .close-button {
-      color: var(--editor-tab-bg-active-color);
+      color: var(--editor-tab-item-active-bg-color);
     }
 
     &:hover .close-button { 
@@ -41,6 +42,6 @@
   }
 
   .close-button {
-    color: var(--editor-tab-bg-color);
+    color: var(--editor-tab-item-bg-color);
   }
 }

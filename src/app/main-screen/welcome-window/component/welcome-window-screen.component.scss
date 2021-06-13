@@ -11,10 +11,20 @@
   flex-direction: column;
   border-style: dashed;
   border-width: 2px;
+  color: var(--common-text-color);
 
   h1,
   p {
     margin: 0;
+  }
+
+  button {
+    color: var(--common-button-text-color);
+    background-color: var(--common-button-bg-color);
+
+    &:hover {
+      background-color: var(--common-button-hover-bg-color);
+    }
   }
 }
 
@@ -25,7 +35,7 @@
 
 button {
   color: var(--editor-text-color);
-  background-color: var(--editor-line-number-color);
+  background-color: var(--editor-line-number-text-color);
   border: none;
   padding: 0.5rem 0.8rem;
   border-radius: 0.2rem;

@@ -1,44 +1,67 @@
 @mixin default-theme {
 
+    // -----------------
+    // --- 1. Common ---
+    // -----------------
+
+    --common-text-color: rgb(204, 204, 204);
+
+    --common-button-text-color: rgb(255, 255, 255);
+
+    --common-button-bg-color: rgb(14, 99, 156);
+    --common-button-hover-bg-color: rgb(17, 119, 187);
+
     // ----------------------
-    // --- 1. Editor tabs ---
+    // --- 2. Editor tabs ---
     // ----------------------
     --editor-tab-row-bg-color: rgb(37, 37, 37);
 
-    --editor-tab-bg-active-color: rgb(30, 30, 30);
-    --editor-tab-bg-color: rgb(45, 45, 45);
+    --editor-tab-item-bg-color: rgb(45, 45, 45);
+    --editor-tab-item-hover-bg-color: rgb(45, 45, 45);
+    --editor-tab-item-active-bg-color: rgb(30, 30, 30);
 
-    --editor-tab-border-active-color: rgb(30, 30, 30);
-    --editor-tab-border-color: rgb(45, 45, 45);
+    --editor-tab-item-border-color: rgb(45, 45, 45);
+    --editor-tab-item-border-hover-color: rgb(45, 45, 45);
+    --editor-tab-item-border-active-color: rgb(30, 30, 30);
 
-    --editor-tab-text-active-color: rgb(225, 225, 225);
     --editor-tab-text-color: rgb(144, 150, 144);
+    --editor-tab-text-active-color: rgb(225, 225, 225);
 
     // -------------------------
-    // --- 2.0 Editor window ---
+    // --- 3.0 Editor window ---
     // -------------------------
 
-    // 2.1 Editor line numbers column
+    // 3.1 Editor line numbers column
     --editor-line-number-column-bg-color: rgb(30, 30, 30);
 
-    --editor-line-number-active-color: rgb(198, 198, 198);
-    --editor-line-number-color: rgb(133, 133, 133);
+    --editor-line-number-text-color: rgb(133, 133, 133);
+    --editor-line-number-text-active-color: rgb(198, 198, 198);
 
-    // 2.2 Editor file contents
+    // 3.2 Editor file contents
     --editor-bg-color: rgb(30, 30, 30);
 
-    --editor-text-color: rgb(255, 255, 255);
+    --editor-text-color: rgb(166, 166, 166);
     
     // ---------------------------------
-    // --- 3.0 Sidebar file explorer ---
+    // --- 4. Sidebar file explorer ---
     // ---------------------------------
 
     --file-explorer-column-bg-color: rgb(37, 37, 37);
 
-    --file-explorer-item-active-color: rgb(255, 255, 251);
-    --file-explorer-item-color: rgb(204, 204, 204);
+    --file-explorer-indentation-bar-color: rgb(57, 57, 57);
 
-    --file-explorer-item-active-bg-color: rgb(9, 71, 113);
+    --file-explorer-item-text-color: rgb(204, 204, 204);
+    --file-explorer-item-text-active-color: rgb(255, 255, 251);
+
     --file-explorer-item-bg-color: rgb(37, 37, 37);
     --file-explorer-item-hover-bg-color: rgb(42, 45, 46);
+    --file-explorer-item-active-bg-color: rgb(9, 71, 113);
+
+    // ---------------------
+    // --- 5. Status bar ---
+    // ---------------------
+
+    --status-bar-bg-color: rgb(0, 122, 204);
+
+    --status-bar-text-color: rgb(255, 255, 255);
 }
