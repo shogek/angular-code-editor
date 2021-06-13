@@ -1,4 +1,11 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: var(--editor-line-number-column-bg-color);
+}
+
 p {
+  padding-right: 1rem;
   margin: 0;
   line-height: 1.85rem;
 
