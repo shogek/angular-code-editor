@@ -1,0 +1,68 @@
+/** Based on: "Bluloco Light Italic" */
+@mixin theme-bluloco-light-italic {
+    // -----------------
+    // --- 1. Common ---
+    // -----------------
+    --common-text-color: rgb(56, 58, 66);
+
+    --common-button-text-color: rgb(255, 255, 255);
+
+    --common-button-bg-color: rgb(0, 131, 192);
+    --common-button-hover-bg-color: rgb(0, 153, 225);
+
+    // ----------------------
+    // --- 2. Editor tabs ---
+    // ----------------------
+    --editor-tab-row-bg-color: rgb(232, 232, 232);
+
+    --editor-tab-item-divider-color: rgb(213, 215, 216);
+
+    --editor-tab-item-bg-color: rgb(238, 238, 238);
+    --editor-tab-item-hover-bg-color: #f1f1f1;
+    --editor-tab-item-active-bg-color: rgb(249, 249, 249);
+
+    --editor-tab-item-border-color: rgb(238, 238, 238);
+    --editor-tab-item-border-hover-color: #f1f1f1;
+    --editor-tab-item-border-active-color: #0099e1;
+
+    --editor-tab-text-color: rgb(160, 161, 167);
+    --editor-tab-text-active-color: rgb(56, 58, 66);
+
+    // -------------------------
+    // --- 3.0 Editor window ---
+    // -------------------------
+    // 3.1 Editor line numbers column
+    --editor-line-number-column-bg-color: #f9f9f9;
+
+    --editor-line-number-text-color: #a0a1a7;
+    --editor-line-number-text-active-color: #f31459;
+
+    // 3.2 Editor file contents
+    --editor-bg-color: #f9f9f9;
+
+    --editor-text-color: #383a42;
+    
+    // ---------------------------------
+    // --- 4. Sidebar file explorer ---
+    // ---------------------------------
+    --file-explorer-column-bg-color: rgb(232, 232, 232);
+
+    --file-explorer-indentation-bar-color: rgb(208, 208, 208);
+
+    --file-explorer-item-text-color: rgb(56, 58, 66);
+    --file-explorer-item-text-hover-color: rgb(56, 58, 66);
+    --file-explorer-item-text-active-color: rgb(255, 255, 255);
+
+    --file-explorer-item-bg-color: rgb(232, 232, 232);
+    --file-explorer-item-hover-bg-color: rgb(241, 241, 241);
+    --file-explorer-item-active-bg-color: rgb(246, 246, 246);
+
+    // ---------------------
+    // --- 5. Status bar ---
+    // ---------------------
+    --status-bar-bg-color: rgb(235, 235, 235);
+
+    --status-bar-divider-color: #0099e1;
+
+    --status-bar-text-color: rgb(56, 58, 66);
+}

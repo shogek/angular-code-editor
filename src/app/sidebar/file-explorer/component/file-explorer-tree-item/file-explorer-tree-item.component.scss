@@ -8,6 +8,7 @@
   color: var(--file-explorer-item-text-color);
 
   &:hover {
+    color: var(--file-explorer-item-text-hover-color);
     background-color: var(--file-explorer-item-hover-bg-color);
   }
 }

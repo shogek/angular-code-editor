@@ -1,12 +1,16 @@
 .wrapper {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   background-color: var(--editor-tab-item-bg-color);
   border: solid 1px var(--editor-tab-item-border-color);
+  border-right-color: var(--editor-tab-item-divider-color);
   color: var(--editor-tab-text-color);
 
   img {
-    height: 1.1rem;
+    height: 1rem;
     padding-left: 0.7rem;
   }
 
@@ -14,6 +18,7 @@
     cursor: pointer;
     background-color: var(--editor-tab-item-hover-bg-color);
     border-color: var(--editor-tab-item-border-hover-color);
+    border-right-color: var(--editor-tab-item-divider-color);
 
     .close-button {
       color: var(--editor-tab-text-color);
@@ -24,6 +29,7 @@
     background-color: var(--editor-tab-item-active-bg-color);
     border-bottom-color: var(--editor-tab-item-active-bg-color);
     border-top-color: var(--editor-tab-item-border-active-color);
+    border-right-color: var(--editor-tab-item-divider-color);
     color: var(--editor-tab-text-active-color);
 
     .close-button {
@@ -36,8 +42,9 @@
   }
 
   p {
+    font-size: 0.9rem;
     margin: 0;
-    padding: 0.7rem;
+    padding: 0.4rem;
     white-space: nowrap;
   }
 

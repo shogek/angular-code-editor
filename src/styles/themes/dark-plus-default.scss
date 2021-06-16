@@ -1,9 +1,14 @@
-@mixin default-theme {
+/** Based on: "Dark+ (default dark)" */
+@mixin theme-dark-plus-default {
+
+    // TODO: Add ability to change themes
+    // TODO: Add colors for context menu
+    // TODO: On tab close button hover, show background
+    // TODO: Add padding to file explorer
 
     // -----------------
     // --- 1. Common ---
     // -----------------
-
     --common-text-color: rgb(204, 204, 204);
 
     --common-button-text-color: rgb(255, 255, 255);
@@ -15,6 +20,8 @@
     // --- 2. Editor tabs ---
     // ----------------------
     --editor-tab-row-bg-color: rgb(37, 37, 37);
+
+    --editor-tab-item-divider-color: rgb(37, 37, 37);
 
     --editor-tab-item-bg-color: rgb(45, 45, 45);
     --editor-tab-item-hover-bg-color: rgb(45, 45, 45);
@@ -30,7 +37,6 @@
     // -------------------------
     // --- 3.0 Editor window ---
     // -------------------------
-
     // 3.1 Editor line numbers column
     --editor-line-number-column-bg-color: rgb(30, 30, 30);
 
@@ -45,12 +51,12 @@
     // ---------------------------------
     // --- 4. Sidebar file explorer ---
     // ---------------------------------
-
     --file-explorer-column-bg-color: rgb(37, 37, 37);
 
     --file-explorer-indentation-bar-color: rgb(57, 57, 57);
 
     --file-explorer-item-text-color: rgb(204, 204, 204);
+    --file-explorer-item-text-hover-color: rgb(204, 204, 204);
     --file-explorer-item-text-active-color: rgb(255, 255, 251);
 
     --file-explorer-item-bg-color: rgb(37, 37, 37);
@@ -60,8 +66,9 @@
     // ---------------------
     // --- 5. Status bar ---
     // ---------------------
-
     --status-bar-bg-color: rgb(0, 122, 204);
+
+    --status-bar-divider-color: rgb(0, 122, 204);
 
     --status-bar-text-color: rgb(255, 255, 255);
 }
