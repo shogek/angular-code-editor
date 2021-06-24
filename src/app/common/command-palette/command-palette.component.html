@@ -1,0 +1,20 @@
+<div
+  class="wrapper"
+  [ngStyle]="{top: 0 + 'px', left: leftX + 'px'}"
+>
+  <div class="search-wrapper">
+    <input type="text" autofocus placeholder="Select color theme (Up/Down keys to preview)" />
+  </div>
+  
+  <ul>
+    <li *ngFor="let choice of choices">
+      <button
+        type="button"
+        (click)="onContextMenuItemClick(choice)"
+        [class.active]="choice.isActive"
+      >
+        {{ choice.label }}
+      </button>
+    </li>
+  </ul>
+</div>

@@ -2,7 +2,6 @@
 @mixin theme-dark-plus-default {
 
     // TODO: Add ability to change themes
-    // TODO: Add colors for context menu
     // TODO: On tab close button hover, show background
     // TODO: Add padding to file explorer
 
@@ -71,4 +70,15 @@
     --status-bar-divider-color: rgb(0, 122, 204);
 
     --status-bar-text-color: rgb(255, 255, 255);
+
+    // -----------------------
+    // --- 6. Context menu ---
+    // -----------------------
+    --context-menu-bg-color: rgb(37, 37, 37);
+
+    --context-menu-text-color: rgb(204, 204, 204);
+    --context-menu-text-hover-color: rgb(255, 255, 255);
+    --context-menu-text-disabled-color: rgb(104, 104, 104);
+
+    --context-menu-item-hover-bg-color: rgb(9, 71, 113);
 }

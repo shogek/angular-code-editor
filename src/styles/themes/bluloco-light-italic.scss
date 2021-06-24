@@ -65,4 +65,31 @@
     --status-bar-divider-color: #0099e1;
 
     --status-bar-text-color: rgb(56, 58, 66);
+
+    // -----------------------
+    // --- 6. Context menu ---
+    // -----------------------
+    --context-menu-bg-color: #f9f9f9;
+
+    --context-menu-text-color: rgb(56, 58, 66);
+    --context-menu-text-hover-color: rgb(56, 58, 66);
+    --context-menu-text-disabled-color: rgb(186, 186, 186);
+
+    --context-menu-item-hover-bg-color: rgb(196, 217, 177);
+
+
+    // TODO: Add these colors to other themes!
+    // --------------------------
+    // --- 7. Command palette ---
+    // --------------------------
+    --command-palette-bg-color: rgb(232, 232, 232);
+
+    --command-palette-item-hover-bg-color: rgb(241, 241, 241);
+    --command-palette-item-active-bg-color: rgb(210, 236, 255);
+
+    --command-palette-item-text-color: rgb(56, 58, 66);
+    --command-palette-item-text-hover-color: rgb(56, 58, 66);
+    --command-palette-item-text-active-color: rgb(255, 255, 255);
+
+    --command-palette-search-box-border-color: #0099e1;
 }
