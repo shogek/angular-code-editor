@@ -23,7 +23,7 @@ export class CommandPaletteComponent implements OnInit {
     @HostListener('document:keydown', ['$event'])
     private onKeyDown(e: KeyboardEvent) {
         const { key } = e;
-        if (key !== 'KeyDown' && key !== 'KeyUp') {
+        if (key !== 'ArrowDown' && key !== 'ArrowUp') {
             return;
         }
 
@@ -31,16 +31,20 @@ export class CommandPaletteComponent implements OnInit {
         e.preventDefault();
         e.stopPropagation();
 
-        let nextIndex = 0;
         const activeIndex = this.choices.findIndex(choice => choice.isActive);
-        if (activeIndex < this.choices.length - 1) {
-            nextIndex = activeIndex + 1;
+        let nextIndex = NaN;
+        if (key === 'ArrowDown') {
+            nextIndex = activeIndex < this.choices.length - 1 ? activeIndex + 1 : 0;
+        } else {
+            nextIndex = activeIndex > 0 ? activeIndex - 1 : this.choices.length - 1;
         }
 
-        const activeChoice = this.choices[activeIndex];
-        activeChoice.isActive = false;
+        const updatedChoices = this.choices.map((choice, index) => 
+            index === nextIndex
+                ? ({...choice, isActive: true})
+                : ({...choice, isActive: false})
+        );
 
-        const nextChoice = this.choices[nextIndex];
-        nextChoice.isActive = true;
+        this.choices = updatedChoices;
     }
 }
