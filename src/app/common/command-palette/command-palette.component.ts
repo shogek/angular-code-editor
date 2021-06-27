@@ -14,6 +14,7 @@ export class CommandPaletteComponent implements OnInit {
 
     private MENU_WIDTH_PX = 600; 
     leftX = 0;
+    isVisible = true;
 
     public ngOnInit() {
         const documentMiddle = document.body.clientWidth / 2;
@@ -21,10 +22,18 @@ export class CommandPaletteComponent implements OnInit {
         this.leftX = menuStart;
     }
 
+    // TODO: Stop listening when 'Enter' pressed
     @HostListener('document:keydown', ['$event'])
     private onKeyDown(e: KeyboardEvent) {
         const { key } = e;
-        if (key !== 'ArrowDown' && key !== 'ArrowUp') {
+        if (key !== 'ArrowDown'
+            && key !== 'ArrowUp'
+            && key !== 'Enter') {
+            return;
+        }
+
+        if (key === 'Enter') {
+            this.isVisible = false;
             return;
         }
 
@@ -50,5 +59,7 @@ export class CommandPaletteComponent implements OnInit {
 
     public onCommandPaletteChoiceClick(choice: CommandPaletteItem) {
         this.choiceSelected.emit(choice);
+        this.isVisible = false;
+        // TODO: (Can I + is it good practice) to destroy the current component?
     }
 }

@@ -1,7 +1,9 @@
 <div
+  *ngIf="isVisible"
   class="wrapper"
   [ngStyle]="{top: 0 + 'px', left: leftX + 'px'}"
 >
+<!-- TODO: Implement search -->
   <div class="search-wrapper">
     <input type="text" autofocus placeholder="Select color theme (Up/Down keys to preview)" />
   </div>
