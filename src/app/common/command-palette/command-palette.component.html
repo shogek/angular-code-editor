@@ -10,7 +10,6 @@
     <li *ngFor="let choice of choices">
       <button
         type="button"
-        (click)="onContextMenuItemClick(choice)"
         [class.active]="choice.isActive"
       >
         {{ choice.label }}
