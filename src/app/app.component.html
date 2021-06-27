@@ -1,5 +1,8 @@
 <div class="screen-wrapper">
-  <app-command-palette [choices]="items"></app-command-palette>
+  <app-command-palette
+    [choices]="items"
+    (choiceSelected)="onChoiceSelected($event)"
+  ></app-command-palette>
 
   <div class="editor-wrapper">
     <ng-container *ngIf="(editorTabs$ | async).length > 0; else welcomeScreen">

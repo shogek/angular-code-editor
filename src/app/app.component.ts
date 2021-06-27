@@ -18,18 +18,22 @@ export class AppComponent {
     {
       label: 'Dark+ (default dark)',
       isActive: false,
+      value: 'theme-dark-plus-default',
     },
     {
       label: 'Bluloco Light',
       isActive: true,
+      value: 'theme-bluloco-light-italic',
     },
     {
       label: 'Material Theme Darker High Contrast',
       isActive: false,
+      value: 'theme-material-darker-high-contrast',
     },
     {
       label: 'Monokai',
       isActive: false,
+      value: 'theme-monokai',
     },
   ]; 
 
@@ -40,4 +44,13 @@ export class AppComponent {
     private editorTabService: EditorTabService,
     private userFileService: UserFileService,
   ) { }
+
+
+  private _currentTheme = 'theme-monokai';
+  public onChoiceSelected(choice: CommandPaletteItem) {
+    console.log(choice);
+    document.body.classList.remove(this._currentTheme);
+    this._currentTheme = choice.value;
+    document.body.classList.add(this._currentTheme);
+  }
 }

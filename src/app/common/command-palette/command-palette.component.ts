@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, OnInit } from "@angular/core";
+import { EventEmitter, ChangeDetectionStrategy, Component, HostListener, Input, OnInit, Output } from "@angular/core";
 import { CommandPaletteItem } from "./command-palette-item";
 
 @Component({
@@ -10,6 +10,7 @@ import { CommandPaletteItem } from "./command-palette-item";
 export class CommandPaletteComponent implements OnInit {
 
     @Input() choices: CommandPaletteItem[] = [];
+    @Output() choiceSelected = new EventEmitter<CommandPaletteItem>();
 
     private MENU_WIDTH_PX = 600; 
     leftX = 0;
@@ -42,5 +43,12 @@ export class CommandPaletteComponent implements OnInit {
         );
 
         this.choices = updatedChoices;
+
+        const selectedChoice = updatedChoices.find(choice => choice.isActive);
+        this.choiceSelected.emit(selectedChoice);
+    }
+
+    public onCommandPaletteChoiceClick(choice: CommandPaletteItem) {
+        this.choiceSelected.emit(choice);
     }
 }
