@@ -27,10 +27,6 @@ export class CommandPaletteComponent implements OnInit {
             return;
         }
 
-        // TODO: Are these needed?
-        e.preventDefault();
-        e.stopPropagation();
-
         const activeIndex = this.choices.findIndex(choice => choice.isActive);
         let nextIndex = NaN;
         if (key === 'ArrowDown') {
