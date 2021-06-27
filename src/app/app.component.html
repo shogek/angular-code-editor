@@ -2,6 +2,7 @@
   <app-command-palette
     [choices]="items"
     (choiceSelected)="onChoiceSelected($event)"
+    (noSearchResults)="onNoSearchResults()"
   ></app-command-palette>
 
   <div class="editor-wrapper">

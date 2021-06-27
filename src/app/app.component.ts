@@ -46,11 +46,19 @@ export class AppComponent {
   ) { }
 
 
-  private _currentTheme = 'theme-monokai';
+  // TODO: Document - cleanup
+  private _originalTheme = 'theme-monokai';
+  private _currentTheme = this._originalTheme;
   public onChoiceSelected(choice: CommandPaletteItem) {
     console.log(choice);
     document.body.classList.remove(this._currentTheme);
     this._currentTheme = choice.value;
     document.body.classList.add(this._currentTheme);
+  }
+
+  public onNoSearchResults() {
+    document.body.classList.remove(this._currentTheme);
+    this._currentTheme = this._originalTheme;
+    document.body.classList.add(this._originalTheme);
   }
 }

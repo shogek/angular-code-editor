@@ -1,15 +1,20 @@
 <div
-  *ngIf="isVisible"
   class="wrapper"
   [ngStyle]="{top: 0 + 'px', left: leftX + 'px'}"
 >
 <!-- TODO: Implement search -->
   <div class="search-wrapper">
-    <input type="text" autofocus placeholder="Select color theme (Up/Down keys to preview)" />
+    <input
+      autofocus
+      type="text"
+      placeholder="Select color theme (Up/Down keys to preview)"
+      [value]="searchValue"
+      (keyup)="onKeyUp($event)"
+    />
   </div>
   
   <ul>
-    <li *ngFor="let choice of choices">
+    <li *ngFor="let choice of filteredChoices">
       <button
         type="button"
         [class.active]="choice.isActive"

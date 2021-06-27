@@ -9,12 +9,19 @@ import { CommandPaletteItem } from "./command-palette-item";
 })
 export class CommandPaletteComponent implements OnInit {
 
-    @Input() choices: CommandPaletteItem[] = [];
+    @Input() set choices(value: CommandPaletteItem[]) {
+        this.filteredChoices = value;
+        this.originalChoices = value;
+    }
     @Output() choiceSelected = new EventEmitter<CommandPaletteItem>();
+    @Output() noSearchResults = new EventEmitter<void>();
 
     private MENU_WIDTH_PX = 600; 
+    originalChoices: CommandPaletteItem[] = [];
+    filteredChoices: CommandPaletteItem[] = [];
+    searchValue = '';
     leftX = 0;
-    isVisible = true;
+    // isVisible = true;
 
     public ngOnInit() {
         const documentMiddle = document.body.clientWidth / 2;
@@ -33,7 +40,7 @@ export class CommandPaletteComponent implements OnInit {
         }
 
         if (key === 'Enter') {
-            this.isVisible = false;
+            // this.isVisible = false;
             return;
         }
 
@@ -59,7 +66,28 @@ export class CommandPaletteComponent implements OnInit {
 
     public onCommandPaletteChoiceClick(choice: CommandPaletteItem) {
         this.choiceSelected.emit(choice);
-        this.isVisible = false;
+        // this.isVisible = false;
         // TODO: (Can I + is it good practice) to destroy the current component?
+    }
+
+    private _currentChoice: CommandPaletteItem | undefined = undefined;
+    // TODO: Document - cleanup - separate
+    public onKeyUp(e: KeyboardEvent) {
+        this.searchValue = this.searchValue + e.key;
+        this.filteredChoices = this.originalChoices.filter(
+            choice => choice.label.toLowerCase().includes(this.searchValue.toLowerCase())
+        );
+
+        if (this.filteredChoices.length < 1) {
+            // TODO: Show message that no such themes found :3
+            this.noSearchResults.emit();
+            return;
+        }
+
+        const currentChoice = this.filteredChoices[0];
+        if (currentChoice.label !== this._currentChoice?.label) {
+            this._currentChoice = currentChoice;
+            this.choiceSelected.emit(currentChoice);
+        }
     }
 }
