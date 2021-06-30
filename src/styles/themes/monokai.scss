@@ -76,4 +76,21 @@
     --context-menu-text-disabled-color: rgb(100, 100, 100);
 
     --context-menu-item-hover-bg-color: rgb(117, 113, 94);
+
+    // --------------------------
+    // --- 7. Command palette ---
+    // --------------------------
+    --command-palette-bg-color: rgb(30, 30, 30);
+
+    --command-palette-item-hover-bg-color: rgb(62, 61, 50);
+    --command-palette-item-active-bg-color: rgb(65, 67, 57);
+
+    --command-palette-item-text-color: rgb(204, 204, 193);
+    --command-palette-item-text-hover-color: rgb(204, 204, 193);
+    --command-palette-item-text-active-color: rgb(255, 255, 255);
+
+    --command-palette-search-box-bg-color: rgb(65, 67, 57);
+    --command-palette-search-box-border-color: rgb(117, 113, 94);
+    --command-palette-search-box-placeholder-color: rgb(134, 135, 130);
+    --command-palette-search-box-text-color: rgb(204, 204, 193);
 }

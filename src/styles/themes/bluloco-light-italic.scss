@@ -77,8 +77,6 @@
 
     --context-menu-item-hover-bg-color: rgb(196, 217, 177);
 
-
-    // TODO: Add these colors to other themes!
     // --------------------------
     // --- 7. Command palette ---
     // --------------------------
@@ -91,5 +89,8 @@
     --command-palette-item-text-hover-color: rgb(56, 58, 66);
     --command-palette-item-text-active-color: rgb(56, 58, 66);
 
-    --command-palette-search-box-border-color: #0099e1;
+    --command-palette-search-box-bg-color: rgb(249, 249, 249);
+    --command-palette-search-box-border-color: rgb(0, 153, 225);
+    --command-palette-search-box-placeholder-color: rgb(160, 161, 167);
+    --command-palette-search-box-text-color: rgb(56, 58, 66);
 }
