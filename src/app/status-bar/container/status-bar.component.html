@@ -2,4 +2,9 @@
   [latestMessage]="latestMessage$ | async"
   [editorLineNumber]="editorActiveLine$ | async"
   [editorCaretOffset]="editorCaretOffset$ | async"
+  [allEditorThemes]="allEditorThemes"
+  [activeEditorTheme]="activeEditorTheme$ | async"
+  (themeSelected)="showTemporaryEditorTheme($event)"
+  (themeConfirmed)="setEditorTheme($event)"
+  (themeReverted)="revertEditorTheme()"
 ></app-status-bar-row>

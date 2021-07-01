@@ -1,8 +1,23 @@
+<app-command-palette
+  *ngIf="isThemePickerVisible"
+  [choices]="editorThemeChoices"
+  (choiceSelected)="onThemeSelected($event)"
+  (choiceConfirmed)="onThemeConfirmed($event)"
+  (noSearchResults)="onNoThemeFound()"
+  (closed)="onThemePickerClosed()"
+></app-command-palette>
+
 <div class="wrapper">
-  {{ latestMessage }}
+  <p>
+    {{ latestMessage }}
+  </p>
 
   <!-- TODO: Split file's contents in to lines and wrapped them in <span> elements to fix getCaretOffset -->
   <div *ngIf="editorLineNumber && editorCaretOffset">
     Ln {{ editorLineNumber }}, Col {{ editorCaretOffset }}
   </div>
+
+  <button #themePickerToggle type="button" (click)="showEditorThemePicker()">
+    Theme: {{ activeEditorTheme.displayName }}
+  </button>
 </div>
