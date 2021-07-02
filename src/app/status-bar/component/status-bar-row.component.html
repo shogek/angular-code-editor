@@ -1,5 +1,6 @@
 <app-command-palette
   *ngIf="isThemePickerVisible"
+  [sourceOpener]="themePickerToggle"
   [choices]="editorThemeChoices"
   (choiceSelected)="onThemeSelected($event)"
   (choiceConfirmed)="onThemeConfirmed($event)"
@@ -17,7 +18,11 @@
     Ln {{ editorLineNumber }}, Col {{ editorCaretOffset }}
   </div>
 
-  <button #themePickerToggle type="button" (click)="showEditorThemePicker()">
+  <button
+    type="button"
+    #themePickerToggle
+    (click)="showEditorThemePicker()"
+  >
     Theme: {{ activeEditorTheme.displayName }}
   </button>
 </div>

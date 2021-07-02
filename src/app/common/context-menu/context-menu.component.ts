@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnDestroy, Output } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
+import { Subscription } from "rxjs";
+
+import { DomEventsService } from "src/app/services/dom-events/dom-events.service";
 import { ContextMenuItem } from "./context-menu-item";
 
 @Component({
@@ -7,7 +10,7 @@ import { ContextMenuItem } from "./context-menu-item";
   styleUrls: ['./context-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContextMenuComponent implements OnDestroy {
+export class ContextMenuComponent implements OnInit, OnDestroy {
   @Input() choices: ContextMenuItem[] = [];
   @Input() set clickableElement(value: HTMLElement) {
     this._clickableElement = value;
@@ -15,21 +18,36 @@ export class ContextMenuComponent implements OnDestroy {
   }
   @Output() itemClicked = new EventEmitter<ContextMenuItem>();
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private domEventsService: DomEventsService,
+  ) { }
 
+  private _subscriptions: Subscription[] = [];
   private _clickableElement!: HTMLElement;
   isMenuVisible = false;
   menuXCoord = NaN;
   menuYCoord = NaN;
   /**
-   * We listen for both 'click' and 'contextmenu' (HostListener) events on the DOM and on the 'clickableElement'.
+   * We listen for both 'click' and 'contextmenu' events on the DOM and on the 'clickableElement'.
    * Since the handlers for those events are fired in succession, 
    * this flag indicates if we came to HostListener's handlers right after processing 'clickableElement' handlers.
   */
   clickedOnMe = false;
 
+  public ngOnInit() {
+    this._subscriptions.push(
+      this.domEventsService.getDocumentClickedListener().subscribe(_ => this.onDocumentClick())
+    );
+    this._subscriptions.push(
+      this.domEventsService.getDocumentContextMenuListener().subscribe(_ => this.onDocumentContextMenu())
+    );
+  }
+
   public ngOnDestroy() {
     this._clickableElement.removeEventListener('contextmenu', this.onContextMenu);
+    this._subscriptions.forEach(x => x.unsubscribe());
+    this._subscriptions = [];
   }
 
   public onContextMenuItemClick(choice: ContextMenuItem) {
@@ -51,9 +69,7 @@ export class ContextMenuComponent implements OnDestroy {
   }
 
   /** Close the tab if the user right clicked anywhere in the DOM. */
-  // TODO: Read about "HostListener"
-  @HostListener('document:click')
-  public onDocumentClick() {
+  private onDocumentClick() {
     if (!this.isMenuVisible) {
       return;
     }
@@ -63,8 +79,7 @@ export class ContextMenuComponent implements OnDestroy {
   }
 
   /** Close the tab if the user left clicked anywhere in the DOM. */
-  @HostListener('document:contextmenu')
-  public onDocumentContextMenu() {
+  private onDocumentContextMenu() {
     if (this.clickedOnMe) {
       this.clickedOnMe = false;
       return;

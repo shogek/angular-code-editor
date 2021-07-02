@@ -1,4 +1,6 @@
-import { EventEmitter, ChangeDetectionStrategy, Component, HostListener, Input, OnInit, Output, AfterViewInit, AfterContentInit, AfterContentChecked, AfterViewChecked } from "@angular/core";
+import { EventEmitter, ChangeDetectionStrategy, Component, HostListener, Input, OnInit, Output, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
+import { DomEventsService } from "src/app/services/dom-events/dom-events.service";
 import { CommandPaletteItem } from "./command-palette-item";
 
 @Component({
@@ -7,7 +9,9 @@ import { CommandPaletteItem } from "./command-palette-item";
     styleUrls: ['./command-palette.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommandPaletteComponent implements OnInit {
+export class CommandPaletteComponent implements OnInit, OnDestroy {
+    /** The HTML element which, when clicked, opens this component. */
+    @Input() sourceOpener!: HTMLElement;
     @Input() set choices(value: CommandPaletteItem[]) {
         this.filteredChoices = value;
         this.originalChoices = value;
@@ -22,35 +26,84 @@ export class CommandPaletteComponent implements OnInit {
     @Output() closed = new EventEmitter<void>();
 
     private MENU_WIDTH_PX = 600;
+    private _subscriptions: Subscription[] = [];
     private _currentChoice: CommandPaletteItem | null = null;
-    private _initialClick = false;
+    private _clickedOnSelf = false;
+    private _clickedOnOpener = false;
+    private _initialLoad = false;
     originalChoices: CommandPaletteItem[] = [];
     filteredChoices: CommandPaletteItem[] = [];
     leftX = 0;
 
+    constructor(private domEventsService: DomEventsService) { }
+
     public ngOnInit() {
+        this._initialLoad = true;
+        this._subscriptions.push(
+            this.domEventsService.getDocumentClickedListener().subscribe(_ => this.onDocumentClick())
+        );
+        this._subscriptions.push(
+            this.domEventsService.getDocumentKeyDownListener().subscribe(e => this.onDocumentKeyDown(e))
+        );
+
+        this.sourceOpener.addEventListener('click', this.onOpenerClicked);
+
         const documentMiddle = document.body.clientWidth / 2;
         const menuStart = documentMiddle - (this.MENU_WIDTH_PX / 2);
         this.leftX = menuStart;
     }
 
-    @HostListener('document:click')
-    public onDocumentClick() {
-        if (!this._initialClick) {
+    public ngOnDestroy() {
+        this._subscriptions.forEach(x => x.unsubscribe());
+        this._subscriptions = [];
+
+        this.sourceOpener.removeEventListener('click', this.onOpenerClicked);
+    }
+
+    @HostListener('click')
+    public onComponentClick() {
+        this._clickedOnSelf = true;
+    }
+
+    private onOpenerClicked = () => {
+        this._clickedOnOpener = true;
+    }
+
+    private onDocumentClick() {
+        if (this._clickedOnSelf) {
+            console.log('PREVENT - _clickedOnSelf');
             /*
             * Fixes bug!
-            * The click, which triggers this component to show, is also registered by this host listener.
-            * The '_initialClick' prevents scenario, where this component opens and immediatelly closes again.
+            * Clicking on the search bar (the component itself) is registered as clicking on the document.
             */
-            this._initialClick = true;
+            this._clickedOnSelf = false;
+            return;
+        }
+
+        if (this._clickedOnOpener) {
+            console.log('PREVENT - _clickedOnOpener');
+            /*
+            * Fixes bug!
+            * TODO: Explain
+            */
+            this._clickedOnOpener = false;
+            return;
+        }
+
+        if (this._initialLoad) {
+            console.log('PREVENT - _initialLoad');
+            /*
+            * Fixes bug!
+            * TODO: Explain
+            */
+            this._initialLoad = false;
             return;
         }
 
         this.closed.emit();
     }
 
-    @HostListener('document:keydown', ['$event'])
-    public onKeyDown(e: KeyboardEvent) {
+    private onDocumentKeyDown(e: KeyboardEvent) {
         const { key } = e;
         if (key !== 'ArrowDown'
             && key !== 'ArrowUp'

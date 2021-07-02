@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ComponentRef, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { CommandPaletteItem } from "src/app/common";
 import { EditorTheme } from "src/app/services";
 
