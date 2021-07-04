@@ -14,7 +14,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   @Input() choices: ContextMenuItem[] = [];
   @Input() set clickableElement(value: HTMLElement) {
     this._clickableElement = value;
-    value.addEventListener('contextmenu', (e) => this.onContextMenu(e));
+    value.addEventListener('contextmenu', this.onContextMenu);
   }
   @Output() itemClicked = new EventEmitter<ContextMenuItem>();
 
@@ -56,7 +56,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
     this.itemClicked.emit(choice);
   }
 
-  public onContextMenu(e: MouseEvent) {
+  private onContextMenu = (e: MouseEvent) => {
     e.preventDefault();
 
     this.clickedOnMe = true;

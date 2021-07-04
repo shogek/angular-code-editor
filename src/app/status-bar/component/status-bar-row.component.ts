@@ -25,7 +25,9 @@ export class StatusBarRowComponent implements OnInit {
   editorThemeChoices: CommandPaletteItem[] = [];
 
   ngOnInit() {
-    this.editorThemeChoices = this.allEditorThemes.map(
+    this.editorThemeChoices = this.allEditorThemes
+      .sort((themeA, themeB) => themeA.displayName.localeCompare(themeB.displayName))
+      .map(
       theme => ({
         label: theme.displayName,
         value: theme.htmlClassName,

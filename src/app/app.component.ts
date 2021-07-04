@@ -33,4 +33,9 @@ export class AppComponent {
   public onDocumentContextMenu() {
     this.domEventsService.notifyDocumentContextMenu();
   }
+
+  @HostListener('document:keydown', ['$event'])
+  public onDocumentKeyDown(e: KeyboardEvent) {
+    this.domEventsService.notifyDocumentKeyDown(e);
+  }
 }
