@@ -2,6 +2,7 @@
   *ngIf="isThemePickerVisible"
   [sourceOpener]="themePickerToggle"
   [choices]="editorThemeChoices"
+  [noSearchResultsText]="'No themes found'"
   (choiceSelected)="onThemeSelected($event)"
   (choiceConfirmed)="onThemeConfirmed($event)"
   (noSearchResults)="onNoThemeFound()"

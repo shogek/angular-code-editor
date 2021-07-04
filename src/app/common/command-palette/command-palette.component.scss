@@ -58,3 +58,9 @@ ul {
         }
     }
 }
+
+.no-results {
+    padding: 0 0.5rem 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: var(--command-palette-item-text-color);
+}

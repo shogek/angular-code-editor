@@ -4,13 +4,14 @@
 >
   <div class="search-wrapper">
     <input
+      #searchInput
       type="text"
       placeholder="Select color theme (Up/Down keys to preview)"
-      (keyup)="onKeyUp($event)"
+      (keyup)="onSearchInputKeyUp($event)"
     />
   </div>
   
-  <ul>
+  <ul *ngIf="filteredChoices.length > 0">
     <li *ngFor="let choice of filteredChoices">
       <button
         type="button"
@@ -21,4 +22,11 @@
       </button>
     </li>
   </ul>
+
+  <div
+    *ngIf="filteredChoices.length < 1 && noSearchResultsText"
+    class="no-results"
+  >
+    {{ noSearchResultsText }}
+  </div>
 </div>

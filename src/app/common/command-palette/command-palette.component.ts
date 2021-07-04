@@ -7,6 +7,8 @@ import {
     OnInit,
     Output,
     OnDestroy,
+    ViewChild,
+    ElementRef,
 } from "@angular/core";
 import { Subscription } from "rxjs";
 import { DomEventsService } from "src/app/services/dom-events/dom-events.service";
@@ -22,9 +24,11 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
     /** The HTML element which, when clicked, opens this component. */
     @Input() sourceOpener!: HTMLElement;
     @Input() set choices(value: CommandPaletteItem[]) {
+        this._originalChoices = value;
         this.filteredChoices = value;
-        this.originalChoices = value;
+        this._currentChoice = value.find(x => x.isActive)!;
     }
+    @Input() noSearchResultsText = '';
 
     /** Fired when via arrow keys, the choices are being navigated through. */
     @Output() choiceSelected = new EventEmitter<CommandPaletteItem>();
@@ -34,13 +38,16 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
     /** Fired when the user closes the palette (via confirmation, "Escape" or LMB somewhere) */
     @Output() closed = new EventEmitter<void>();
 
+    @ViewChild('searchInput') searchInput!: ElementRef;
+
+    private UNICODE_CHAR_REGEX = /\p{Letter}/gu;
     private MENU_WIDTH_PX = 600;
     private _subscriptions: Subscription[] = [];
-    private _currentChoice: CommandPaletteItem | null = null;
     private _clickedOnSelf = false;
     private _clickedOnOpener = false;
     private _initialLoad = false;
-    originalChoices: CommandPaletteItem[] = [];
+    private _currentChoice: CommandPaletteItem | null = null;
+    private _originalChoices: CommandPaletteItem[] = [];
     filteredChoices: CommandPaletteItem[] = [];
     leftX = 0;
 
@@ -105,6 +112,12 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
     }
 
     private onDocumentKeyDown(e: KeyboardEvent) {
+        // If the user pressed a letter - focus back on the search
+        if (e.key.length < 2 && this.UNICODE_CHAR_REGEX.test(e.key)) {
+            this.searchInput.nativeElement.focus();
+            return;
+        }
+
         switch(e.key) {
             case 'Enter': this.handlePressedEnter(); return;
             case 'Escape': this.handlePressedEscape(); return;
@@ -119,23 +132,35 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
         this.closed.emit();
     }
 
-    // TODO: Document - cleanup - separate
-    public onKeyUp(e: KeyboardEvent) {
+    public onSearchInputKeyUp(e: KeyboardEvent) {
+        // Walking through the menu choices
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
         const searchInput = e.target as HTMLInputElement;
         const searchValue = searchInput.value.toLowerCase();
 
-        this.filteredChoices = this.originalChoices.filter(
+        const searchResults = this._originalChoices.filter(
             choice => choice.label.toLowerCase().includes(searchValue)
         );
 
-        if (this.filteredChoices.length < 1) {
-            // TODO: Show message that no such themes found :3
+        if (searchResults.length < 1) {
+            this.filteredChoices = [];
             this._currentChoice = null;
             this.noSearchResults.emit();
             return;
         }
 
-        const currentChoice = this.filteredChoices[0];
+        const currentChoice = searchResults.find(x => x.isActive) ?? searchResults[0];
+        this.filteredChoices = searchResults.map(
+            choice => choice.value === currentChoice.value
+                ? ({...choice, isActive: true})
+                : ({...choice})
+        );
+
         if (currentChoice.label !== this._currentChoice?.label) {
             this._currentChoice = currentChoice;
             this.choiceSelected.emit(currentChoice);
