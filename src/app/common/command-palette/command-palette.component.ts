@@ -1,4 +1,13 @@
-import { EventEmitter, ChangeDetectionStrategy, Component, HostListener, Input, OnInit, Output, OnDestroy } from "@angular/core";
+import {
+    EventEmitter,
+    ChangeDetectionStrategy,
+    Component,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    OnDestroy,
+} from "@angular/core";
 import { Subscription } from "rxjs";
 import { DomEventsService } from "src/app/services/dom-events/dom-events.service";
 import { CommandPaletteItem } from "./command-palette-item";
@@ -39,6 +48,7 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this._initialLoad = true;
+
         this._subscriptions.push(
             this.domEventsService.getDocumentClickedListener().subscribe(_ => this.onDocumentClick())
         );
@@ -71,31 +81,22 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
 
     private onDocumentClick() {
         if (this._clickedOnSelf) {
-            console.log('PREVENT - _clickedOnSelf');
-            /*
-            * Fixes bug!
-            * Clicking on the search bar (the component itself) is registered as clicking on the document.
-            */
+            /* Fixes bug!
+            * Clicking on the search bar (the component itself) is still registered as a click on the document. */
             this._clickedOnSelf = false;
             return;
         }
 
         if (this._clickedOnOpener) {
-            console.log('PREVENT - _clickedOnOpener');
-            /*
-            * Fixes bug!
-            * TODO: Explain
-            */
+            /* Fixes bug!
+            * Clicking on the button which opens the command palette is still registered as a click on the document. */
             this._clickedOnOpener = false;
             return;
         }
 
         if (this._initialLoad) {
-            console.log('PREVENT - _initialLoad');
-            /*
-            * Fixes bug!
-            * TODO: Explain
-            */
+            /* Fixes bug!
+            *  Not sure what causes this damn bug. */
             this._initialLoad = false;
             return;
         }
@@ -104,44 +105,13 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
     }
 
     private onDocumentKeyDown(e: KeyboardEvent) {
-        const { key } = e;
-        if (key !== 'ArrowDown'
-            && key !== 'ArrowUp'
-            && key !== 'Enter'
-            && key !== 'Escape') {
-            return;
+        switch(e.key) {
+            case 'Enter': this.handlePressedEnter(); return;
+            case 'Escape': this.handlePressedEscape(); return;
+            case 'ArrowUp': this.handlePressedArrowKey(false); return;
+            case 'ArrowDown': this.handlePressedArrowKey(true); return;
+            default: return;
         }
-
-        if (key === 'Enter') {
-            const activeChoice = this.filteredChoices.find(x => x.isActive)
-            this.choiceConfirmed.emit(activeChoice);
-            this.closed.emit();
-            return;
-        }
-
-        if (key === 'Escape') {
-            this.closed.emit();
-            return;
-        }
-
-        const activeIndex = this.filteredChoices.findIndex(choice => choice.isActive);
-        let nextIndex = NaN;
-        if (key === 'ArrowDown') {
-            nextIndex = activeIndex < this.filteredChoices.length - 1 ? activeIndex + 1 : 0;
-        } else {
-            nextIndex = activeIndex > 0 ? activeIndex - 1 : this.filteredChoices.length - 1;
-        }
-
-        const updatedChoices = this.filteredChoices.map((choice, index) => 
-            index === nextIndex
-                ? ({...choice, isActive: true})
-                : ({...choice, isActive: false})
-        );
-
-        this.filteredChoices = updatedChoices;
-
-        const selectedChoice = updatedChoices.find(choice => choice.isActive);
-        this.choiceSelected.emit(selectedChoice);
     }
 
     public onCommandPaletteChoiceClick(choice: CommandPaletteItem) {
@@ -170,5 +140,36 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
             this._currentChoice = currentChoice;
             this.choiceSelected.emit(currentChoice);
         }
+    }
+
+    private handlePressedEnter() {
+        const activeChoice = this.filteredChoices.find(x => x.isActive)
+        this.choiceConfirmed.emit(activeChoice);
+        this.closed.emit();
+    }
+
+    private handlePressedEscape() {
+        this.closed.emit();
+    }
+
+    private handlePressedArrowKey(isArrowDown: boolean) {
+        const activeIndex = this.filteredChoices.findIndex(choice => choice.isActive);
+        let nextIndex = NaN;
+        if (isArrowDown) {
+            nextIndex = activeIndex < this.filteredChoices.length - 1 ? activeIndex + 1 : 0;
+        } else {
+            nextIndex = activeIndex > 0 ? activeIndex - 1 : this.filteredChoices.length - 1;
+        }
+
+        const updatedChoices = this.filteredChoices.map((choice, index) => 
+            index === nextIndex
+                ? ({...choice, isActive: true})
+                : ({...choice, isActive: false})
+        );
+
+        this.filteredChoices = updatedChoices;
+
+        const selectedChoice = updatedChoices.find(choice => choice.isActive);
+        this.choiceSelected.emit(selectedChoice);
     }
 }
