@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { CommandPaletteItem } from "src/app/common";
 import { EditorTheme } from "src/app/services";
 
@@ -8,12 +8,18 @@ import { EditorTheme } from "src/app/services";
   styleUrls: ['./status-bar-row.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatusBarRowComponent implements OnInit {
+export class StatusBarRowComponent {
   @Input() latestMessage!: string;
   @Input() editorLineNumber: number | undefined;
   @Input() editorCaretOffset: number | undefined;
-  @Input() allEditorThemes!: EditorTheme[];
-  @Input() activeEditorTheme!: EditorTheme;
+  @Input() set allEditorThemes(value: EditorTheme[]) {
+    this._allEditorThemes = value;
+    this.prepareEditorThemeChoices();
+  } get allEditorThemes(): EditorTheme[] { return this._allEditorThemes; }
+  @Input() set activeEditorTheme(value: EditorTheme) {
+    this._activeEditorTheme = value;
+    this.prepareEditorThemeChoices();
+  } get activeEditorTheme(): EditorTheme { return this._activeEditorTheme; }
 
   @Output() themeSelected = new EventEmitter<EditorTheme>();
   @Output() themeConfirmed = new EventEmitter<EditorTheme>();
@@ -21,20 +27,10 @@ export class StatusBarRowComponent implements OnInit {
 
   @ViewChild('themePickerToggle') themePickerToggle!: ElementRef;
 
+  private _activeEditorTheme!: EditorTheme;
+  private _allEditorThemes: EditorTheme[] = [];
   isThemePickerVisible = false;
   editorThemeChoices: CommandPaletteItem[] = [];
-
-  ngOnInit() {
-    this.editorThemeChoices = this.allEditorThemes
-      .sort((themeA, themeB) => themeA.displayName.localeCompare(themeB.displayName))
-      .map(
-      theme => ({
-        label: theme.displayName,
-        value: theme.htmlClassName,
-        isActive: this.activeEditorTheme.displayName === theme.displayName,
-      })
-    );
-  }
 
   public showEditorThemePicker() {
     /*
@@ -64,5 +60,28 @@ export class StatusBarRowComponent implements OnInit {
   public onThemePickerClosed() {
     this.themeReverted.emit();
     this.isThemePickerVisible = false;
+  }
+
+  private prepareEditorThemeChoices() {
+    this.editorThemeChoices = StatusBarRowComponent.getAvailableEditorThemes(
+      this.allEditorThemes,
+      this.activeEditorTheme,
+    );
+  }
+
+  private static getAvailableEditorThemes(allThemes: EditorTheme[], currentTheme: EditorTheme): CommandPaletteItem[] {
+    if (!allThemes || allThemes.length < 1 || !currentTheme) {
+      return [];
+    }
+    
+    return allThemes
+      .sort((themeA, themeB) => themeA.displayName.localeCompare(themeB.displayName))
+      .map(
+        theme => ({
+          label: theme.displayName,
+          value: theme.htmlClassName,
+          isActive: currentTheme.displayName === theme.displayName,
+        })
+      );
   }
 }
