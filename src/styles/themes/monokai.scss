@@ -1,0 +1,99 @@
+/** Based on "Monokai" */
+@mixin theme-monokai {
+    // -----------------
+    // --- 1. Common ---
+    // -----------------
+    --common-text-color: rgb(204, 204, 204);
+
+    --common-button-text-color: rgb(255, 255, 255);
+
+    --common-button-bg-color: rgb(117, 113, 94);
+    --common-button-hover-bg-color: rgb(141, 136, 113);
+
+    // ----------------------
+    // --- 2. Editor tabs ---
+    // ----------------------
+    --editor-tab-row-bg-color: rgb(30, 30, 30);
+
+    --editor-tab-item-divider-color: rgb(30, 30, 30);
+
+    --editor-tab-item-bg-color: rgb(52, 53, 47);
+    --editor-tab-item-hover-bg-color: rgb(52, 53, 57);
+    --editor-tab-item-active-bg-color: rgb(39, 40, 34);
+
+    --editor-tab-item-border-color: rgb(52, 53, 57);
+    --editor-tab-item-border-hover-color: rgb(52, 53, 57);
+    --editor-tab-item-border-active-color: rgb(39, 40, 34);
+
+    --editor-tab-text-color: rgb(204, 204, 199);
+    --editor-tab-text-active-color: rgb(255, 255, 255);
+
+    // -------------------------
+    // --- 3.0 Editor window ---
+    // -------------------------
+    // 3.1 Editor line numbers column
+    --editor-line-number-column-bg-color: #272822;
+
+    --editor-line-number-text-color: #90908a;
+    --editor-line-number-text-active-color: #c2c2bf;
+
+    // 3.2 Editor file contents
+    --editor-bg-color: #272822;
+
+    --editor-text-color: #f8f8f2;
+    
+    // ---------------------------------
+    // --- 4. Sidebar file explorer ---
+    // ---------------------------------
+    --file-explorer-column-bg-color: #1e1f1c;
+
+    --file-explorer-indentation-bar-color: rgb(53, 53, 53);
+
+    --file-explorer-item-text-color: aliceblue;
+    --file-explorer-item-text-hover-color: aliceblue;
+    --file-explorer-item-text-active-color: rgb(240, 248, 255);
+
+    --file-explorer-item-bg-color: #1e1f1c;
+    --file-explorer-item-hover-bg-color: #3e3d32;
+    --file-explorer-item-active-bg-color: #414339;
+
+    // ---------------------
+    // --- 5. Status bar ---
+    // ---------------------
+    --status-bar-bg-color: rgb(65, 67, 57);
+
+    --status-bar-divider-color: rgb(65, 67, 57);
+    
+    --status-bar-text-color: rgb(255, 255, 255);
+
+    --status-bar-button-hover-bg-color: rgb(88, 90, 81);
+    --status-bar-button-active-bg-color: rgb(99, 101, 93);
+
+    // -----------------------
+    // --- 6. Context menu ---
+    // -----------------------
+    --context-menu-bg-color: rgb(30, 30, 30);
+
+    --context-menu-text-color: rgb(204, 204, 204);
+    --context-menu-text-hover-color: rgb(255, 255, 255);
+    --context-menu-text-disabled-color: rgb(100, 100, 100);
+
+    --context-menu-item-hover-bg-color: rgb(117, 113, 94);
+
+    // --------------------------
+    // --- 7. Command palette ---
+    // --------------------------
+    --command-palette-bg-color: rgb(30, 30, 30);
+
+    --command-palette-item-hover-bg-color: rgb(62, 61, 50);
+    --command-palette-item-active-bg-color: rgb(65, 67, 57);
+
+    --command-palette-item-text-color: rgb(204, 204, 193);
+    --command-palette-item-text-hover-color: rgb(204, 204, 193);
+    --command-palette-item-text-active-color: rgb(255, 255, 255);
+
+    --command-palette-search-box-bg-color: rgb(65, 67, 57);
+    --command-palette-search-box-border-color: rgb(117, 113, 94);
+    --command-palette-search-box-placeholder-color: rgb(134, 135, 130);
+    --command-palette-search-box-text-color: rgb(204, 204, 193);
+}

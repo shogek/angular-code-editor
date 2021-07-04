@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { EditorTab } from './models/editor-tab.model';
 import { UserFile } from './models/user-file.model';
+import { DomEventsService } from './services/dom-events/dom-events.service';
 import { EditorTabService } from './services/editor-tab/editor-tab.service';
 import { UserFileService } from './services/user-file/user-file.service';
 
@@ -19,5 +21,21 @@ export class AppComponent {
   constructor (
     private editorTabService: EditorTabService,
     private userFileService: UserFileService,
+    private domEventsService: DomEventsService,
   ) { }
+
+  @HostListener('document:click', ['$event'])
+  public onDocumentClick(e: MouseEvent) {
+    this.domEventsService.notifyDocumentClicked(e);
+  }
+
+  @HostListener('document:contextmenu')
+  public onDocumentContextMenu() {
+    this.domEventsService.notifyDocumentContextMenu();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  public onDocumentKeyDown(e: KeyboardEvent) {
+    this.domEventsService.notifyDocumentKeyDown(e);
+  }
 }

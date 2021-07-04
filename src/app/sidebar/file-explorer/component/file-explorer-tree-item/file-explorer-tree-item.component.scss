@@ -1,7 +1,3 @@
-.wrapper {
-  background-color: var(--editor-tab-bg-color);
-}
-
 .line {
   display: flex;
   align-items: center;
@@ -9,9 +5,11 @@
   cursor: pointer;
   margin: 0;
   height: 1.8rem;
+  color: var(--file-explorer-item-text-color);
 
   &:hover {
-    background-color: var(--sidebar-file-tree-item-bg-active-color);
+    color: var(--file-explorer-item-text-hover-color);
+    background-color: var(--file-explorer-item-hover-bg-color);
   }
 }
 
@@ -39,5 +37,5 @@
 
 .list {
   list-style-type: none;
-  border-left: solid 1px var(--sidebar-file-tree-divider-color);
+  border-left: solid 1px var(--file-explorer-indentation-bar-color);
 }

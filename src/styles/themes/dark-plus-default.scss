@@ -1,0 +1,104 @@
+/** Based on: "Dark+ (default dark)" */
+@mixin theme-dark-plus-default {
+
+    // TODO: Add ability to change themes
+    // TODO: On tab close button hover, show background
+    // TODO: Add padding to file explorer
+
+    // -----------------
+    // --- 1. Common ---
+    // -----------------
+    --common-text-color: rgb(204, 204, 204);
+
+    --common-button-text-color: rgb(255, 255, 255);
+
+    --common-button-bg-color: rgb(14, 99, 156);
+    --common-button-hover-bg-color: rgb(17, 119, 187);
+
+    // ----------------------
+    // --- 2. Editor tabs ---
+    // ----------------------
+    --editor-tab-row-bg-color: rgb(37, 37, 37);
+
+    --editor-tab-item-divider-color: rgb(37, 37, 37);
+
+    --editor-tab-item-bg-color: rgb(45, 45, 45);
+    --editor-tab-item-hover-bg-color: rgb(45, 45, 45);
+    --editor-tab-item-active-bg-color: rgb(30, 30, 30);
+
+    --editor-tab-item-border-color: rgb(45, 45, 45);
+    --editor-tab-item-border-hover-color: rgb(45, 45, 45);
+    --editor-tab-item-border-active-color: rgb(30, 30, 30);
+
+    --editor-tab-text-color: rgb(144, 150, 144);
+    --editor-tab-text-active-color: rgb(225, 225, 225);
+
+    // -------------------------
+    // --- 3.0 Editor window ---
+    // -------------------------
+    // 3.1 Editor line numbers column
+    --editor-line-number-column-bg-color: rgb(30, 30, 30);
+
+    --editor-line-number-text-color: rgb(133, 133, 133);
+    --editor-line-number-text-active-color: rgb(198, 198, 198);
+
+    // 3.2 Editor file contents
+    --editor-bg-color: rgb(30, 30, 30);
+
+    --editor-text-color: rgb(166, 166, 166);
+    
+    // ---------------------------------
+    // --- 4. Sidebar file explorer ---
+    // ---------------------------------
+    --file-explorer-column-bg-color: rgb(37, 37, 37);
+
+    --file-explorer-indentation-bar-color: rgb(57, 57, 57);
+
+    --file-explorer-item-text-color: rgb(204, 204, 204);
+    --file-explorer-item-text-hover-color: rgb(204, 204, 204);
+    --file-explorer-item-text-active-color: rgb(255, 255, 251);
+
+    --file-explorer-item-bg-color: rgb(37, 37, 37);
+    --file-explorer-item-hover-bg-color: rgb(42, 45, 46);
+    --file-explorer-item-active-bg-color: rgb(9, 71, 113);
+
+    // ---------------------
+    // --- 5. Status bar ---
+    // ---------------------
+    --status-bar-bg-color: rgb(0, 122, 204);
+
+    --status-bar-divider-color: rgb(0, 122, 204);
+
+    --status-bar-text-color: rgb(255, 255, 255);
+
+    --status-bar-button-hover-bg-color: rgb(31, 138, 210);
+    --status-bar-button-active-bg-color: rgb(46, 146, 213);
+
+    // -----------------------
+    // --- 6. Context menu ---
+    // -----------------------
+    --context-menu-bg-color: rgb(37, 37, 37);
+
+    --context-menu-text-color: rgb(204, 204, 204);
+    --context-menu-text-hover-color: rgb(255, 255, 255);
+    --context-menu-text-disabled-color: rgb(104, 104, 104);
+
+    --context-menu-item-hover-bg-color: rgb(9, 71, 113);
+
+    // --------------------------
+    // --- 7. Command palette ---
+    // --------------------------
+    --command-palette-bg-color: rgb(37, 37, 37);
+
+    --command-palette-item-hover-bg-color: rgb(42, 45, 46);
+    --command-palette-item-active-bg-color: rgb(9, 71, 113);
+
+    --command-palette-item-text-color: rgb(204, 204, 204);
+    --command-palette-item-text-hover-color: rgb(204, 204, 204);
+    --command-palette-item-text-active-color: rgb(255, 255, 255);
+
+    --command-palette-search-box-bg-color: rgb(60, 60, 60);
+    --command-palette-search-box-border-color: rgb(0, 127, 212);
+    --command-palette-search-box-placeholder-color: rgb(166, 166, 166);
+    --command-palette-search-box-text-color: rgb(204, 204, 204);
+}

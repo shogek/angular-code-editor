@@ -16,8 +16,9 @@ import {
 } from './main-screen';
 import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
 import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pipe';
-import { EditorTabService, StatusBarService, UserFileService } from './services';
-import { ContextMenuComponent } from './common';
+import { EditorTabService, EditorThemeService, StatusBarService, UserFileService } from './services';
+import { CommandPaletteComponent, ContextMenuComponent } from './common';
+import { DomEventsService } from './services/dom-events/dom-events.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ContextMenuComponent } from './common';
     StatusBarRowComponent,
     SafeHtmlPipe,
     ContextMenuComponent,
+    CommandPaletteComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,8 @@ import { ContextMenuComponent } from './common';
     UserFileService,
     EditorTabService,
     StatusBarService,
+    EditorThemeService,
+    DomEventsService,
   ],
   bootstrap: [AppComponent]
 })

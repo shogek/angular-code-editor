@@ -1,19 +1,7 @@
-:root {
-  // TODO: Names are getting too long - fix it.
-  --editor-text-color: rgb(225, 228, 232);
-  --editor-line-number-color: rgb(68, 77, 86);
-  --editor-line-number-active-color: rgb(225, 228, 232);
-  --editor-bg-color: rgb(36, 41, 46);
-  --editor-bg-active-color: rgb(43, 48, 54);
-  --editor-tab-border-color: rgb(27, 31, 35);
-  --editor-tab-border-active-color: rgb(249, 130, 108);
-  --editor-tab-bg-color: rgb(31, 36, 40);
-  --editor-tab-bg-active-color: rgb(36, 41, 46);
-  --editor-tab-text-color: rgb(149, 157, 165);
-  --editor-tab-text-active-color: rgb(225, 228, 220);
-  --sidebar-file-tree-divider-color: rgb(47, 54, 61);
-  --sidebar-file-tree-item-bg-active-color: rgb(40, 46, 52);
-}
+@import "./styles/themes/dark-plus-default.scss";
+@import "./styles/themes/monokai.scss";
+@import "./styles/themes/bluloco-light-italic.scss";
+@import "./styles/themes/material-darker-high-contrast.scss";
 
 @font-face {
   font-family: 'Fira code';
@@ -30,4 +18,20 @@ body {
   font-family: 'Fira code';
   color: var(--editor-text-color);
   background-color: var(--editor-bg-color);
+}
+
+.theme-dark-plus-default {
+  @include theme-dark-plus-default;
+}
+
+.theme-monokai {
+  @include theme-monokai;
+}
+
+.theme-material-darker-high-contrast {
+  @include theme-material-darker-high-contrast;
+}
+
+.theme-bluloco-light-italic {
+  @include theme-bluloco-light-italic;
 }

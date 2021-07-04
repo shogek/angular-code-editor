@@ -1,6 +1,8 @@
-<p 
-  *ngFor="let _ of [].constructor(fileLineCount); let i = index;"
-  [class.active]="i + 1 === activeLine"
->
-  {{ i + 1 }}
-</p>
+<div class="wrapper">
+  <p 
+    *ngFor="let _ of [].constructor(fileLineCount); let i = index;"
+    [class.active]="i + 1 === activeLine"
+  >
+    {{ i + 1 }}
+  </p>
+</div>

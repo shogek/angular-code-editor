@@ -1,11 +1,18 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: var(--editor-line-number-column-bg-color);
+}
+
 p {
+  padding-right: 1.5rem;
   margin: 0;
   line-height: 1.85rem;
 
-  color: var(--editor-line-number-color);
+  color: var(--editor-line-number-text-color);
   text-align: end;
 
   &.active {
-    color: var(--editor-line-active-number-color);
+    color: var(--editor-line-number-text-active-color);
   }
 }

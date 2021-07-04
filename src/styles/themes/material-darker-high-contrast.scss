@@ -1,0 +1,99 @@
+/** Based on: "Material Theme Darker High Contrast" */
+@mixin theme-material-darker-high-contrast {
+    // -----------------
+    // --- 1. Common ---
+    // -----------------
+    --common-text-color: rgb(132, 132, 132);
+
+    --common-button-text-color: rgb(255, 255, 255);
+
+    --common-button-bg-color: rgb(48, 48, 48);
+    --common-button-hover-bg-color: rgb(54, 54, 54);
+
+    // ----------------------
+    // --- 2. Editor tabs ---
+    // ----------------------
+    --editor-tab-row-bg-color: rgb(33, 33, 33);
+
+    --editor-tab-item-divider-color: rgb(33, 33, 33);
+
+    --editor-tab-item-bg-color: rgb(33, 33, 33);
+    --editor-tab-item-hover-bg-color: rgb(33, 33, 33);
+    --editor-tab-item-active-bg-color: rgb(33, 33, 33);
+
+    --editor-tab-item-border-color: rgb(33, 33, 33);
+    --editor-tab-item-border-hover-color: rgb(33, 33, 33);
+    --editor-tab-item-border-active-color: #80cbc4;
+
+    --editor-tab-text-color: rgb(132, 132, 132);
+    --editor-tab-text-active-color: rgb(255, 255, 255);
+
+    // -------------------------
+    // --- 3.0 Editor window ---
+    // -------------------------
+    // 3.1 Editor line numbers column
+    --editor-line-number-column-bg-color: rgb(33, 33, 33);
+
+    --editor-line-number-text-color: rgb(66, 66, 66);
+    --editor-line-number-text-active-color: rgb(132, 132, 132);
+
+    // 3.2 Editor file contents
+    --editor-bg-color: rgb(33, 33, 33);
+
+    --editor-text-color: rgb(255, 255, 255);
+    
+    // ---------------------------------
+    // --- 4. Sidebar file explorer ---
+    // ---------------------------------
+    --file-explorer-column-bg-color: rgb(26, 26, 26);
+
+    --file-explorer-indentation-bar-color: rgb(42, 42, 42);
+
+    --file-explorer-item-text-color: rgb(132, 132, 132);
+    --file-explorer-item-text-hover-color: rgb(255, 255, 255);
+    --file-explorer-item-text-active-color: #80cbc4;
+
+    --file-explorer-item-bg-color: rgb(26, 26, 26);
+    --file-explorer-item-hover-bg-color: rgb(26, 26, 26);
+    --file-explorer-item-active-bg-color: rgb(21, 21, 21);
+
+    // ---------------------
+    // --- 5. Status bar ---
+    // ---------------------
+    --status-bar-bg-color: rgb(26, 26, 26);
+
+    --status-bar-divider-color: rgb(16, 16, 16);
+
+    --status-bar-text-color: rgb(97, 97, 97);
+
+    --status-bar-button-hover-bg-color: rgb(33, 33, 33);
+    --status-bar-button-active-bg-color: rgb(67, 67, 67);
+
+    // -----------------------
+    // --- 6. Context menu ---
+    // -----------------------
+    --context-menu-bg-color: rgb(33, 33, 33);
+
+    --context-menu-text-color: rgb(238, 255, 255);
+    --context-menu-text-hover-color: rgb(128, 203, 196);
+    --context-menu-text-disabled-color: rgb(115, 122, 122);
+
+    --context-menu-item-hover-bg-color: rgb(23, 23, 23);
+
+    // --------------------------
+    // --- 7. Command palette ---
+    // --------------------------
+    --command-palette-bg-color: rgb(26, 26, 26);
+
+    --command-palette-item-hover-bg-color: rgb(26, 26, 26);
+    --command-palette-item-active-bg-color: rgb(26, 26, 26);
+
+    --command-palette-item-text-color: rgb(204, 204, 204);
+    --command-palette-item-text-hover-color: rgb(255, 255, 255);
+    --command-palette-item-text-active-color: rgb(128, 203, 196);
+
+    --command-palette-search-box-bg-color: rgb(43, 43, 43);
+    --command-palette-search-box-border-color: rgb(55, 55, 55);
+    --command-palette-search-box-placeholder-color: rgb(124, 124, 124);
+    --command-palette-search-box-text-color: rgb(255, 255, 255);
+}
