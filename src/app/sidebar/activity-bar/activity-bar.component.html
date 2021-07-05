@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <div class="content">
+        <ng-content *ngIf="isOpen"></ng-content>
+    </div>
+
+    <div (click)="onClick()" class="button">
+        <img [src]="filesIcon" />
+    </div>
+</div>

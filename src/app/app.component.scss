@@ -10,6 +10,10 @@
 .editor-wrapper {
   height: 97.5%;
   display: flex;
+
+  .activity-bar {
+    width: 4%;
+  }
 }
 
 .status-bar {

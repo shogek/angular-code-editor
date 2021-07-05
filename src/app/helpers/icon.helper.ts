@@ -4,6 +4,8 @@ const iconPathTable: {[fileExtension: string]: string} = {
   'scss': iconFolder + 'scss.svg',
   'html': iconFolder + 'html.svg',
   'folder': iconFolder + 'folder.svg',
+  'files-light': iconFolder + 'files-light.svg',
+  'files-dark': iconFolder + 'files-dark.svg',
   'default': iconFolder + 'file.svg',
 };
 
@@ -13,6 +15,15 @@ const iconPathTable: {[fileExtension: string]: string} = {
  */
 export function getFolderIcon(): string {
   return iconPathTable['folder'];
+}
+
+/**
+ * Returns a path to an icon which represents files.
+ * @returns Example: '/assets/icons/folder.svg'.
+ */
+ export function getFilesIcon(): string {
+   // TODO: Add a way to dinamically get white/dark icons
+  return iconPathTable['files-light'];
 }
 
 /**

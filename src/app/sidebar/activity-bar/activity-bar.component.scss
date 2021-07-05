@@ -1,0 +1,32 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.content {
+    width: 90%;
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--activity-bar-bg-color);
+}
+
+img {
+    padding: 1rem;
+    cursor: pointer;
+    height: 1.8rem;
+    filter: brightness(2) saturate(100%);
+
+    &:hover {
+        filter: brightness(100) saturate(100%);
+    }
+
+    &.active {
+        filter: brightness(100) saturate(100%);
+    }
+}
