@@ -1,35 +1,24 @@
-:host {
-  height: 100%;
-  display: block;
-}
-
 .screen-wrapper {
   height: 100%;
-}
-
-.editor-wrapper {
-  height: 97.5%;
   display: flex;
+  flex-direction: column;
 
-  .activity-bar {
-    width: 4%;
+  .editor-wrapper {
+    flex-grow: 1;
+    display: flex;
+    // TODO: Tab list items push the activity bar
+    // TODO: Make sidebar resizeable
+    .editor {
+      flex-grow: 1;
+    }
   }
-}
 
-.status-bar {
-  display: block;
-  height: 2.5%;
-  width: 100%;
-}
-
-// TODO: Make sidebar resizeable
-.editor {
-  width: 70%;
-}
-
-.sidebar {
-  width: 30%;
-  height: 100%;
+  .status-bar {
+    display: block;
+    width: 100%;
+    // Taken from VSCode
+    min-height: 22px;
+  }
 }
 
 .welcome-screen {
