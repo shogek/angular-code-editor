@@ -24,18 +24,19 @@ export class AppComponent {
     private domEventsService: DomEventsService,
   ) { }
 
+  // TODO: Move to separate component?
   @HostListener('document:click', ['$event'])
-  public onDocumentClick(e: MouseEvent) {
-    this.domEventsService.notifyDocumentClicked(e);
-  }
+  public onDocumentClick = (e: MouseEvent) => this.domEventsService.notifyDocumentClicked(e);
 
   @HostListener('document:contextmenu')
-  public onDocumentContextMenu() {
-    this.domEventsService.notifyDocumentContextMenu();
-  }
+  public onDocumentContextMenu = () => this.domEventsService.notifyDocumentContextMenu();
 
   @HostListener('document:keydown', ['$event'])
-  public onDocumentKeyDown(e: KeyboardEvent) {
-    this.domEventsService.notifyDocumentKeyDown(e);
-  }
+  public onDocumentKeyDown = (e: KeyboardEvent) => this.domEventsService.notifyDocumentKeyDown(e);
+
+  @HostListener('document:mousemove', ['$event'])
+  public onDocumentMouseMoved = (e: MouseEvent) => this.domEventsService.notifyDocumentMouseMoved(e);
+
+  @HostListener('document:mouseup', ['$event'])
+  public onDocumentMouseUp = (e: MouseEvent) => this.domEventsService.notifyDocumentMouseUp(e);
 }

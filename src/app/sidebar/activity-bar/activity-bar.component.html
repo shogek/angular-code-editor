@@ -1,9 +1,19 @@
 <div class="wrapper">
-    <div class="content">
-        <ng-content *ngIf="isOpen"></ng-content>
+    <div
+        class="drag-resizer"
+        (mousedown)="onMouseDown($event)"
+    ></div>
+
+    <div class="content" [style.width.px]="contentWidth" *ngIf="isOpen">
+        <ng-content></ng-content>
     </div>
 
-    <div (click)="onClick()" class="button">
-        <img [src]="filesIcon" />
+    <div class="buttons-column">
+        <div (click)="onClick()" class="button">
+            <img
+                [class.active]="isOpen"
+                [src]="filesIcon"
+            />
+        </div>
     </div>
 </div>

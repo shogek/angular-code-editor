@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewChild, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { ContextMenuItem } from "src/app/common";
 import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorTabListItemMenu } from "./editor-tab-list-item.menu";
@@ -21,8 +21,6 @@ export class EditorTabListItemComponent implements OnInit {
   @Output() clickClose = new EventEmitter<string>();
   @Output() clickCloseAll = new EventEmitter<void>();
   @Output() clickCloseOthers = new EventEmitter<string>();
-
-  @ViewChild('tab') tabElement!: HTMLElement;
 
   private _canCloseOtherTabs = false;
   contextMenuChoices: ContextMenuItem[] = [];

@@ -6,10 +6,10 @@
   .editor-wrapper {
     flex-grow: 1;
     display: flex;
-    // TODO: Tab list items push the activity bar
-    // TODO: Make sidebar resizeable
+    
     .editor {
       flex-grow: 1;
+      overflow-x: auto;
     }
   }
 

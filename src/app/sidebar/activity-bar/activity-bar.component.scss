@@ -4,16 +4,26 @@
     display: flex;
 }
 
+.drag-resizer {
+    width: 0.5rem;
+    background-color: aqua;
+    cursor: e-resize;
+}
+
 .content {
     width: 90%;
 }
 
-.button {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: var(--activity-bar-bg-color);
+.buttons-column {
+    width: 65px;
+
+    .button {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: var(--activity-bar-bg-color);
+    }
 }
 
 img {
