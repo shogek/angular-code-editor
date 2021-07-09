@@ -1,8 +1,6 @@
 /** Based on: "Dark+ (default dark)" */
 @mixin theme-dark-plus-default {
 
-    // TODO: Add ability to change themes
-    // TODO: On tab close button hover, show background
     // TODO: Add padding to file explorer
 
     // -----------------
@@ -25,6 +23,9 @@
     --editor-tab-item-bg-color: rgb(45, 45, 45);
     --editor-tab-item-hover-bg-color: rgb(45, 45, 45);
     --editor-tab-item-active-bg-color: rgb(30, 30, 30);
+
+    --editor-tab-active-item-close-button-bg-color: rgb(50, 50, 50);
+    --editor-tab-inactive-item-close-button-bg-color: rgb(60, 60, 60);
 
     --editor-tab-item-border-color: rgb(45, 45, 45);
     --editor-tab-item-border-hover-color: rgb(45, 45, 45);
@@ -101,4 +102,11 @@
     --command-palette-search-box-border-color: rgb(0, 127, 212);
     --command-palette-search-box-placeholder-color: rgb(166, 166, 166);
     --command-palette-search-box-text-color: rgb(204, 204, 204);
+
+    // -----------------------
+    // --- 8. Activity bar ---
+    // -----------------------
+    --activity-bar-bg-color: rgb(51, 51, 51);
+
+    --activity-bar-resizer-color: rgb(0, 127, 212);
 }

@@ -5,7 +5,10 @@
 >
   <app-editor-tab-list-item
     *ngFor="let tab of openedTabs"
-    [tab]="tab"
+    [tabId]="tab.userFileId"
+    [tabName]="tab.name"
+    [isTabActive]="tab.isActive"
+    [iconPath]="tab.iconPath"
     [canCloseOtherTabs]="openedTabs.length > 1"
     (clickOpen)="openTab.emit(tab.userFileId)"
     (clickClose)="closeTab.emit($event)"

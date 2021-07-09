@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewChild, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { ContextMenuItem } from "src/app/common";
-import { EditorTab } from "src/app/models/editor-tab.model";
 import { EditorTabListItemMenu } from "./editor-tab-list-item.menu";
 
 // TODO: Scroll to clicked tab if it is not fully visible
@@ -12,17 +11,19 @@ import { EditorTabListItemMenu } from "./editor-tab-list-item.menu";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorTabListItemComponent implements OnInit {
-  @Input() tab!: EditorTab;
+  @Input() tabId!: string;
+  @Input() tabName!: string;
+  @Input() isTabActive!: boolean;
+  @Input() iconPath!: string;
   @Input() set canCloseOtherTabs(value: boolean) {
     this._canCloseOtherTabs = value;
     this.initContextMenuChoices();
   } get canCloseOtherTabs(): boolean { return this._canCloseOtherTabs; };
+
   @Output() clickOpen = new EventEmitter<void>();
   @Output() clickClose = new EventEmitter<string>();
   @Output() clickCloseAll = new EventEmitter<void>();
   @Output() clickCloseOthers = new EventEmitter<string>();
-
-  @ViewChild('tab') tabElement!: HTMLElement;
 
   private _canCloseOtherTabs = false;
   contextMenuChoices: ContextMenuItem[] = [];
@@ -32,26 +33,26 @@ export class EditorTabListItemComponent implements OnInit {
   }
 
   public onClickOpen() {
-    if (!this.tab.isActive) {
+    if (!this.isTabActive) {
       this.clickOpen.emit();
     }
   }
 
   public onClickClose(e: MouseEvent): void {
     e.stopPropagation();
-    this.clickClose.emit(this.tab.userFileId);
+    this.clickClose.emit(this.tabId);
   }
 
   public onContextMenuItemClicked(choice: ContextMenuItem) {
     switch (choice.label) {
       case EditorTabListItemMenu.Close:
-        this.clickClose.emit(this.tab.userFileId);
+        this.clickClose.emit(this.tabId);
         break;
       case EditorTabListItemMenu.CloseAll:
         this.clickCloseAll.emit();
         break;
       case EditorTabListItemMenu.CloseOthers:
-        this.clickCloseOthers.emit(this.tab.userFileId);
+        this.clickCloseOthers.emit(this.tabId);
         break;
       default: throw new Error(`Unknown context menu item: ${choice}`);
     }

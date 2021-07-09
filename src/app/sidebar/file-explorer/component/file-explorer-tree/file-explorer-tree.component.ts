@@ -3,6 +3,8 @@ import { UserFile } from "src/app/models/user-file.model";
 import { createFolderTreeStructure } from "../common/folder.helper";
 import { Folder } from "../common/folder.model";
 
+// TODO: Show all kinds of text in file explorer if no files loaded
+
 @Component({
   selector: 'app-file-explorer-tree',
   templateUrl: './file-explorer-tree.component.html',

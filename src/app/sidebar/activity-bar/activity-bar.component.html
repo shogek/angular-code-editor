@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div
+        *ngIf="isOpen"
+        class="resizer"
+        (mousedown)="onMouseDown($event)"
+    ></div>
+
+    <div
+        *ngIf="isOpen"
+        class="content"
+        [style.width.px]="contentWidth"
+    >
+        <ng-content></ng-content>
+    </div>
+
+    <div class="buttons-column">
+        <div (click)="onClick()" class="button">
+            <img
+                [class.active]="isOpen"
+                [src]="filesIcon"
+            />
+        </div>
+    </div>
+</div>

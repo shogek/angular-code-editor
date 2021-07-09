@@ -1,18 +1,9 @@
-:host {
-  height: 100%;
-}
-
 .container {
   height: 100%;
   display: flex;
 }
 
-.number-container {
-  width: 5%;
-}
-
 .file-contents {
-  width: 95%;
   margin: 0;
   line-height: 1.85rem;
   cursor: text;

@@ -6,11 +6,10 @@
 
 .tabs {
   display: block;
-  height: 4%;
 }
 
 .editor {
-  height: 96%;
+  flex-grow: 1;
   display: block;
   overflow-y: auto;
 }

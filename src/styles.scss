@@ -18,20 +18,20 @@ body {
   font-family: 'Fira code';
   color: var(--editor-text-color);
   background-color: var(--editor-bg-color);
-}
 
-.theme-dark-plus-default {
-  @include theme-dark-plus-default;
-}
-
-.theme-monokai {
-  @include theme-monokai;
-}
-
-.theme-material-darker-high-contrast {
-  @include theme-material-darker-high-contrast;
-}
-
-.theme-bluloco-light-italic {
-  @include theme-bluloco-light-italic;
+  &.theme-dark-plus-default {
+    @include theme-dark-plus-default;
+  }
+  
+  &.theme-monokai {
+    @include theme-monokai;
+  }
+  
+  &.theme-material-darker-high-contrast {
+    @include theme-material-darker-high-contrast;
+  }
+  
+  &.theme-bluloco-light-italic {
+    @include theme-bluloco-light-italic;
+  }
 }

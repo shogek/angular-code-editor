@@ -1,0 +1,48 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.resizer {
+    background-color: var(--file-explorer-column-bg-color);
+    width: 0.4rem;
+    cursor: e-resize;
+
+    &:hover {
+        background-color: var(--activity-bar-resizer-color);
+    }
+}
+
+.content {
+    width: 90%;
+}
+
+// TODO: Add color to right border of active button
+
+.buttons-column {
+    width: 65px;
+
+    .button {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: var(--activity-bar-bg-color);
+    }
+}
+
+img {
+    padding: 1rem;
+    cursor: pointer;
+    height: 1.8rem;
+    filter: brightness(2) saturate(100%);
+
+    &:hover {
+        filter: brightness(100) saturate(100%);
+    }
+
+    &.active {
+        filter: brightness(100) saturate(100%);
+    }
+}

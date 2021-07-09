@@ -18,8 +18,11 @@
     --editor-tab-item-divider-color: rgb(30, 30, 30);
 
     --editor-tab-item-bg-color: rgb(52, 53, 47);
-    --editor-tab-item-hover-bg-color: rgb(52, 53, 57);
+    --editor-tab-item-hover-bg-color: rgb(52, 53, 47);
     --editor-tab-item-active-bg-color: rgb(39, 40, 34);
+
+    --editor-tab-active-item-close-button-bg-color: rgb(55, 57, 52);
+    --editor-tab-inactive-item-close-button-bg-color: rgb(64, 66, 61);
 
     --editor-tab-item-border-color: rgb(52, 53, 57);
     --editor-tab-item-border-hover-color: rgb(52, 53, 57);
@@ -96,4 +99,11 @@
     --command-palette-search-box-border-color: rgb(117, 113, 94);
     --command-palette-search-box-placeholder-color: rgb(134, 135, 130);
     --command-palette-search-box-text-color: rgb(204, 204, 193);
+
+    // -----------------------
+    // --- 8. Activity bar ---
+    // -----------------------
+    --activity-bar-bg-color: rgb(39, 40, 34);
+
+    --activity-bar-resizer-color: rgb(117, 113, 94);
 }
