@@ -2,7 +2,6 @@
   height: 100%;
   background-color: var(--file-explorer-column-bg-color);
   overflow-y: auto;
-  border: solid 1px var(--editor-tab-item-border-color);
   // Fixes problem of padding making height taller than 100%;
   box-sizing: border-box;
 }

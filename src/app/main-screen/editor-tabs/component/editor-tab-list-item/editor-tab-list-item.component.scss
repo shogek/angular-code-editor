@@ -8,6 +8,7 @@
   border: solid 1px var(--editor-tab-item-border-color);
   border-right-color: var(--editor-tab-item-divider-color);
   color: var(--editor-tab-text-color);
+  padding: 0.3rem;
 
   img {
     height: 1rem;
@@ -19,10 +20,6 @@
     background-color: var(--editor-tab-item-hover-bg-color);
     border-color: var(--editor-tab-item-border-hover-color);
     border-right-color: var(--editor-tab-item-divider-color);
-
-    .close-button {
-      color: var(--editor-tab-text-color);
-    }
   }
 
   &.active {
@@ -31,14 +28,6 @@
     border-top-color: var(--editor-tab-item-border-active-color);
     border-right-color: var(--editor-tab-item-divider-color);
     color: var(--editor-tab-text-active-color);
-
-    .close-button {
-      color: var(--editor-tab-item-active-bg-color);
-    }
-
-    &:hover .close-button { 
-      color: var(--editor-tab-text-active-color);
-    }
   }
 
   p {
@@ -47,8 +36,41 @@
     padding: 0.4rem;
     white-space: nowrap;
   }
+}
+
+.close-button {
+  padding: 0.2rem 0.4rem;
+  height: 1rem;
+  line-height: 1.1rem;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+}
+
+.wrapper.inactive {
+  .close-button {
+    color: rgba(0, 0, 0, 0);
+  }
+
+  &:hover {
+    .close-button {
+      color: var(--editor-tab-text-color);
+    }
+  }
 
   .close-button {
-    color: var(--editor-tab-item-bg-color);
+    &:hover {
+      background-color: var(--editor-tab-inactive-item-close-button-bg-color);
+    }
+  }
+}
+
+.wrapper.active {
+  .close-button {
+    color: var(--editor-tab-text-active-color);
+
+    &:hover {
+      background-color: var(--editor-tab-active-item-close-button-bg-color);
+    }
   }
 }

@@ -6,6 +6,7 @@
   .editor-wrapper {
     flex-grow: 1;
     display: flex;
+    overflow-y: auto;
     
     .editor {
       flex-grow: 1;

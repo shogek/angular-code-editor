@@ -13,7 +13,7 @@ import { DomEventsService } from "src/app/services/dom-events/dom-events.service
 export class ActivityBarComponent {
     private subscriptionUp: Subscription | null = null;
     private subscriptionMove: Subscription | null = null;
-    INITIAL_WIDTH_PX = 200;
+    INITIAL_WIDTH_PX = 400;
     contentWidth = this.INITIAL_WIDTH_PX;
     isOpen = false;
     isClicked = false;

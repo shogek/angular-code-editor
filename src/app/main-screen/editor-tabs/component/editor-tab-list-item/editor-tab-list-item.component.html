@@ -2,17 +2,19 @@
   #tabElement
   class="wrapper"
   [class.active]="tab.isActive"
+  [class.inactive]="!tab.isActive"
   (click)="onClickOpen()"
 >
   <img [src]="tab.iconPath" />
 
   <p>
     {{ tab.name }} 
-    <span
+  </p>
+
+  <div
       class="close-button"
       (click)="onClickClose($event)"
-    >✕</span>
-  </p>
+    >✕</div>
 </div>
 
 <app-context-menu
