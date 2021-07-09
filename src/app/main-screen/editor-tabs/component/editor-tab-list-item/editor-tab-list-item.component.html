@@ -1,14 +1,14 @@
 <div
   #tabElement
   class="wrapper"
-  [class.active]="tab.isActive"
-  [class.inactive]="!tab.isActive"
+  [class.active]="isTabActive"
+  [class.inactive]="!isTabActive"
   (click)="onClickOpen()"
 >
-  <img [src]="tab.iconPath" />
+  <img [src]="iconPath" />
 
   <p>
-    {{ tab.name }} 
+    {{ tabName }} 
   </p>
 
   <div
