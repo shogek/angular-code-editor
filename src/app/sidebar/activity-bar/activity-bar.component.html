@@ -1,10 +1,15 @@
 <div class="wrapper">
     <div
-        class="drag-resizer"
+        *ngIf="isOpen"
+        class="resizer"
         (mousedown)="onMouseDown($event)"
     ></div>
 
-    <div class="content" [style.width.px]="contentWidth" *ngIf="isOpen">
+    <div
+        *ngIf="isOpen"
+        class="content"
+        [style.width.px]="contentWidth"
+    >
         <ng-content></ng-content>
     </div>
 

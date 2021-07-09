@@ -4,10 +4,13 @@
     display: flex;
 }
 
-.drag-resizer {
-    width: 0.5rem;
-    background-color: aqua;
+.resizer {
+    width: 0.4rem;
     cursor: e-resize;
+
+    &:hover {
+        background-color: var(--activity-bar-resizer-color);
+    }
 }
 
 .content {
