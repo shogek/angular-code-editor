@@ -1,6 +1,6 @@
 import { UserFile } from "src/app/models/user-file.model";
 
-const pathToIconFolder = '/assets/icons/';
+const pathToIconFolder = 'assets/icons/';
 
 const MOCK_USER_FILE_100: UserFile = {
   id: 'id100',

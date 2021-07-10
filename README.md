@@ -3,6 +3,11 @@ https://shogek.github.io/angular-code-editor/
 
 <br>
 
+## Deploy me
+`ng deploy --base-href=/angular-code-editor/`
+
+<br>
+
 ## CodeEditor
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
