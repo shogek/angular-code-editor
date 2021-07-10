@@ -2,12 +2,12 @@ import { EditorTheme } from "./editor-theme.model";
 
 export const AVAILABLE_THEMES: EditorTheme[] = [
     {
-        displayName: 'Monokai',
-        htmlClassName: 'theme-monokai',
-    },
-    {
         displayName: 'Dark+ (default dark)',
         htmlClassName: 'theme-dark-plus-default',
+    },
+    {
+        displayName: 'Monokai',
+        htmlClassName: 'theme-monokai',
     },
     {
         displayName: 'Material Theme Darker High Contrast',

@@ -8,7 +8,10 @@ import { UserFileService } from "src/app/services/user-file/user-file.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeWindowComponent {
-  constructor (private userFileService: UserFileService) { }
+  constructor (private userFileService: UserFileService) {
+    // TODO: Remove after showing text and buttons in empty file explorer
+    this.userFileService.useDummyFiles();
+  }
 
   public onLoadDummyFiles() {
     this.userFileService.useDummyFiles();
