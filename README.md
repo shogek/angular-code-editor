@@ -25,6 +25,7 @@ https://shogek.github.io/angular-code-editor/
 ☑️ <span style="color: gray"> <b>[Activity bar]</b>    Collapsible and horizontally resizeable </span>  
 ☐                             <b>[Activity bar]</b>    Show messages and buttons if no files loaded  
 ☐                             <b>[Editor]</b>          Add 'console.log' terminal  
+☐                             <b>[Editor]</b>          Automatically deploy to gh-pages on push to master  
 
 <br>
 
