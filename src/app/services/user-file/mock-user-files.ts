@@ -7,6 +7,7 @@ const MOCK_USER_FILE_100: UserFile = {
   name: 'editor-window-screen.component.html',
   extension: 'html',
   path: 'src/app/editor-window/component/editor-window-screen.component.html',
+  depth: 4,
   iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<div
@@ -36,6 +37,7 @@ const MOCK_USER_FILE_101: UserFile = {
   name: 'editor-window-screen.component.scss',
   extension: 'scss',
   path: 'src/app/editor-window/component/editor-window-screen.component.scss',
+  depth: 4,
   iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
@@ -70,6 +72,7 @@ const MOCK_USER_FILE_102: UserFile = {
   name: 'editor-window-screen.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/component/editor-window-screen.component.ts',
+  depth: 4,
   iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
@@ -101,6 +104,7 @@ const MOCK_USER_FILE_103: UserFile = {
   name: 'editor-window.component.html',
   extension: 'html',
   path: 'src/app/editor-window/container/editor-window.component.html',
+  depth: 4,
   iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<ng-container *ngIf="activeTab$ | async as activeTab">
@@ -126,6 +130,7 @@ const MOCK_USER_FILE_104: UserFile = {
   name: 'editor-window.component.scss',
   extension: 'scss',
   path: 'src/app/editor-window/container/editor-window.component.scss',
+  depth: 4,
   iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
@@ -159,6 +164,7 @@ const MOCK_USER_FILE_105: UserFile = {
   name: 'editor-window.component.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window.component.ts',
+  depth: 4,
   iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
@@ -273,6 +279,7 @@ const MOCK_USER_FILE_106: UserFile = {
   name: 'editor-window-component.logic.ts',
   extension: 'ts',
   path: 'src/app/editor-window/container/editor-window-component.logic.ts',
+  depth: 4,
   iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { getLineCount } from "src/app/helpers/text-content.helper";
@@ -342,6 +349,7 @@ const MOCK_USER_FILE_107: UserFile = {
   name: 'app.component.ts',
   extension: 'ts',
   path: 'src/app/app.component.ts',
+  depth: 2,
   iconPath: pathToIconFolder + 'ts.svg',
   contents:
 `import { Component } from '@angular/core';
@@ -367,6 +375,7 @@ const MOCK_USER_FILE_108: UserFile = {
   name: 'app.component.scss',
   extension: 'scss',
   path: 'src/app/app.component.scss',
+  depth: 2,
   iconPath: pathToIconFolder + 'scss.svg',
   contents:
 `:host {
@@ -383,6 +392,7 @@ const MOCK_USER_FILE_109: UserFile = {
   name: 'app.component.html',
   extension: 'html',
   path: 'src/app/app.component.html',
+  depth: 2,
   iconPath: pathToIconFolder + 'html.svg',
   contents:
 `<ng-container *ngIf="(editorTabs$ | async).length > 0; else welcomeScreen">
@@ -401,6 +411,7 @@ const MOCK_USER_FILE_110: UserFile = {
   name: 'test.txt',
   extension: 'txt',
   path: 'src/test.txt',
+  depth: 1,
   iconPath: pathToIconFolder + 'file.svg',
   contents:
 `Don't mind me, just trying to cause an exception.`};

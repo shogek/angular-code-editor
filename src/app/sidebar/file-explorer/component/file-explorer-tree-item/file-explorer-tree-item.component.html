@@ -1,9 +1,9 @@
 <div class="wrapper">
   <!-- TODO: Show active file -->
-  <div class="line" (click)="toggleExpanded()">
+  <div class="line" (click)="toggleExpanded()" [style.paddingLeft.rem]="getFolderDepth(folder) - 1">
     <span class="caret" [class.expanded]="isExpanded">›</span>
     <img class="icon" [src]="folderIcon" />
-    <p class="text">
+    <p class="text" >
       {{ folder.name }}
     </p>
   </div>
@@ -16,6 +16,7 @@
       <div *ngFor="let file of folder.files"
         class="line pad-left"
         (click)="onFileClicked(file.id)"
+        [style.paddingLeft.rem]="getFileDepth(file) - 1"
       >
         <img [src]="file.iconPath" class="icon" />
         <p class="text">{{ file.name }}</p>
@@ -25,7 +26,8 @@
     <ng-container *ngIf="folder.folders.length > 0">
       <div
         *ngFor="let folder of folder.folders"
-        class="pad-left"
+        [style.paddingLeft.rem]="getFolderDepth(folder)"
+        class="pad-left-x"
       >
         <app-file-explorer-tree-item
           [folder]="folder"

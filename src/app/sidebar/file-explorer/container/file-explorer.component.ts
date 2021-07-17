@@ -8,6 +8,7 @@ import { UserFileService } from "src/app/services/user-file/user-file.service";
 })
 export class FileExplorer {
   userFiles$ = this.userFileService.getAll();
+  userFolders$ = this.userFileService.getAllFolders();
 
   constructor (private userFileService: UserFileService) { }
 

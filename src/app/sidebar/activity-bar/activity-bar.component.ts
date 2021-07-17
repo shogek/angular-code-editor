@@ -15,7 +15,7 @@ export class ActivityBarComponent {
     private subscriptionMove: Subscription | null = null;
     INITIAL_WIDTH_PX = 400;
     contentWidth = this.INITIAL_WIDTH_PX;
-    isOpen = false;
+    isOpen = true;
     isClicked = false;
     filesIcon: string = getFilesIcon();
     oldX = 0;

@@ -1,13 +1,36 @@
-<div class="wrapper">
-  <h5 class="title">EXPLORER</h5>
+<ng-container *ngIf="root">
 
-  <div class="tree">
-    <app-file-explorer-tree-item
-      [folder]="folder"
-      (fileClicked)="onFileClicked($event)"
-    ></app-file-explorer-tree-item>
+  <div class="wrapper">
+    <h5 class="title">EXPLORER</h5>
+
+    <div class="tree">
+      <div class="line" [style.paddingLeft.rem]="root.depth">
+        <img class="icon" [src]="folderIcon" />
+        <p class="text">
+            {{ root.name }}
+        </p>
+      </div>
+
+      <app-file-explorer-tree-folder
+        *ngFor="let folder of rootChildren"
+        [folderName]="folder.name"
+        [folderDepth]="folder.depth"
+        [files]="folder.files"
+      ></app-file-explorer-tree-folder>
+
+      <!-- TODO: Fix the "isActive" part. -->
+      <app-file-explorer-tree-file
+        *ngFor="let file of root.files"
+        [fileName]="file.name"
+        [filePath]="file.path"
+        [fileDepth]="file.depth"
+        [fileIcon]="file.iconPath"
+        [isActive]="false"
+      ></app-file-explorer-tree-file>
+    </div>
+
+    <!-- TODO: .wrapper has padding, but it is not adhered to. -->
+    <div class="spacer"></div>
   </div>
 
-  <!-- TODO: .wrapper has padding, but it is not adhered to. -->
-  <div class="spacer"></div>
-</div>
+</ng-container>

@@ -1,0 +1,33 @@
+.line {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    margin: 0;
+    height: 1.8rem;
+    color: var(--file-explorer-item-text-color);
+  
+    &:hover {
+      color: var(--file-explorer-item-text-hover-color);
+      background-color: var(--file-explorer-item-hover-bg-color);
+    }
+}
+  
+.text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+  
+    .caret {
+        display: inline-block;
+  
+        &.expanded {
+        transform: rotate(90deg);
+        }
+}
+
+// TODO: Copy VSCode config from old pc for smooth caret
+.icon {
+    height: 1.1rem;
+}

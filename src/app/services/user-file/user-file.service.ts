@@ -5,25 +5,32 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { getFileIcon } from "../../helpers/icon.helper";
 import { StatusBarService } from "../status-bar/status-bar.service";
 import { UserFileSource } from "./user-file-source";
+import { Folder } from "src/app/models/folder.model";
 
 @Injectable()
 export class UserFileService {
-  private files: UserFile[] = [];
-  private files$ = new BehaviorSubject<UserFile[]>([]);
-  private activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
+  private _files: UserFile[] = [];
+  private _files$ = new BehaviorSubject<UserFile[]>([]);
+  private _activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
+  private _folders: Folder[] = [];
+  private _folders$ = new BehaviorSubject<Folder[]>([]);
 
   constructor(private statusBarService: StatusBarService) { }
 
   public get(id: string): UserFile {
-    return this.files.find(file => file.id === id)!;
+    return this._files.find(file => file.id === id)!;
   } 
 
   public getAll(): Observable<UserFile[]> {
-    return this.files$;
+    return this._files$.asObservable();
   }
 
   public getActiveFile(): Observable<UserFile | undefined> {
-    return this.activeFile$;
+    return this._activeFile$.asObservable();
+  }
+
+  public getAllFolders(): Observable<Folder[]> {
+    return this._folders$.asObservable();
   }
 
   public useDummyFiles() {
@@ -32,8 +39,45 @@ export class UserFileService {
   }
 
   public openFile(userFileId: string) {
-    const activeFile = this.files.find(({ id }) => id === userFileId)!
-    this.activeFile$.next(activeFile);
+    const activeFile = this._files.find(({ id }) => id === userFileId)!
+    this._activeFile$.next(activeFile);
+  }
+
+  public getFolders(files: UserFile[]): Folder[] {
+    const folders: { [pathToFolder: string] : Folder; } = {};
+    let sortOrder = 1;
+
+    for (const file of files) {
+      // Ex.: pathToFile = ['src', 'test'];
+      const pathToFile = file.path.split('/').slice(0, -1);
+
+      let previousFolder: Folder | null = null;
+      for (let i = 0; i < pathToFile.length; i++) {
+        const pathToFolder = pathToFile.slice(0, i + 1).join('/');
+        let newFolder: Folder | null = null;
+        if (!folders[pathToFolder]) {
+          newFolder = new Folder(pathToFolder, sortOrder);
+          folders[pathToFolder] = newFolder;
+          sortOrder++;
+        } else {
+
+        }
+
+        if (previousFolder && newFolder) {
+          previousFolder.addFolder(newFolder);
+        }
+
+        previousFolder = newFolder ?? folders[pathToFolder];
+      }
+
+      const fileFolder = folders[pathToFile.join('/')];
+      fileFolder.addFile(file);
+    }
+
+    return Object
+      .keys(folders)
+      .map(key => folders[key])
+      // .sort(folder => folder.sortOrder);
   }
 
   public async setAll(fileList: FileList, fileSource: UserFileSource) {
@@ -41,6 +85,7 @@ export class UserFileService {
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
+      const filePath = (file as any).webkitRelativePath || 'Unknown';
       const fileContents = await this.getFileContent(file);
       const fileExtension = file.name.split('.').pop()!;
       userFiles.push({
@@ -48,11 +93,16 @@ export class UserFileService {
         name: file.name,
         contents: fileContents,
         extension: fileExtension,
-        path: (file as any).webkitRelativePath || 'Unknown',
+        path: filePath,
+        depth: filePath.split('/').length,
         iconPath: getFileIcon(fileExtension)
       });
+
+      console.log((file as any).webkitRelativePath);
     }
-    
+    const folders = this.getFolders(userFiles);
+    this.setFolders(folders);
+
     this.setFiles(userFiles);
 
     const message = this.getFileSourceMessage(fileSource);
@@ -60,12 +110,17 @@ export class UserFileService {
   }
 
   public remove(fileId: string): void {
-    this.files = this.files.filter(file => file.id !== fileId);
+    this._files = this._files.filter(file => file.id !== fileId);
   }
 
   private setFiles(files: UserFile[]) {
-    this.files = files;
-    this.files$.next(files);
+    this._files = files;
+    this._files$.next(files);
+  }
+
+  private setFolders(folders: Folder[]) {
+    this._folders = folders;
+    this._folders$.next(folders);
   }
 
   private getFileContent(file: File): Promise<string> {

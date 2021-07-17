@@ -3,7 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActivityBarComponent, FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar';
+import {
+  ActivityBarComponent,
+  FileExplorer,
+  FileExplorerTree,
+  FileExplorerTreeFileComponent,
+  FileExplorerTreeFolderComponent,
+  FileExplorerTreeItem
+} from './sidebar';
 import {
   EditorLineNumbersComponent,
   EditorTabListComponent,
@@ -40,6 +47,8 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     ContextMenuComponent,
     CommandPaletteComponent,
     ActivityBarComponent,
+    FileExplorerTreeFileComponent,
+    FileExplorerTreeFolderComponent,
   ],
   imports: [
     BrowserModule,

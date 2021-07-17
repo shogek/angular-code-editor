@@ -1,11 +1,15 @@
 import { UserFile } from "src/app/models/user-file.model";
 
+// TODO: Still used?
+
 export class Folder {
-  public name = '';
+  public path!: string;
+  public name!: string;
   public files: UserFile[] = [];
   public folders: Folder[] = [];
 
-  constructor (folderName: string) {
+  constructor (path: string, folderName: string) {
+    this.path = path;
     this.name = folderName;
   }
 
@@ -28,8 +32,12 @@ export class Folder {
       return;
     }
 
-    const newChildFolder = new Folder(folderName);
+    const newChildFolder = new Folder(this.getFolderPath(file), folderName);
     this.folders.push(newChildFolder);
     newChildFolder.parse(file, folderNames);
+  }
+
+  private getFolderPath(file: UserFile): string {
+    return file.path.split('/').slice(0, -1).join('');
   }
 }
