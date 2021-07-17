@@ -4,30 +4,34 @@
     <h5 class="title">EXPLORER</h5>
 
     <div class="tree">
-      <div class="line" [style.paddingLeft.rem]="root.depth">
-        <img class="icon" [src]="folderIcon" />
+      <div class="line" [style.paddingLeft.rem]="root.depth" (click)="toggleFolder()">
+        <img class="icon" [src]="isOpen ? chevronDownIcon : chevronRightIcon" />
         <p class="text">
             {{ root.name }}
         </p>
       </div>
 
-      <app-file-explorer-tree-folder
-        *ngFor="let folder of rootChildren"
-        [folderName]="folder.name"
-        [folderDepth]="folder.depth"
-        [files]="folder.files"
-      ></app-file-explorer-tree-folder>
+      <ng-container *ngIf="isOpen">
+        <app-file-explorer-tree-folder
+          *ngFor="let folder of rootChildren"
+          [folderName]="folder.name"
+          [folderDepth]="folder.depth"
+          [files]="folder.files"
+          [chevronDownIcon]="chevronDownIcon"
+          [chevronRightIcon]="chevronRightIcon"
+        ></app-file-explorer-tree-folder>
 
-      <!-- TODO: Fix the "isActive" part. -->
-      <app-file-explorer-tree-file
-        *ngFor="let file of root.files"
-        [fileName]="file.name"
-        [filePath]="file.path"
-        [fileDepth]="file.depth"
-        [fileIcon]="file.iconPath"
-        [isActive]="false"
-      ></app-file-explorer-tree-file>
-    </div>
+        <!-- TODO: Fix the "isActive" part. -->
+        <app-file-explorer-tree-file
+          *ngFor="let file of root.files"
+          [fileName]="file.name"
+          [filePath]="file.path"
+          [fileDepth]="file.depth"
+          [fileIcon]="file.iconPath"
+          [isActive]="false"
+        ></app-file-explorer-tree-file>
+      </ng-container>
+  </div>
 
     <!-- TODO: .wrapper has padding, but it is not adhered to. -->
     <div class="spacer"></div>

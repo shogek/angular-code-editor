@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { getFolderIcon } from "src/app/helpers/icon.helper";
 import { UserFile } from "src/app/models/user-file.model";
 import { Folder } from "../common/folder.model";
 
@@ -14,7 +13,7 @@ export class FileExplorerTreeItem {
   @Output() fileClicked = new EventEmitter<string>();
   
   isExpanded = true;
-  folderIcon = getFolderIcon();
+  folderIcon = '';
 
   public getFolderDepth(folder: Folder) {
     return folder.path.split('/').length;

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+
 import { EditorTheme } from "./editor-theme.model";
 import { AVAILABLE_THEMES } from "./available-editor-themes";
 
@@ -10,6 +12,7 @@ export class EditorThemeService {
     private _temporaryTheme: EditorTheme | null = null;
     private _activeTheme: EditorTheme = defaultTheme;
     private _activeTheme$ = new BehaviorSubject<EditorTheme>(defaultTheme);
+    private _isDarkTheme$ = this._activeTheme$.pipe(map(theme => theme.isDarkTheme));
 
     constructor() {
         this.setTheme(defaultTheme);
@@ -18,6 +21,8 @@ export class EditorThemeService {
     public getAllThemes = (): EditorTheme[] => AVAILABLE_THEMES;
 
     public getActiveTheme = (): Observable<EditorTheme> => this._activeTheme$.asObservable();
+
+    public getIsDarkTheme = (): Observable<boolean> => this._isDarkTheme$;
 
     public setTemporaryTheme(theme: EditorTheme) {
         if (!this._temporaryTheme) {

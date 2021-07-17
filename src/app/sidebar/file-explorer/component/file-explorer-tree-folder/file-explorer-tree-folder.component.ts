@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { getFolderIcon } from "src/app/helpers/icon.helper";
 import { UserFile } from "src/app/models/user-file.model";
 
 @Component({
@@ -12,7 +11,8 @@ export class FileExplorerTreeFolderComponent {
     @Input() folderName!: string;
     @Input() folderDepth!: number;
     @Input() files: UserFile[] = [];
+    @Input() chevronDownIcon!: string;
+    @Input() chevronRightIcon!: string;
 
     isOpen = false;
-    folderIcon = getFolderIcon();
 }

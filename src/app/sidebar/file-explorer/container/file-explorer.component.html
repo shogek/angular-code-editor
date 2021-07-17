@@ -1,4 +1,6 @@
 <app-file-explorer-tree
   [userFolders]="userFolders$ | async"
+  [chevronDownIcon]="chevronDownIcon$ | async"
+  [chevronRightIcon]="chevronRightIcon$ | async"
   (fileClicked)="onFileClicked($event)"
 ></app-file-explorer-tree>

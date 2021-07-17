@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+
 import { UserFile } from "../../models/user-file.model";
 import { MOCK_USER_FILES } from "./mock-user-files";
-import { BehaviorSubject, Observable } from "rxjs";
-import { getFileIcon } from "../../helpers/icon.helper";
 import { StatusBarService } from "../status-bar/status-bar.service";
 import { UserFileSource } from "./user-file-source";
 import { Folder } from "src/app/models/folder.model";
+import { IconService } from "../icon/icon-service";
 
 @Injectable()
 export class UserFileService {
@@ -15,7 +16,10 @@ export class UserFileService {
   private _folders: Folder[] = [];
   private _folders$ = new BehaviorSubject<Folder[]>([]);
 
-  constructor(private statusBarService: StatusBarService) { }
+  constructor(
+    private statusBarService: StatusBarService,
+    private iconService: IconService,
+  ) { }
 
   public get(id: string): UserFile {
     return this._files.find(file => file.id === id)!;
@@ -95,7 +99,7 @@ export class UserFileService {
         extension: fileExtension,
         path: filePath,
         depth: filePath.split('/').length,
-        iconPath: getFileIcon(fileExtension)
+        iconPath: this.iconService.getFileIcon(fileExtension)
       });
 
       console.log((file as any).webkitRelativePath);

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { getFilesIcon } from "src/app/helpers/icon.helper";
+
+import { IconService } from "src/app/services";
 import { DomEventsService } from "src/app/services/dom-events/dom-events.service";
 
 @Component({
@@ -10,17 +11,31 @@ import { DomEventsService } from "src/app/services/dom-events/dom-events.service
     // Use 'Default' otherwise resizing doesn't work
     changeDetection: ChangeDetectionStrategy.Default,
 })
-export class ActivityBarComponent {
+export class ActivityBarComponent implements OnInit, OnDestroy {
     private subscriptionUp: Subscription | null = null;
     private subscriptionMove: Subscription | null = null;
+    private subscriptionIcon!: Subscription;
     INITIAL_WIDTH_PX = 400;
     contentWidth = this.INITIAL_WIDTH_PX;
     isOpen = true;
     isClicked = false;
-    filesIcon: string = getFilesIcon();
+    filesIcon!: string;
     oldX = 0;
 
-    constructor(private domEventsService: DomEventsService) { }
+    constructor(
+        private domEventsService: DomEventsService,
+        private iconService: IconService,
+    ) { }
+
+    public ngOnInit() {
+        this.subscriptionIcon = this.iconService.getFilesIcon().subscribe(icon => this.filesIcon = icon);
+    }
+
+    public ngOnDestroy() {
+        this.subscriptionIcon.unsubscribe();
+        this.subscriptionMove?.unsubscribe();
+        this.subscriptionUp?.unsubscribe();
+    }
 
     public onClick() {
         this.isOpen = !this.isOpen;
