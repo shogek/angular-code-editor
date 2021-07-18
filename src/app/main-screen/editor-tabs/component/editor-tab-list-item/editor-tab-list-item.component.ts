@@ -45,15 +45,9 @@ export class EditorTabListItemComponent implements OnInit {
 
   public onContextMenuItemClicked(choice: ContextMenuItem) {
     switch (choice.label) {
-      case EditorTabListItemMenu.Close:
-        this.clickClose.emit(this.tabId);
-        break;
-      case EditorTabListItemMenu.CloseAll:
-        this.clickCloseAll.emit();
-        break;
-      case EditorTabListItemMenu.CloseOthers:
-        this.clickCloseOthers.emit(this.tabId);
-        break;
+      case EditorTabListItemMenu.Close:       return this.clickClose.emit(this.tabId);
+      case EditorTabListItemMenu.CloseAll:    return this.clickCloseAll.emit();
+      case EditorTabListItemMenu.CloseOthers: return this.clickCloseOthers.emit(this.tabId);
       default: throw new Error(`Unknown context menu item: ${choice}`);
     }
   }

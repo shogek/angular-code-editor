@@ -20,7 +20,12 @@ export class FileExplorerTreeComponent {
 
   treeItems: TreeItem[] = [];
 
-  public onTreeItemFileClicked(path: string, fileId: string) {
+  public onTreeItemFileClicked(event: MouseEvent, path: string, fileId: string) {
+    if (event.buttons !== 1) {
+      // 1 = left click, 2 = right click
+      return;
+    }
+
     this.treeItems = this.treeItems.map((treeItem): TreeItem => ({
         ...treeItem,
         isActive: treeItem.path === path,
@@ -30,11 +35,25 @@ export class FileExplorerTreeComponent {
     this.fileClicked.emit(fileId);
   }
 
+  public onFileDelete(fileId: string) {
+    // TODO:
+  }
+
+  /** @param path Ex.: `'src/component/test'` */
+  public onFolderDelete(path: string) {
+    // TODO:
+  }
+
   /**
    * @param path Ex.: `'src/component/test'`
    * @param isExpanded Whether the folder was expanded or collapsed
    */
-  public onTreeItemFolderClicked(path: string, isExpanded: boolean, depth: number) {
+  public onTreeItemFolderClicked(event: MouseEvent, path: string, isExpanded: boolean, depth: number) {
+    if (event.buttons !== 1) {
+      // 1 = left click, 2 = right click
+      return;
+    }
+
     this.treeItems = this.treeItems.map((treeItem): TreeItem => {
       // Found item which was directly clicked on.
       if (treeItem.path === path) {

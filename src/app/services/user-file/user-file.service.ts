@@ -115,7 +115,6 @@ export class UserFileService {
   }
 
   private setFiles(files: UserFile[]) {
-    debugger;
     this._files = files;
     this._files$.next(files);
   }

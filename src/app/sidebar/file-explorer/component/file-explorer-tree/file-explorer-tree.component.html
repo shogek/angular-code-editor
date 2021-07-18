@@ -16,7 +16,8 @@
             [chevronRightIcon]=""
             [isActive]="treeItem.isActive"
             [isExpanded]=""
-            (mousedown)="onTreeItemFileClicked(treeItem.path, treeItem.fileId)"
+            (mousedown)="onTreeItemFileClicked($event, treeItem.path, treeItem.fileId)"
+            (delete)="onFileDelete(treeItem.fileId)"
           ></app-file-explorer-tree-item>
 
           <!-- TreeItem represents a Folder -->
@@ -31,6 +32,7 @@
             [isActive]="treeItem.isActive"
             [isExpanded]="treeItem.isExpanded"
             (mousedown)="onTreeItemFolderClicked(treeItem.path, !treeItem.isExpanded, treeItem.depth)"
+            (delete)="onFolderDelete(treeItem.path)"
           ></app-file-explorer-tree-item>
 
       </ng-container>
