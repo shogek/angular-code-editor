@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
 import { UserFile } from "src/app/models/user-file.model";
+import { TreeItem } from "./tree-item.model";
 
 // TODO: Show all kinds of text in file explorer if no files loaded
-// TODO: Fix bug - if grandparent is toggle, child file should follow parent folder's visiblity
 
 @Component({
   selector: 'app-file-explorer-tree',
@@ -14,32 +14,41 @@ export class FileExplorerTreeComponent {
   @Input() chevronDownIcon!: string;
   @Input() chevronRightIcon!: string;
   @Input() set userFiles(value: UserFile[]) {
-    this.treeItems = this.mapToCustomObject(value);
+    this.treeItems = this.mapToTreeItem(value);
   }
   @Output() fileClicked = new EventEmitter<string>();
 
   treeItems: TreeItem[] = [];
 
   public onTreeItemFileClicked(path: string, fileId: string) {
-    // TODO: Refactor to adhere to types
-    this.treeItems = this.treeItems.map(
-      treeItem => treeItem.path === path
-        ? ({...treeItem, isActive: true})
-        : ({...treeItem, isActive: false})
+    this.treeItems = this.treeItems.map((treeItem): TreeItem => ({
+        ...treeItem,
+        isActive: treeItem.path === path,
+      })
     );
 
     this.fileClicked.emit(fileId);
   }
 
-  // TODO: Document and simplify code
-  public onTreeItemFolderClicked(path: string, isExpanded: boolean) {
-    this.treeItems = this.treeItems.map(treeItem => {
+  /**
+   * @param path Ex.: `'src/component/test'`
+   * @param isExpanded Whether the folder was expanded or collapsed
+   */
+  public onTreeItemFolderClicked(path: string, isExpanded: boolean, depth: number) {
+    this.treeItems = this.treeItems.map((treeItem): TreeItem => {
+      // Found item which was directly clicked on.
       if (treeItem.path === path) {
-        // TODO: Does type safety work here?
         return {...treeItem, isExpanded: isExpanded, isActive: true};
       }
 
+      // Check if descendant - 'src/component/test' && 'src/component/' == true
       if ((treeItem.path + '/').startsWith(path + '/')) {
+        // Check if direct child
+        // TODO: Fix bug with grandparent-parent folder visibility
+        if (treeItem.isFile && treeItem.depth === depth + 1) {
+          // Make sure folder's contents remain collapsed after parent folder is toggled
+          return {...treeItem, isVisible: isExpanded, isActive: false, isExpanded: isExpanded};
+        }
         return {...treeItem, isVisible: isExpanded, isActive: false};
       }
 
@@ -47,8 +56,7 @@ export class FileExplorerTreeComponent {
     });
   }
 
-  // TODO: Document and simplify code
-  private mapToCustomObject(files: UserFile[]) {
+  private mapToTreeItem(files: UserFile[]) {
     const treeItems: { [pathToDirectory: string] : TreeItem; } = {};
 
     for (const file of files) {
@@ -61,6 +69,7 @@ export class FileExplorerTreeComponent {
         const pathToDirectory = pathToFile.slice(0, i + 1).join('/');
 
         if (treeItems[pathToDirectory]) {
+          // TreeItem for folder was already created
           return;
         }
         
@@ -94,17 +103,4 @@ export class FileExplorerTreeComponent {
       .keys(treeItems)
       .map(key => treeItems[key]);
   }
-}
-
-// TODO: Document and move to separate file
-export interface TreeItem {
-  name: string;
-  path: string;
-  depth: number;
-  isFile: boolean;
-  fileIcon: string;
-  fileId: string;
-  isVisible: boolean;
-  isActive: boolean;
-  isExpanded: boolean;
 }

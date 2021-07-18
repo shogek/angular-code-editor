@@ -30,13 +30,10 @@
             [chevronRightIcon]="chevronRightIcon"
             [isActive]="treeItem.isActive"
             [isExpanded]="treeItem.isExpanded"
-            (mousedown)="onTreeItemFolderClicked(treeItem.path, !treeItem.isExpanded)"
+            (mousedown)="onTreeItemFolderClicked(treeItem.path, !treeItem.isExpanded, treeItem.depth)"
           ></app-file-explorer-tree-item>
 
       </ng-container>
     </ng-container>
   </div>
-
-  <!-- TODO: .wrapper has padding, but it is not adhered to. -->
-  <div class="spacer"></div>
 </div>
