@@ -1,5 +1,5 @@
 <app-file-explorer-tree
-  [userFolders]="userFolders$ | async"
+  [userFiles]="userFiles$ | async"
   [chevronDownIcon]="chevronDownIcon$ | async"
   [chevronRightIcon]="chevronRightIcon$ | async"
   (fileClicked)="onFileClicked($event)"

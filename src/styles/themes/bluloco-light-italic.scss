@@ -1,5 +1,8 @@
 /** Based on: "Bluloco Light Italic" */
 @mixin theme-bluloco-light-italic {
+
+    // TODO: Split theme files by below categories
+    
     // -----------------
     // --- 1. Common ---
     // -----------------
@@ -52,13 +55,15 @@
 
     --file-explorer-indentation-bar-color: rgb(208, 208, 208);
 
+    --file-explorer-item-border-active-color: rgb(0, 153, 225);
+
     --file-explorer-item-text-color: rgb(56, 58, 66);
     --file-explorer-item-text-hover-color: rgb(56, 58, 66);
     --file-explorer-item-text-active-color: rgb(255, 255, 255);
 
     --file-explorer-item-bg-color: rgb(232, 232, 232);
     --file-explorer-item-hover-bg-color: rgb(241, 241, 241);
-    --file-explorer-item-active-bg-color: rgb(246, 246, 246);
+    --file-explorer-item-active-bg-color: rgb(0, 167, 245);
 
     // ---------------------
     // --- 5. Status bar ---

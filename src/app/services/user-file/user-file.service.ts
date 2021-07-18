@@ -101,11 +101,8 @@ export class UserFileService {
         depth: filePath.split('/').length,
         iconPath: this.iconService.getFileIcon(fileExtension)
       });
-
-      console.log((file as any).webkitRelativePath);
     }
-    const folders = this.getFolders(userFiles);
-    this.setFolders(folders);
+    this.setFolders(this.getFolders(userFiles));
 
     this.setFiles(userFiles);
 
@@ -118,6 +115,7 @@ export class UserFileService {
   }
 
   private setFiles(files: UserFile[]) {
+    debugger;
     this._files = files;
     this._files$.next(files);
   }

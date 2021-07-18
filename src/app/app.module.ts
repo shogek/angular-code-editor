@@ -5,11 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   ActivityBarComponent,
-  FileExplorer,
-  FileExplorerTree,
-  FileExplorerTreeFileComponent,
-  FileExplorerTreeFolderComponent,
-  FileExplorerTreeItem
+  FileExplorerComponent,
+  FileExplorerTreeComponent,
+  FileExplorerTreeItemComponent,
 } from './sidebar';
 import {
   EditorLineNumbersComponent,
@@ -38,17 +36,15 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     EditorLineNumbersComponent,
     WelcomeWindowComponent,
     WelcomeWindowScreenComponent,
-    FileExplorer,
-    FileExplorerTree,
-    FileExplorerTreeItem,
+    FileExplorerComponent,
+    FileExplorerTreeComponent,
+    FileExplorerTreeItemComponent,
     StatusBarComponent,
     StatusBarRowComponent,
     SafeHtmlPipe,
     ContextMenuComponent,
     CommandPaletteComponent,
     ActivityBarComponent,
-    FileExplorerTreeFileComponent,
-    FileExplorerTreeFolderComponent,
   ],
   imports: [
     BrowserModule,

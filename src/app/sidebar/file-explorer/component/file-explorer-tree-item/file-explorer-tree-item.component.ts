@@ -1,33 +1,19 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { UserFile } from "src/app/models/user-file.model";
-import { Folder } from "../common/folder.model";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-file-explorer-tree-item',
-  templateUrl: './file-explorer-tree-item.component.html',
-  styleUrls: ['./file-explorer-tree-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-file-explorer-tree-item',
+    templateUrl: './file-explorer-tree-item.component.html',
+    styleUrls: ['./file-explorer-tree-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerTreeItem {
-  @Input() folder!: Folder;
-  @Output() fileClicked = new EventEmitter<string>();
-  
-  isExpanded = true;
-  folderIcon = '';
-
-  public getFolderDepth(folder: Folder) {
-    return folder.path.split('/').length;
-  }
-
-  public getFileDepth(file: UserFile) {
-    return file.path.split('/').slice(0, -1).length;
-  }
-
-  public toggleExpanded() {
-    this.isExpanded = !this.isExpanded;
-  }
-
-  public onFileClicked(userFileId: string) {
-    this.fileClicked.emit(userFileId);
-  }
+export class FileExplorerTreeItemComponent {
+    @Input() name!: string;
+    @Input() depth!: number;
+    @Input() isFile!: boolean;
+    @Input() fileIcon = '';
+    @Input() chevronDownIcon = '';
+    @Input() chevronRightIcon = '';
+    @Input() isActive = false;
+    @Input() isExpanded = false;
+    @Output() clicked = new EventEmitter<void>();
 }

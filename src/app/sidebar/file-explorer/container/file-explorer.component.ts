@@ -7,8 +7,8 @@ import { UserFileService } from "src/app/services/user-file/user-file.service";
   templateUrl: './file-explorer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorer {
-  userFolders$ = this.userFileService.getAllFolders();
+export class FileExplorerComponent {
+  userFiles$ = this.userFileService.getAll();
   chevronDownIcon$ = this.iconService.getChevronDownIcon();
   chevronRightIcon$ = this.iconService.getChevronRightIcon();
 

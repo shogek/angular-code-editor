@@ -118,6 +118,9 @@ export class CommandPaletteComponent implements OnInit, OnDestroy {
             return;
         }
 
+        // Prevent scrolling in page
+        e.preventDefault();
+
         switch(e.key) {
             case 'Enter': this.handlePressedEnter(); return;
             case 'Escape': this.handlePressedEscape(); return;
