@@ -1,0 +1,15 @@
+<div class="empty">
+    You have not yet uploaded a folder.
+
+    <div class="first-button">
+        <button type="button" (click)="clickFolderInput()">Upload Folder</button>
+        <input #folderUploader hidden type="file" multiple webkitdirectory (change)="onFolderUploaded($event)"/>
+    </div>
+
+    You can also just upload some files.
+
+    <div>
+        <button type="button" (click)="clickFileInput()">Upload Files</button>
+        <input #fileUploader hidden type="file" multiple (change)="onFilesUploaded($event)" />
+    </div>
+</div>

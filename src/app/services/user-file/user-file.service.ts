@@ -1,29 +1,33 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+
 import { UserFile } from "../../models/user-file.model";
 import { MOCK_USER_FILES } from "./mock-user-files";
-import { BehaviorSubject, Observable } from "rxjs";
-import { getFileIcon } from "../../helpers/icon.helper";
 import { StatusBarService } from "../status-bar/status-bar.service";
 import { UserFileSource } from "./user-file-source";
+import { IconService } from "../icon/icon-service";
 
 @Injectable()
 export class UserFileService {
-  private files: UserFile[] = [];
-  private files$ = new BehaviorSubject<UserFile[]>([]);
-  private activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
+  private _files: UserFile[] = [];
+  private _files$ = new BehaviorSubject<UserFile[]>([]);
+  private _activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
 
-  constructor(private statusBarService: StatusBarService) { }
+  constructor(
+    private statusBarService: StatusBarService,
+    private iconService: IconService,
+  ) { }
 
   public get(id: string): UserFile {
-    return this.files.find(file => file.id === id)!;
+    return this._files.find(file => file.id === id)!;
   } 
 
   public getAll(): Observable<UserFile[]> {
-    return this.files$;
+    return this._files$.asObservable();
   }
 
   public getActiveFile(): Observable<UserFile | undefined> {
-    return this.activeFile$;
+    return this._activeFile$.asObservable();
   }
 
   public useDummyFiles() {
@@ -32,8 +36,8 @@ export class UserFileService {
   }
 
   public openFile(userFileId: string) {
-    const activeFile = this.files.find(({ id }) => id === userFileId)!
-    this.activeFile$.next(activeFile);
+    const activeFile = this._files.find(({ id }) => id === userFileId)!
+    this._activeFile$.next(activeFile);
   }
 
   public async setAll(fileList: FileList, fileSource: UserFileSource) {
@@ -41,6 +45,7 @@ export class UserFileService {
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
+      const filePath = (file as any).webkitRelativePath || `unknown/${file.name}`;
       const fileContents = await this.getFileContent(file);
       const fileExtension = file.name.split('.').pop()!;
       userFiles.push({
@@ -48,24 +53,40 @@ export class UserFileService {
         name: file.name,
         contents: fileContents,
         extension: fileExtension,
-        path: (file as any).webkitRelativePath || 'Unknown',
-        iconPath: getFileIcon(fileExtension)
+        path: filePath,
+        depth: filePath.split('/').length,
+        iconPath: this.iconService.getFileIcon(fileExtension)
       });
     }
-    
+
     this.setFiles(userFiles);
 
     const message = this.getFileSourceMessage(fileSource);
     this.statusBarService.showMessage(message);
   }
 
-  public remove(fileId: string): void {
-    this.files = this.files.filter(file => file.id !== fileId);
+  public remove(fileId: string) {
+    const updatedFiles = this._files.filter(({id}) => id !== fileId);
+    this.setFiles(updatedFiles);
+  }
+
+  /**
+   * Remove all files within a specified folder.
+   * @param path Ex.: `'src/component/test'`
+   */
+  public removeByFolder(folderPath: string) {
+    const updatedFiles = this._files.filter(({path}) => {
+      // 'src/test/app.ts' => 'src/test'
+      const pathToFile = path.split('/').slice(0, -1).join('/');
+      return !(pathToFile + '/').startsWith(folderPath + '/');
+    });
+
+    this.setFiles(updatedFiles);
   }
 
   private setFiles(files: UserFile[]) {
-    this.files = files;
-    this.files$.next(files);
+    this._files = files;
+    this._files$.next(files);
   }
 
   private getFileContent(file: File): Promise<string> {

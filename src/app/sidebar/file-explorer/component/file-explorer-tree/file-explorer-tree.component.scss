@@ -4,10 +4,7 @@
   overflow-y: auto;
   // Fixes problem of padding making height taller than 100%;
   box-sizing: border-box;
-}
-
-.spacer {
-  height: 1.7rem;
+  padding-bottom: 1.7rem;
 }
 
 .title {

@@ -1,41 +1,39 @@
 .line {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  margin: 0;
-  height: 1.8rem;
-  color: var(--file-explorer-item-text-color);
-
-  &:hover {
-    color: var(--file-explorer-item-text-hover-color);
-    background-color: var(--file-explorer-item-hover-bg-color);
-  }
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    margin: 0;
+    height: 1.8rem;
+    border: 1px solid var(--file-explorer-column-bg-color);
+    color: var(--file-explorer-item-text-color);
+  
+    &:hover {
+      color: var(--file-explorer-item-text-hover-color);
+      background-color: var(--file-explorer-item-hover-bg-color);
+    }
 }
 
-.pad-left {
-  padding-left: 1.7rem;
+.line.active {
+    color: var(--file-explorer-item-text-active-color);
+    background-color: var(--file-explorer-item-active-bg-color);
+    border-color: var(--file-explorer-item-border-active-color);
 }
-
+  
 .text {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-
-.caret {
-  display: inline-block;
-
-  &.expanded {
-    transform: rotate(90deg);
-  }
+  
+    .caret {
+        display: inline-block;
+  
+        &.expanded {
+        transform: rotate(90deg);
+        }
 }
 
 .icon {
-  height: 1.1rem;
-}
-
-.list {
-  list-style-type: none;
-  border-left: solid 1px var(--file-explorer-indentation-bar-color);
+    height: 1.1rem;
 }

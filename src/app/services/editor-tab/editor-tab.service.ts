@@ -37,7 +37,7 @@ export class EditorTabService implements OnDestroy {
   }
 
   public getOpenedTabs(): Observable<EditorTab[]> {
-    return this.openedTabs$;
+    return this.openedTabs$.asObservable();
   }
 
   public setActiveTab(tabId: string) {

@@ -51,14 +51,14 @@ export class WelcomeWindowScreenComponent {
     }
   }
 
-  public async onFilesUploaded(e: Event) {
+  public onFilesUploaded(e: Event) {
     const files = (e.target as HTMLInputElement).files;
     if (files?.length && files.length > 0) {
       this.filesUploaded.emit(files);
     }
   }
 
-  public async onFolderUploaded(e: Event) {
+  public onFolderUploaded(e: Event) {
     const files = (e.target as HTMLInputElement).files;
     if (files?.length && files.length > 0) {
       this.folderUploaded.emit(files);

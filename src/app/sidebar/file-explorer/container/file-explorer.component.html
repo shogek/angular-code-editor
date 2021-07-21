@@ -1,4 +1,18 @@
-<app-file-explorer-tree
-  [userFiles]="userFiles$ | async"
-  (fileClicked)="onFileClicked($event)"
-></app-file-explorer-tree>
+<ng-container *ngIf="userFiles$ | async as userFiles; else empty">
+  <app-file-explorer-tree
+    *ngIf="userFiles.length > 0; else empty"
+    [userFiles]="userFiles"
+    [chevronDownIcon]="chevronDownIcon$ | async"
+    [chevronRightIcon]="chevronRightIcon$ | async"
+    (fileClicked)="onFileClicked($event)"
+    (fileDelete)="onFileDelete($event)"
+    (folderDelete)="onFolderDelete($event)"
+  ></app-file-explorer-tree>
+</ng-container>
+
+<ng-template #empty>
+  <app-empty-file-explorer
+    (filesUploaded)="onFilesUploaded($event)"
+    (folderUploaded)="onFolderUploaded($event)"
+  ></app-empty-file-explorer>
+</ng-template>

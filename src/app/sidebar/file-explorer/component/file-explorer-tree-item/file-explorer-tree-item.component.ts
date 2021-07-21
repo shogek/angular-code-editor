@@ -1,26 +1,48 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { getFolderIcon } from "src/app/helpers/icon.helper";
-import { Folder } from "../common/folder.model";
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
+import { ContextMenuItem } from "src/app/common";
+import { FileExplorerTreeItemMenu } from "./file-explorer-tree-item.menu";
 
-// TODO: Sort files and folders by name
 @Component({
-  selector: 'app-file-explorer-tree-item',
-  templateUrl: './file-explorer-tree-item.component.html',
-  styleUrls: ['./file-explorer-tree-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-file-explorer-tree-item',
+    templateUrl: './file-explorer-tree-item.component.html',
+    styleUrls: ['./file-explorer-tree-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerTreeItem {
-  @Input() folder!: Folder;
-  @Output() fileClicked = new EventEmitter<string>();
-  
-  isExpanded = true;
-  folderIcon = getFolderIcon();
+export class FileExplorerTreeItemComponent {
+    @Input() name!: string;
+    @Input() depth!: number;
+    @Input() isFile!: boolean;
+    @Input() fileIcon = '';
+    @Input() chevronDownIcon = '';
+    @Input() chevronRightIcon = '';
+    @Input() isActive = false;
+    @Input() isExpanded = false;
+    @Output() delete = new EventEmitter<void>();
 
-  public toggleExpanded() {
-    this.isExpanded = !this.isExpanded;
-  }
+    contextMenuChoices: ContextMenuItem[] = [
+        { label: FileExplorerTreeItemMenu.Delete, isDisabled: false },
+        { label: FileExplorerTreeItemMenu.Rename, isDisabled: false },
+    ];
 
-  public onFileClicked(userFileId: string) {
-    this.fileClicked.emit(userFileId);
-  }
+    public onContextMenuItemClicked(choice: ContextMenuItem) {
+        switch (choice.label) {
+            case FileExplorerTreeItemMenu.Delete: return this.deleteItem();
+            case FileExplorerTreeItemMenu.Rename: return this.renameItem();
+            default: throw new Error(`Unknown context menu item: ${choice}`);
+        }
+    }
+
+    private deleteItem() {
+        const message = this.isFile
+            ? `Are you sure you want to delete '${this.name}'?`
+            : `Are you sure you want to delete '${this.name}' and its contents?`;
+
+        if (window.confirm(message)) {
+            this.delete.emit();
+        }
+    }
+
+    private renameItem() {
+        alert('Implement me!');
+    }
 }

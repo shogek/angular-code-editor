@@ -1,13 +1,41 @@
 <div class="wrapper">
   <h5 class="title">EXPLORER</h5>
 
-  <div class="tree">
-    <app-file-explorer-tree-item
-      [folder]="folder"
-      (fileClicked)="onFileClicked($event)"
-    ></app-file-explorer-tree-item>
-  </div>
+  <div>
+    <ng-container *ngFor="let treeItem of treeItems">
+        <ng-container *ngIf="treeItem.isVisible">
 
-  <!-- TODO: .wrapper has padding, but it is not adhered to. -->
-  <div class="spacer"></div>
+          <!-- TreeItem represents a File -->
+          <app-file-explorer-tree-item
+            *ngIf="treeItem.isFile && treeItem.isExpanded"
+            [name]="treeItem.name"
+            [depth]="treeItem.depth"
+            [isFile]="true"
+            [fileIcon]="treeItem.fileIcon"
+            [chevronDownIcon]=""
+            [chevronRightIcon]=""
+            [isActive]="treeItem.isActive"
+            [isExpanded]=""
+            (mousedown)="onTreeItemFileClicked($event, treeItem.path, treeItem.fileId)"
+            (delete)="fileDelete.emit(treeItem.fileId)"
+          ></app-file-explorer-tree-item>
+
+          <!-- TreeItem represents a Folder -->
+          <app-file-explorer-tree-item
+            *ngIf="!treeItem.isFile"
+            [name]="treeItem.name"
+            [depth]="treeItem.depth"
+            [isFile]="false"
+            [fileIcon]=""
+            [chevronDownIcon]="chevronDownIcon"
+            [chevronRightIcon]="chevronRightIcon"
+            [isActive]="treeItem.isActive"
+            [isExpanded]="treeItem.isExpanded"
+            (mousedown)="onTreeItemFolderClicked($event, treeItem.path, !treeItem.isExpanded, treeItem.depth)"
+            (delete)="folderDelete.emit(treeItem.path)"
+          ></app-file-explorer-tree-item>
+
+      </ng-container>
+    </ng-container>
+  </div>
 </div>

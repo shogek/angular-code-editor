@@ -14,10 +14,11 @@
     </div>
 
     <div class="buttons-column">
-        <div (click)="onClick()" class="button">
+        <div class="button">
             <img
                 [class.active]="isOpen"
                 [src]="filesIcon"
+                (click)="onClick()" 
             />
         </div>
     </div>

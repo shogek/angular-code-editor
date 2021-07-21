@@ -3,7 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActivityBarComponent, FileExplorer, FileExplorerTree, FileExplorerTreeItem } from './sidebar';
+import {
+  ActivityBarComponent,
+  EmptyFileExplorerComponent,
+  FileExplorerComponent,
+  FileExplorerTreeComponent,
+  FileExplorerTreeItemComponent,
+} from './sidebar';
 import {
   EditorLineNumbersComponent,
   EditorTabListComponent,
@@ -16,7 +22,7 @@ import {
 } from './main-screen';
 import { StatusBarComponent, StatusBarRowComponent } from './status-bar';
 import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pipe';
-import { EditorTabService, EditorThemeService, StatusBarService, UserFileService } from './services';
+import { EditorTabService, EditorThemeService, IconService, StatusBarService, UserFileService } from './services';
 import { CommandPaletteComponent, ContextMenuComponent } from './common';
 import { DomEventsService } from './services/dom-events/dom-events.service';
 
@@ -31,9 +37,10 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     EditorLineNumbersComponent,
     WelcomeWindowComponent,
     WelcomeWindowScreenComponent,
-    FileExplorer,
-    FileExplorerTree,
-    FileExplorerTreeItem,
+    EmptyFileExplorerComponent,
+    FileExplorerComponent,
+    FileExplorerTreeComponent,
+    FileExplorerTreeItemComponent,
     StatusBarComponent,
     StatusBarRowComponent,
     SafeHtmlPipe,
@@ -51,6 +58,7 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     StatusBarService,
     EditorThemeService,
     DomEventsService,
+    IconService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,5 @@
 /** Based on: "Dark+ (default dark)" */
 @mixin theme-dark-plus-default {
-
-    // TODO: Add padding to file explorer
-
     // -----------------
     // --- 1. Common ---
     // -----------------
@@ -54,6 +51,8 @@
     --file-explorer-column-bg-color: rgb(37, 37, 37);
 
     --file-explorer-indentation-bar-color: rgb(57, 57, 57);
+
+    --file-explorer-item-border-active-color: rgb(0, 122, 204);
 
     --file-explorer-item-text-color: rgb(204, 204, 204);
     --file-explorer-item-text-hover-color: rgb(204, 204, 204);

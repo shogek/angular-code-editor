@@ -15,7 +15,7 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Fira code';
+  font-family: 'Fira code' !important;
   color: var(--editor-text-color);
   background-color: var(--editor-bg-color);
 
