@@ -41,49 +41,12 @@ export class UserFileService {
     this._activeFile$.next(activeFile);
   }
 
-  public getFolders(files: UserFile[]): Folder[] {
-    const folders: { [pathToFolder: string] : Folder; } = {};
-    let sortOrder = 1;
-
-    for (const file of files) {
-      // Ex.: pathToFile = ['src', 'test'];
-      const pathToFile = file.path.split('/').slice(0, -1);
-
-      let previousFolder: Folder | null = null;
-      for (let i = 0; i < pathToFile.length; i++) {
-        const pathToFolder = pathToFile.slice(0, i + 1).join('/');
-        let newFolder: Folder | null = null;
-        if (!folders[pathToFolder]) {
-          newFolder = new Folder(pathToFolder, sortOrder);
-          folders[pathToFolder] = newFolder;
-          sortOrder++;
-        } else {
-
-        }
-
-        if (previousFolder && newFolder) {
-          previousFolder.addFolder(newFolder);
-        }
-
-        previousFolder = newFolder ?? folders[pathToFolder];
-      }
-
-      const fileFolder = folders[pathToFile.join('/')];
-      fileFolder.addFile(file);
-    }
-
-    return Object
-      .keys(folders)
-      .map(key => folders[key])
-      // .sort(folder => folder.sortOrder);
-  }
-
   public async setAll(fileList: FileList, fileSource: UserFileSource) {
     const userFiles: UserFile[] = [];
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
-      const filePath = (file as any).webkitRelativePath || 'Unknown';
+      const filePath = (file as any).webkitRelativePath || `unknown/${file.name}`;
       const fileContents = await this.getFileContent(file);
       const fileExtension = file.name.split('.').pop()!;
       userFiles.push({
