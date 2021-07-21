@@ -17,7 +17,7 @@ export class ActivityBarComponent implements OnInit, OnDestroy {
     private subscriptionIcon!: Subscription;
     INITIAL_WIDTH_PX = 400;
     contentWidth = this.INITIAL_WIDTH_PX;
-    isOpen = true;
+    isOpen = false;
     isClicked = false;
     filesIcon!: string;
     oldX = 0;

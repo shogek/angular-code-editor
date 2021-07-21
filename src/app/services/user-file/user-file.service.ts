@@ -5,7 +5,6 @@ import { UserFile } from "../../models/user-file.model";
 import { MOCK_USER_FILES } from "./mock-user-files";
 import { StatusBarService } from "../status-bar/status-bar.service";
 import { UserFileSource } from "./user-file-source";
-import { Folder } from "src/app/models/folder.model";
 import { IconService } from "../icon/icon-service";
 
 @Injectable()

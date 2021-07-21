@@ -11,6 +11,6 @@ export interface UserFile {
   path: string;
   /** How deep in the directory tree it's located. Ex.: `"app/tests/test.ts".` would be `2`. */
   depth: number;
-  /** Ex.: `"/assets/icons/file.svg"` */
+  /** Ex.: `"assets/icons/file.svg"` */
   iconPath: string;
 }
