@@ -20,4 +20,12 @@ export class FileExplorerComponent {
   public onFileClicked(userFileId: string) {
     this.userFileService.openFile(userFileId);
   }
+
+  public onFileDelete(userFileId: string) {
+    this.userFileService.remove(userFileId);
+  }
+
+  public onFolderDelete(folderPath: string) {
+    this.userFileService.removeByFolder(folderPath);
+  }
 }

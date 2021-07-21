@@ -17,6 +17,8 @@ export class FileExplorerTreeComponent {
     this.treeItems = this.mapToTreeItem(value);
   }
   @Output() fileClicked = new EventEmitter<string>();
+  @Output() fileDelete = new EventEmitter<string>();
+  @Output() folderDelete = new EventEmitter<string>();
 
   treeItems: TreeItem[] = [];
 
@@ -33,15 +35,6 @@ export class FileExplorerTreeComponent {
     );
 
     this.fileClicked.emit(fileId);
-  }
-
-  public onFileDelete(fileId: string) {
-    // TODO:
-  }
-
-  /** @param path Ex.: `'src/component/test'` */
-  public onFolderDelete(path: string) {
-    // TODO:
   }
 
   /**

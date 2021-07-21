@@ -17,7 +17,6 @@ export class FileExplorerTreeItemComponent {
     @Input() chevronRightIcon = '';
     @Input() isActive = false;
     @Input() isExpanded = false;
-    @Output() clicked = new EventEmitter<void>();
     @Output() delete = new EventEmitter<void>();
 
     contextMenuChoices: ContextMenuItem[] = [

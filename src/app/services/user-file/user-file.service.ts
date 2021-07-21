@@ -13,8 +13,6 @@ export class UserFileService {
   private _files: UserFile[] = [];
   private _files$ = new BehaviorSubject<UserFile[]>([]);
   private _activeFile$ = new BehaviorSubject<UserFile | undefined>(undefined);
-  private _folders: Folder[] = [];
-  private _folders$ = new BehaviorSubject<Folder[]>([]);
 
   constructor(
     private statusBarService: StatusBarService,
@@ -31,10 +29,6 @@ export class UserFileService {
 
   public getActiveFile(): Observable<UserFile | undefined> {
     return this._activeFile$.asObservable();
-  }
-
-  public getAllFolders(): Observable<Folder[]> {
-    return this._folders$.asObservable();
   }
 
   public useDummyFiles() {
@@ -102,7 +96,6 @@ export class UserFileService {
         iconPath: this.iconService.getFileIcon(fileExtension)
       });
     }
-    this.setFolders(this.getFolders(userFiles));
 
     this.setFiles(userFiles);
 
@@ -110,18 +103,28 @@ export class UserFileService {
     this.statusBarService.showMessage(message);
   }
 
-  public remove(fileId: string): void {
-    this._files = this._files.filter(file => file.id !== fileId);
+  public remove(fileId: string) {
+    const updatedFiles = this._files.filter(({id}) => id !== fileId);
+    this.setFiles(updatedFiles);
+  }
+
+  /**
+   * Remove all files within a specified folder.
+   * @param path Ex.: `'src/component/test'`
+   */
+  public removeByFolder(folderPath: string) {
+    const updatedFiles = this._files.filter(({path}) => {
+      // 'src/test/app.ts' => 'src/test'
+      const pathToFile = path.split('/').slice(0, -1).join('/');
+      return !(pathToFile + '/').startsWith(folderPath + '/');
+    });
+
+    this.setFiles(updatedFiles);
   }
 
   private setFiles(files: UserFile[]) {
     this._files = files;
     this._files$.next(files);
-  }
-
-  private setFolders(folders: Folder[]) {
-    this._folders = folders;
-    this._folders$.next(folders);
   }
 
   private getFileContent(file: File): Promise<string> {

@@ -3,4 +3,6 @@
   [chevronDownIcon]="chevronDownIcon$ | async"
   [chevronRightIcon]="chevronRightIcon$ | async"
   (fileClicked)="onFileClicked($event)"
+  (fileDelete)="onFileDelete($event)"
+  (folderDelete)="onFolderDelete($event)"
 ></app-file-explorer-tree>

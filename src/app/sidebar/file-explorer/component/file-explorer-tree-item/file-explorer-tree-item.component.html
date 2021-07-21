@@ -3,7 +3,6 @@
     class="line"
     [style.paddingLeft.rem]="depth"
     [class.active]="isActive"
-    (click)="clicked.emit()"
 >
     <ng-container *ngIf="isFile then file else folder"></ng-container>
 
