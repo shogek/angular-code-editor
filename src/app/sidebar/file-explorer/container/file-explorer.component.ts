@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { IconService } from "src/app/services/icon/icon-service";
+import { UserFileSource } from "src/app/services/user-file/user-file-source";
 import { UserFileService } from "src/app/services/user-file/user-file.service";
 
 @Component({
@@ -16,6 +17,14 @@ export class FileExplorerComponent {
     private userFileService: UserFileService,
     private iconService: IconService,
   ) { }
+
+  public onFilesUploaded(files: FileList) {
+    this.userFileService.setAll(files, UserFileSource.UploadedFiles);
+  }
+
+  public onFolderUploaded(files: FileList) {
+    this.userFileService.setAll(files, UserFileSource.UploadedFolder);
+  }
 
   public onFileClicked(userFileId: string) {
     this.userFileService.openFile(userFileId);

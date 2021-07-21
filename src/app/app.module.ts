@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   ActivityBarComponent,
+  EmptyFileExplorerComponent,
   FileExplorerComponent,
   FileExplorerTreeComponent,
   FileExplorerTreeItemComponent,
@@ -36,6 +37,7 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     EditorLineNumbersComponent,
     WelcomeWindowComponent,
     WelcomeWindowScreenComponent,
+    EmptyFileExplorerComponent,
     FileExplorerComponent,
     FileExplorerTreeComponent,
     FileExplorerTreeItemComponent,

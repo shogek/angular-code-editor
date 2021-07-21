@@ -15,12 +15,12 @@
     </div>
 
     <div>
-      <button type="button" (click)="clickFileInput()">Upload files</button>
+      <button type="button" (click)="clickFileInput()">Upload Files</button>
       <input #fileUploader hidden type="file" multiple (change)="onFilesUploaded($event)"/>
     </div>
 
     <div>
-      <button type="button" (click)="clickFolderInput()">Upload a folder</button>
+      <button type="button" (click)="clickFolderInput()">Upload Folder</button>
       <input #folderUploader hidden type="file" multiple webkitdirectory (change)="onFolderUploaded($event)" />
     </div>
   </div>
