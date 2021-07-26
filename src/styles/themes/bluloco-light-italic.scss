@@ -1,8 +1,5 @@
 /** Based on: "Bluloco Light Italic" */
 @mixin theme-bluloco-light-italic {
-
-    // TODO: Split theme files by below categories
-    
     // -----------------
     // --- 1. Common ---
     // -----------------
@@ -83,10 +80,10 @@
     --context-menu-bg-color: #f9f9f9;
 
     --context-menu-text-color: rgb(56, 58, 66);
-    --context-menu-text-hover-color: rgb(56, 58, 66);
+    --context-menu-text-hover-color: rgb(255, 255, 255);
     --context-menu-text-disabled-color: rgb(186, 186, 186);
 
-    --context-menu-item-hover-bg-color: rgb(196, 217, 177);
+    --context-menu-item-hover-bg-color: rgb(0, 167, 245);
 
     // --------------------------
     // --- 7. Command palette ---

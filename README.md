@@ -14,18 +14,18 @@ https://shogek.github.io/angular-code-editor/
 ☑️ <span style="color: gray"> <b>[Editor]</b>          Added tabs for easier navigation between files </span>  
 ☑️ <span style="color: gray"> <b>[File tabs]</b>       Added icons for some file types </span>  
 ☑️ <span style="color: gray"> <b>[File tabs]</b>       Added context menu support (right click on a tab) </span>  
-☐                             <b>[File tabs]</b>       Scroll container to reveal opened tab if it's not fully visible  
+☐                            <b>[File tabs]</b>       Scroll container to reveal opened tab if it's not fully visible  
 ☑️ <span style="color: gray"> <b>[Editor]</b>          Added a status bar (the long line at the bottom of the screen) </span>  
 ☑️ <span style="color: gray"> <b>[Status bar]</b>      Shows current column when file clicked with mouse (show also active line? Nah, I'm good, thanks) </span>  
 ☑️ <span style="color: gray"> <b>[Status bar]</b>      Added a theme chooser (click on the "Theme: ..." button in the status bar at the bottom) </span>  
 ☑️ <span style="color: gray"> <b>[Editor]</b>          Added file explorer to see all of the loaded files (accessible via activity bar of the right) </span>  
 ☑️ <span style="color: gray"> <b>[File explorer]</b>   Collapse and expand folders, open files </span>  
-☐                             <b>[File explorer]</b>   Fix padding and overall design  
+☑️ <span style="color: gray"> <b>[File explorer]</b>   Fix padding and overall design </span>  
 ☑️ <span style="color: gray"> <b>[Editor]</b>          Added the activity bar to house the file explorer (vertical menu on the right) </span>  
 ☑️ <span style="color: gray"> <b>[Activity bar]</b>    Collapsible and horizontally resizeable </span>  
-☐                             <b>[Activity bar]</b>    Show messages and buttons if no files loaded  
-☐                             <b>[Editor]</b>          Add 'console.log' terminal  
-☐                             <b>[Editor]</b>          Automatically deploy to gh-pages on push to master  
+☑️ <span style="color: gray"> <b>[Activity bar]</b>    Show messages and buttons if no files loaded </span>  
+☐                            <b>[Editor]</b>          Add 'console.log' terminal  
+☐                            <b>[Editor]</b>          Automatically deploy to gh-pages on push to master  
 
 <br>
 
