@@ -25,6 +25,8 @@ import { SafeHtmlPipe } from './main-screen/editor-window/component/safe-html.pi
 import { EditorTabService, EditorThemeService, IconService, StatusBarService, UserFileService } from './services';
 import { CommandPaletteComponent, ContextMenuComponent } from './common';
 import { DomEventsService } from './services/dom-events/dom-events.service';
+import { KeyboardShortcutsService } from './services/keyboard-shortcuts/keyboard-shortcuts.service';
+import { UploadFilesShortcutComponent } from './main-screen/upload-files-shortcut/upload-files-shortcut.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     ContextMenuComponent,
     CommandPaletteComponent,
     ActivityBarComponent,
+    UploadFilesShortcutComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { DomEventsService } from './services/dom-events/dom-events.service';
     EditorThemeService,
     DomEventsService,
     IconService,
+    KeyboardShortcutsService,
   ],
   bootstrap: [AppComponent]
 })
